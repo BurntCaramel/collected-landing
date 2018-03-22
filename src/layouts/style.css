@@ -1,0 +1,19 @@
+.border {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.text-white {
+  color: white;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.bg-grey {
+  background-color: rgb(155, 155, 155);
+}
+.bg-grey-dark {
+  background-color: rgb(125, 125, 125);
+}
