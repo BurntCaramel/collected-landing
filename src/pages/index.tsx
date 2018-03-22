@@ -61,13 +61,13 @@ const IndexPage = (props: Props) => (
       </div>
       <LinkList>
         <Link to="/page-2/" className="text-xl">
-          Trello: Landing page
+          Trello: Onboarding flow, from forms to emails
         </Link>
         <Link to="/page-2/" className="text-xl">
           Trello: Header, sidebar & footer navigation
         </Link>
         <Link to="/page-2/" className="text-xl">
-          Trello: Onboarding flow
+          Trello: Landing page
         </Link>
       </LinkList>
     </article>
