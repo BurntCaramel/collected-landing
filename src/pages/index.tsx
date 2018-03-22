@@ -35,21 +35,29 @@ const IndexPage = (props: Props) => (
         <div className="mr-1">
           <TrelloIcon size={64} color={trelloBlue} />
         </div>
-        <label className="col flex-1">
-          {'Paste your Trello board URL '}
-          <input placeholder="https://trello.com/b/abcdef" className="border" />
-        </label>
-        <button className="ml-2">Go</button>
+        <div className="col flex-1">
+          <label htmlFor="input-url-trello" className="col flex-1">
+            {'Paste your Trello board URL '}
+          </label>
+          <div className="row">
+            <input id="input-url-trello" placeholder="https://trello.com/b/abcdef" className="border" />
+            <button className="text-white bg-grey-dark">Go</button>
+          </div>
+        </div>
       </div>
       <div className="row mb-4">
         <div className="mr-1">
           <GitHubIcon size={64} />
         </div>
-        <label className="col flex-1">
+        <div className="col flex-1">
+          <label htmlFor="input-url-github" className="col flex-1">
           {'Paste your GitHub repo URL '}
-          <input placeholder="https://github.com/org/repo" className="border" />
-        </label>
-        <button className="ml-2">Go</button>
+          </label>
+          <div className="row">
+            <input id="input-url-github" placeholder="https://github.com/org/repo" className="border" />
+            <button className="text-white bg-grey-dark">Go</button>
+          </div>
+        </div>
       </div>
       <LinkList>
         <Link to="/page-2/" className="text-xl">
