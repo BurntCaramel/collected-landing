@@ -24,8 +24,8 @@ const IndexPage = (props: Props) => (
     <h1 className="mt-12 mb-8">Get feedback fast with realistic prototypes</h1>
     <article className="mb-4">
       <h2 className="mb-4">
-        Find fantastic IA and flows: navigations, onboarding, forms, emails,
-        categorization, search filters
+        Find fantastic information architecture & flows: navigations, onboarding, forms, emails,
+        categorization, search capabilities
       </h2>
       <form>
         <div className="row mb-2">
