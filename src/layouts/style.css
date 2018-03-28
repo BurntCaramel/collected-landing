@@ -17,3 +17,7 @@
 .bg-grey-dark {
   background-color: rgb(125, 125, 125);
 }
+
+.appearance-none {
+  appearance: none;
+}

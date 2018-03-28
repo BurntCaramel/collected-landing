@@ -1,9 +1,9 @@
 import * as React from 'react'
 import Link from 'gatsby-link'
 
-const SecondPage = () => (
+const PhilosophyPage = () => (
   <div>
-    <h1>Features</h1>
+    <h1>Inspiration</h1>
 
     <h2>GraphQL</h2>
     <article>
@@ -29,4 +29,4 @@ const SecondPage = () => (
   </div>
 )
 
-export default SecondPage
+export default PhilosophyPage
