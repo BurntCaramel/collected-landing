@@ -57,7 +57,7 @@ const IndexPage = (props: Props) => (
         <code>{`https://1.source.collected.design/graphql`}</code>
       </p>
 
-      <h3 className="mt-4 mb-2">All files in a GitHub repo</h3>
+      <h3 className="mt-4 mb-2">GitHub: All files in the RoyalIcing/lofi-bootstrap repo</h3>
       <pre>
         <code>
           {`
@@ -72,7 +72,7 @@ gitHubRepo(owner: "RoyalIcing", repoName: "lofi-bootstrap") {
         </code>
       </pre>
 
-      <h3 className="mt-4 mb-2">Lists and their cards in a Trello board</h3>
+      <h3 className="mt-4 mb-2">Trello: Lists and their cards in a board</h3>
       <pre>
         <code>
           {`
@@ -87,6 +87,31 @@ query Trello {
         id,
         name,
         desc
+      }
+    }
+  }
+}
+`.trim()}
+        </code>
+      </pre>
+
+      <h3 className="mt-4 mb-2">Trello: Cards tagged #page in a list named ‘Stripe’</h3>
+      <pre>
+        <code>
+          {`
+{
+  collectedNavs: trelloBoard(id: "4wctPH1u") {
+    name
+    stripe: list(name: "Stripe") {
+      name
+      pages: cards(tags: ["page"]) {
+        name,
+        body: desc {
+          headings {
+            text,
+            level
+          }
+        }
       }
     }
   }
