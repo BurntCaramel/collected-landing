@@ -33,6 +33,9 @@ const Header = () => (
       <Link to="/api" style={styles.link} className="mr-4">
         API
       </Link>
+      <Link to="/deploy" style={styles.link} className="mr-4">
+        Deploy
+      </Link>
       <Link to="/learn" style={styles.link} className="mr-4">
         Learn
       </Link>
