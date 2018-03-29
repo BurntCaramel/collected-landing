@@ -23,34 +23,13 @@ const IndexPage = (props: Props) => (
     <h1 className="mt-12 mb-8">Collected API</h1>
 
     <article className="mb-8">
-      <h2 className="mb-2">Collected Source REST</h2>
-      <p>Load from Trello, GitHub. Formats: JSON.</p>
-
-      <h3 className="mt-4 mb-2">Base URL</h3>
-      <p>
-        <code>{`https://1.source.collected.design`}</code>
-      </p>
-
-      <h3 className="mt-4 mb-2">List files in a GitHub repo</h3>
-      <pre>
-        <code>
-          {`GET https://1.source.collected.design/github/RoyalIcing/lofi-bootstrap/master/command:list?content`}
-        </code>
-      </pre>
-
-      <h3 className="mt-4 mb-2">List cards in a Trello board</h3>
-      <pre>
-        <code>
-          {`GET https://1.source.collected.design/trello/580710faeb62c4f7a6fa7786`}
-        </code>
-      </pre>
-    </article>
-
-    <hr />
-
-    <article className="mb-8">
       <h2 className="mb-2">Collected Source GraphQL</h2>
-      <p>Load from Trello, GitHub.</p>
+      <p>Query & load content from Trello, GitHub.</p>
+
+      <h3 className="mt-4 mb-2">Try online</h3>
+      <p>
+        <a href="https://1.source.collected.design/graphiql">https://1.source.collected.design/graphiql</a>
+      </p>
 
       <h3 className="mt-4 mb-2">End-point</h3>
       <p>
@@ -120,6 +99,31 @@ query Trello {
         </code>
       </pre>
     </article>
+
+    <article className="mb-8">
+      <h2 className="mb-2">Collected Source REST</h2>
+      <p>Load from Trello, GitHub. Formats: JSON.</p>
+
+      <h3 className="mt-4 mb-2">Base URL</h3>
+      <p>
+        <code>{`https://1.source.collected.design`}</code>
+      </p>
+
+      <h3 className="mt-4 mb-2">List files in a GitHub repo</h3>
+      <pre>
+        <code>
+          {`GET https://1.source.collected.design/github/RoyalIcing/lofi-bootstrap/master/command:list?content`}
+        </code>
+      </pre>
+
+      <h3 className="mt-4 mb-2">List cards in a Trello board</h3>
+      <pre>
+        <code>
+          {`GET https://1.source.collected.design/trello/580710faeb62c4f7a6fa7786`}
+        </code>
+      </pre>
+    </article>
+
   </div>
 )
 
