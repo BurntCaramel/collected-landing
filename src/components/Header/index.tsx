@@ -7,7 +7,7 @@ const styles = {
     textDecoration: 'none',
     fontSize: '1rem',
     lineHeight: '1.5',
-    textTransform: 'uppercase',
+    //textTransform: 'uppercase',
     letterSpacing: '0.05em',
   } as React.CSSProperties,
 }
@@ -31,10 +31,10 @@ const Header = () => (
         Collected
       </Link>
       <Link to="/api" style={styles.link} className="mr-4">
-        API
+        Guides
       </Link>
       <Link to="/deploy" style={styles.link} className="mr-4">
-        Deploy
+        Open source
       </Link>
       <Link to="/learn" style={styles.link} className="mr-4">
         Learn
