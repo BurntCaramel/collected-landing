@@ -32,7 +32,7 @@ const WorkflowPage = () => (
     <h1>Workflow</h1>
 
     <Grid columns={2} gap="0.5rem">
-      {many(props => <button className="text-white bg-black" {...props} />, [
+      {many(props => <button className="text-white bg-shadow" {...props} />, [
         'Add data source',
         'Add component library',
         'New project',
@@ -42,11 +42,11 @@ const WorkflowPage = () => (
     </Grid>
 
     {/* <Grid gap="0.5rem">
-      <button className="text-white bg-black">Add data source</button>
-      <button className="text-white bg-black">Add component library</button>
-      <button className="text-white bg-black">New project</button>
-      <button className="text-white bg-black">New document</button>
-      <button className="text-white bg-black">New space</button>
+      <button className="text-white bg-shadow">Add data source</button>
+      <button className="text-white bg-shadow">Add component library</button>
+      <button className="text-white bg-shadow">New project</button>
+      <button className="text-white bg-shadow">New document</button>
+      <button className="text-white bg-shadow">New space</button>
     </Grid> */}
 
     <hr />

@@ -15,7 +15,7 @@ const styles = {
 const Header = () => (
   <div
     style={{
-      background: '#1a1a1a',
+      background: '#110f00',
       marginBottom: '1.45rem',
     }}
   >

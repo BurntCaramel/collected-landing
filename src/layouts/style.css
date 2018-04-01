@@ -10,6 +10,9 @@
 .bg-black {
   background-color: black;
 }
+.bg-shadow {
+  background-color: #110f00;
+}
 
 .bg-grey {
   background-color: rgb(155, 155, 155);

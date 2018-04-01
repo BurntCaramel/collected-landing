@@ -42,7 +42,7 @@ const IndexPage = (props: Props) => (
           </select>
         </div>
         <div className="row">
-          <button className="flex-1 py-1 text-white bg-grey-dark">
+          <button className="flex-1 py-1 text-white bg-shadow">
             Search
           </button>
         </div>
@@ -80,7 +80,7 @@ const IndexPage = (props: Props) => (
 
         <div className="email-octopus-form-row-subscribe">
           <input type="hidden" name="successRedirectUrl" value="" />
-          <button type="submit" className="px-2 py-1 text-white bg-grey-dark">
+          <button type="submit" className="px-2 py-1 text-white bg-shadow">
             Subscribe
           </button>
         </div>
@@ -118,7 +118,7 @@ const IndexPage = (props: Props) => (
               placeholder="https://trello.com/b/abcdef"
               className="border"
             />
-            <button className="text-white bg-grey-dark">Go</button>
+            <button className="text-white bg-shadow">Go</button>
           </div>
         </div>
       </div>
@@ -136,7 +136,7 @@ const IndexPage = (props: Props) => (
               placeholder="https://github.com/org/repo"
               className="border"
             />
-            <button className="text-white bg-grey-dark">Go</button>
+            <button className="text-white bg-shadow">Go</button>
           </div>
         </div>
       </div>
@@ -154,7 +154,7 @@ const IndexPage = (props: Props) => (
               placeholder="bucket-name/key/path"
               className="border"
             />
-            <button className="text-white bg-grey-dark">Go</button>
+            <button className="text-white bg-shadow">Go</button>
           </div>
         </div>
       </div>
