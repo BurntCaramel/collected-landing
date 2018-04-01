@@ -20,7 +20,7 @@ const LinkList = ({
 
 const IndexPage = (props: Props) => (
   <div>
-    <h1 className="mt-12 mb-8">Collected API</h1>
+    <h1 className="mt-8 mb-8">Collected Docs</h1>
 
     <article className="mb-8">
       <h2 className="mb-2">Collected Source GraphQL</h2>

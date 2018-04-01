@@ -30,14 +30,21 @@ const Header = () => (
       <Link to="/" style={styles.link} className="mr-4 font-bold">
         Collected
       </Link>
-      <Link to="/api" style={styles.link} className="mr-4">
-        Guides
-      </Link>
-      <Link to="/deploy" style={styles.link} className="mr-4">
-        Open source
+      <input
+        className="mr-4 px-2"
+        placeholder="Search catalog"
+      />
+      <Link to="/docs" style={styles.link} className="mr-4">
+        Docs
       </Link>
       <Link to="/learn" style={styles.link} className="mr-4">
         Learn
+      </Link>
+      <Link to="/catalog" style={styles.link} className="mr-4">
+        Catalog
+      </Link>
+      <Link to="/open-source" style={styles.link} className="mr-4">
+        Open source
       </Link>
       <Link to="/inspiration" style={styles.link} className="mr-4">
         Inspiration
