@@ -61,22 +61,22 @@ const IndexPage = (props: Props) => (
       Let your users give feedback fast with realistic prototypes
     </h1> */}
     {/* <h1 className="mt-12 mb-8">Get rapid feedback with rapid prototyping</h1> */}
-    <h1 className="mt-12 mb-8">Get feedback fast with realistic prototypes</h1>
+    <h1 className="mt-12 mb-8">Get feedback fast with realistic, better prototypes</h1>
 
     <article className="mb-8">
       <div className="mb-4">
         <h2 className="mb-1">
-          Find and compare information architecture & flows
+          Find and compare information architecture, components, and flows
         </h2>
         <p>
-          Research navs, onboarding, forms, emails, categorization, search capabilities.
+          Research navs, onboarding, components, forms, emails, categorization, search capabilities.
         </p>
       </div>
       <form>
         <div className="row">
           <div className="col flex-1 mr-2 mb-2">
             <label className="flex-1">{'Search catalog for '}</label>
-            <input placeholder="nav" className="flex-1 px-2 py-1 border" />
+            <input placeholder="nav, button, sign up, welcome email" className="flex-1 px-2 py-1 border" />
           </div>
           <div className="col flex-1 ml-2 mb-2">
             <label className="col flex-1">{'Industry'}</label>
@@ -124,8 +124,11 @@ const IndexPage = (props: Props) => (
       {/* <h2 className="mb-4">
         Turn your content into a prototyping data source.
       </h2> */}
-      <h2 className="mb-8">
+      {/* <h2 className="mb-8">
         Prototype with your content from Trello or GitHub.
+      </h2> */}
+      <h2 className="mb-8">
+        Prototype rapidly with content from Trello or GitHub.
       </h2>
       <div className="row mb-8">
         <div className="mr-4">
