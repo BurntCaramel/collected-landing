@@ -3,8 +3,11 @@ import Link from 'gatsby-link'
 import TrelloIcon from '../components/FontAwesome/Trello'
 import GitHubIcon from '../components/FontAwesome/GitHub'
 import AWSIcon from '../components/FontAwesome/AWS'
+import queryFromLocation from '../nav/queryFromLocation'
 
-interface Props {}
+interface Props {
+  location: Location
+}
 
 interface Card {
   name: string
@@ -147,17 +150,22 @@ class ResearchPage extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    const query = queryFromLocation(this.props.location)
+
     fetch('https://staging.1.source.collected.design/graphql', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        variables: {
+          q: query.q || ''
+        },
         query: `
-{
+query Search($q: String) {
   collectedIA: trelloBoard(id: "4wctPH1u") {
     name
-    lists(q: "Basecamp") {
+    lists(q: $q) {
       name
       cards {
         name,
@@ -188,7 +196,7 @@ class ResearchPage extends React.Component<Props, State> {
 
   render() {
     const { result } = this.state
-    console.log('result', result)
+
     return (
       <div>
         <h1 className="mt-8 mb-8">Research</h1>

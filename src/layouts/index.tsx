@@ -10,17 +10,12 @@ import './style.css'
 
 interface Props {
   children: any
-  location: {
-    pathname: string
-    search: string
-    hash: string
-  }
+  location: Location
 }
 
 //const TemplateWrapper = ({ children }: Props) => (
 class TemplateWrapper extends React.Component<Props, void> {
   render() {
-    console.log('props', this.props)
     return (
       <div>
         <Helmet

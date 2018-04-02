@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link, { navigateTo } from 'gatsby-link'
-import { parse as parseQuery } from 'query-string'
+import queryFromLocation from '../../nav/queryFromLocation'
 
 const styles = {
   link: {
@@ -55,7 +55,7 @@ const Header = (props: Props) => {
     )
   }
 
-  const query = parseQuery(location.search)
+  const query = queryFromLocation(location)
 
   return (
     <div
