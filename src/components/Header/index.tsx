@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Link, { navigateTo } from 'gatsby-link'
+import { parse as parseQuery } from 'query-string'
 
 const styles = {
   link: {
@@ -26,29 +27,35 @@ function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
 }
 
 interface Props {
-  currentPath: string
+  location: Location
 }
 
 const Header = (props: Props) => {
-  const link = (content: string, toPath: string, extraClasses: Array<string> = []) => {
-    const isCurrent = toPath === props.currentPath
+  const link = (
+    content: string,
+    toPath: string,
+    extraClasses: Array<string> = []
+  ) => {
+    const isCurrent = toPath === props.location.pathname
 
     return (
-    <a
-      href={ toPath }
-      aria-current={isCurrent ? 'page' : null}
-      style={styles.link}
-      className={classes([
-        'mr-4',
-        isCurrent && 'border-b-2',
-        ...extraClasses,
-      ])}
-      onClick={onLinkClick}
-    >
-      { content }
-    </a>
+      <a
+        href={toPath}
+        aria-current={isCurrent ? 'page' : null}
+        style={styles.link}
+        className={classes([
+          'mr-4',
+          isCurrent && 'border-b-2',
+          ...extraClasses,
+        ])}
+        onClick={onLinkClick}
+      >
+        {content}
+      </a>
     )
   }
+
+  const query = parseQuery(location.search)
 
   return (
     <div
@@ -66,15 +73,19 @@ const Header = (props: Props) => {
         }}
       >
         <div className="row">
-          { link('Collected', '/', ['font-bold']) }
-          <input className="mr-4 mt-1 mb-1 px-2" placeholder="Search catalog" />
+          {link('Collected', '/', ['font-bold'])}
+          <input
+            className="mr-4 mt-1 mb-1 px-2"
+            placeholder="Search catalog"
+            defaultValue={query['q'] || ''}
+          />
         </div>
         <div className="row">
-          { link('Research', '/research') }
-          { link('Create', '/create') }
-          { link('Contribute', '/contribute') }
-          { link('Docs', '/docs') }
-          { link('Open source', '/open-source') }
+          {link('Research', '/research')}
+          {link('Create', '/create')}
+          {link('Contribute', '/contribute')}
+          {link('Docs', '/docs')}
+          {link('Open source', '/open-source')}
           {/* <Link to="/inspiration" style={styles.link} className="mr-4">
             Inspiration
           </Link> */}

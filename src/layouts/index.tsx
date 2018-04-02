@@ -36,7 +36,7 @@ class TemplateWrapper extends React.Component<Props, void> {
             },
           ]}
         />
-        <Header currentPath={this.props.location.pathname} />
+        <Header location={this.props.location} />
         <div
           style={{
             margin: '0 auto',

@@ -72,18 +72,19 @@ const IndexPage = (props: Props) => (
           emails, categorization, search, and accessibility capabilities.
         </p>
       </div>
-      <form>
+      <form action="/research">
         <div className="row">
           <div className="col flex-1 mr-2 mb-2">
             <label className="flex-1">{'Search catalog for '}</label>
             <input
+              name="q"
               placeholder="nav, button, sign up, welcome email"
               className="flex-1 px-2 py-1 border"
             />
           </div>
           <div className="col flex-1 ml-2 mb-2">
             <label className="col flex-1">{'Industry'}</label>
-            <select className="flex-1 px-2 py-1 border">
+            <select name="industry" className="flex-1 px-2 py-1 border">
               <option>{'Development & design'}</option>
               <option>{'Open source'}</option>
               <option>{'Government'}</option>

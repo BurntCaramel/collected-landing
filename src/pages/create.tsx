@@ -6,18 +6,6 @@ import AWSIcon from '../components/FontAwesome/AWS'
 
 interface Props {}
 
-const trelloBlue = '#0079BF'
-
-const LinkList = ({
-  children,
-  Component = 'ul',
-}: {
-  children: React.ReactNode
-  Component: React.ComponentType
-}) => (
-  <Component>{React.Children.map(children, item => <li>{item}</li>)}</Component>
-)
-
 const ContributePage = (props: Props) => (
   <div>
     <h1 className="mt-8 mb-8">Create your own Collected</h1>
