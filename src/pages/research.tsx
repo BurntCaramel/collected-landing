@@ -6,7 +6,11 @@ import AWSIcon from '../components/FontAwesome/AWS'
 import queryFromLocation from '../nav/queryFromLocation'
 
 interface Card {
-  name: string
+  id: string
+  name: {
+    text: string
+    tags: [string]
+  }
   body: {
     sections: [
       {
@@ -19,6 +23,7 @@ interface Card {
         listItems: [
           {
             text: string
+            tags: [string]
           }
         ]
       }
@@ -27,6 +32,7 @@ interface Card {
 }
 
 interface List {
+  id: string
   name: string
   cards: [Card]
 }
@@ -48,25 +54,32 @@ interface FailureResult {
 }
 
 function renderCard(card: Card) {
-  if (/#nav/.test(card.name)) {
+  const { tags } = card.name
+
+  if (tags[0] === 'nav') {
     return renderNavCard(card)
-  } else if (/#page/.test(card.name)) {
+  } else if (tags[0] === 'page') {
     return renderPageCard(card)
   } else {
     return null
   }
 }
 
+const isPrimaryItem = ({ tags }: { tags: [string] }): boolean =>
+  tags[0] === 'primary'
+
 function renderNavCard(card: Card) {
   return (
-    <div key={card.name} className="mb-8">
-      <h2>{card.name}</h2>
+    <div key={card.id} className="mb-8">
+      <h2>{card.name.tags[1] === 'primary' ? 'Primary nav' : 'Nav'}</h2>
       <div
         style={{
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
+          paddingTop: '0.5rem',
+          paddingBottom: '0.5rem',
           paddingLeft: '0.5rem',
           paddingRight: '0.5rem',
           backgroundColor: 'white',
@@ -74,20 +87,26 @@ function renderNavCard(card: Card) {
       >
         {card.body.sections.map(section => (
           <div>
-            {section.listItems.map(listItem => (
-              <span
-                style={{
-                  display: 'inline-block',
-                  paddingLeft: '0.333rem',
-                  paddingRight: '0.333rem',
-                  paddingTop: '1rem',
-                  paddingBottom: '1rem',
-                  fontWeight: /#logo/.test(listItem.text) ? 700 : 400,
-                }}
-              >
-                {listItem.text}
-              </span>
-            ))}
+            {section.listItems.map(listItem => {
+              const isPrimary = isPrimaryItem(listItem)
+              return (
+                <span
+                  style={{
+                    display: 'inline-block',
+                    paddingLeft: '0.333rem',
+                    paddingRight: '0.333rem',
+                    paddingTop: '0.5rem',
+                    paddingBottom: '0.5rem',
+                    fontWeight: listItem.tags[0] === 'logo' ? 700 : 400,
+                    color: isPrimary ? 'white' : '#111',
+                    backgroundColor: isPrimary ? '#111' : 'white',
+                    borderRadius: isPrimary ? 5 : 0,
+                  }}
+                >
+                  {listItem.text}
+                </span>
+              )
+            })}
           </div>
         ))}
       </div>
@@ -110,8 +129,8 @@ function renderHeading(heading: { level: number; text: string }) {
 
 function renderPageCard(card: Card) {
   return (
-    <div key={card.name} className="mb-8">
-      <h2>{card.name}</h2>
+    <div key={card.id} className="mb-8">
+      <h2>{card.name.text}</h2>
       <div
         style={{
           display: 'flex',
@@ -177,9 +196,14 @@ query Search($q: String) {
   collectedIA: trelloBoard(id: "4wctPH1u") {
     name
     lists(q: $q) {
+      id
       name
       cards {
-        name,
+        id
+        name {
+          text
+          tags
+        }
         body: desc {
           source,
           sections {
@@ -189,6 +213,7 @@ query Search($q: String) {
             }
             listItems {
               text
+              tags
             }
           }
         }
