@@ -61,15 +61,19 @@ gitHubRepo(owner: "RoyalIcing", repoName: "lofi-bootstrap") {
           {`
 query Trello {
   trelloBoard(id: "580710faeb62c4f7a6fa7786") {
-    name,
-    id,
+    name
+    id
     lists {
-      id,
-      name,
+      id
+      name
       cards {
-        id,
-        name,
-        desc
+        id
+        name {
+          text
+        }
+        desc {
+          source
+        }
       }
     }
   }
@@ -87,10 +91,12 @@ query Trello {
 {
   collectedNavs: trelloBoard(id: "4wctPH1u") {
     name
-    stripe: list(name: "Stripe") {
+    lists(q: "Stripe") {
       name
       pages: cards(tags: ["page"]) {
-        name,
+        name {
+          text
+        }
         body: desc {
           headings {
             text,
