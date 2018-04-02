@@ -68,8 +68,8 @@ const IndexPage = (props: Props) => (
           Find and compare information architecture, components, and flows
         </h2>
         <p>
-          Research navs, onboarding, components, forms, emails, categorization,
-          search capabilities.
+          Research navigation, onboarding, components, landing pages, forms, emails, categorization,
+          search, and accessibility capabilities.
         </p>
       </div>
       <form>
@@ -93,7 +93,7 @@ const IndexPage = (props: Props) => (
           </div>
         </div>
         <div className="row">
-          <button className="flex-1 py-1 font-bold text-white bg-shadow">
+          <button className="flex-1 px-2 py-1 font-bold text-white bg-shadow">
             Search
           </button>
         </div>
