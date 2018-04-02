@@ -89,17 +89,19 @@ function renderNavCard(card: Card) {
           <div>
             {section.listItems.map(listItem => {
               const isPrimary = isPrimaryItem(listItem)
+              const isSearch = listItem.tags[0] === 'search'
               return (
                 <span
                   style={{
                     display: 'inline-block',
                     paddingLeft: '0.333rem',
                     paddingRight: '0.333rem',
-                    paddingTop: '0.5rem',
-                    paddingBottom: '0.5rem',
+                    paddingTop: '0.25rem',
+                    paddingBottom: '0.25rem',
                     fontWeight: listItem.tags[0] === 'logo' ? 700 : 400,
-                    color: isPrimary ? 'white' : '#111',
+                    color: isPrimary ? 'white' : isSearch ? '#888' : '#111',
                     backgroundColor: isPrimary ? '#111' : 'white',
+                    border: isSearch ? '1px solid #111' : 'none',
                     borderRadius: isPrimary ? 5 : 0,
                   }}
                 >
