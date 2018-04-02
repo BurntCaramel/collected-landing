@@ -5,10 +5,6 @@ import GitHubIcon from '../components/FontAwesome/GitHub'
 import AWSIcon from '../components/FontAwesome/AWS'
 import queryFromLocation from '../nav/queryFromLocation'
 
-interface Props {
-  location: Location
-}
-
 interface Card {
   name: string
   body: {
@@ -35,7 +31,7 @@ interface List {
   cards: [Card]
 }
 
-interface Result {
+interface SuccessResult {
   data: {
     collectedIA: {
       lists: [List]
@@ -43,8 +39,12 @@ interface Result {
   }
 }
 
-interface State {
-  result: Result
+interface FailureResult {
+  errors: [
+    {
+      message: string
+    }
+  ]
 }
 
 function renderCard(card: Card) {
@@ -59,10 +59,7 @@ function renderCard(card: Card) {
 
 function renderNavCard(card: Card) {
   return (
-    <div
-      key={card.name}
-      className='mb-8'
-    >
+    <div key={card.name} className="mb-8">
       <h2>{card.name}</h2>
       <div
         style={{
@@ -77,16 +74,20 @@ function renderNavCard(card: Card) {
       >
         {card.body.sections.map(section => (
           <div>
-            {section.listItems.map(listItem => <span
-            style={{
-              display: 'inline-block',
-              paddingLeft: '0.333rem',
-              paddingRight: '0.333rem',
-              paddingTop: '1rem',
-              paddingBottom: '1rem',
-              fontWeight: /#logo/.test(listItem.text) ? 700 : 400
-            }}
-            >{listItem.text}</span>)}
+            {section.listItems.map(listItem => (
+              <span
+                style={{
+                  display: 'inline-block',
+                  paddingLeft: '0.333rem',
+                  paddingRight: '0.333rem',
+                  paddingTop: '1rem',
+                  paddingBottom: '1rem',
+                  fontWeight: /#logo/.test(listItem.text) ? 700 : 400,
+                }}
+              >
+                {listItem.text}
+              </span>
+            ))}
           </div>
         ))}
       </div>
@@ -94,30 +95,22 @@ function renderNavCard(card: Card) {
   )
 }
 
-function renderHeading(heading: {
-  level: number
-  text: string
-}) {
+function renderHeading(heading: { level: number; text: string }) {
   let Component = 'h3'
   if (heading.level === 1) {
     Component = 'h1'
-  }
-  else if (heading.level === 2) {
+  } else if (heading.level === 2) {
     Component = 'h2'
-  }
-  else if (heading.level === 3) {
+  } else if (heading.level === 3) {
     Component = 'h3'
   }
 
-  return <Component key={heading.text}>{ heading.text }</Component>
+  return <Component key={heading.text}>{heading.text}</Component>
 }
 
 function renderPageCard(card: Card) {
   return (
-    <div
-      key={card.name}
-      className='mb-8'
-    >
+    <div key={card.name} className="mb-8">
       <h2>{card.name}</h2>
       <div
         style={{
@@ -129,9 +122,11 @@ function renderPageCard(card: Card) {
         }}
       >
         {card.body.sections.map(section => (
-          <div style={{
-            marginBottom: '1rem',
-          }}>
+          <div
+            style={{
+              marginBottom: '1rem',
+            }}
+          >
             {section.headings.map(renderHeading)}
           </div>
         ))}
@@ -143,6 +138,22 @@ function renderPageCard(card: Card) {
 function renderList(list: List) {
   return <div>{list.cards.map(renderCard)}</div>
 }
+
+interface Props {
+  location: Location
+}
+
+interface State {
+  result: SuccessResult | FailureResult | Error
+}
+
+const isSuccess = (
+  result: SuccessResult | FailureResult | Error
+): result is SuccessResult => !!(result as SuccessResult).data
+
+const isFailure = (
+  result: SuccessResult | FailureResult | Error
+): result is FailureResult => !!(result as FailureResult).errors
 
 class ResearchPage extends React.Component<Props, State> {
   state: State = {
@@ -159,7 +170,7 @@ class ResearchPage extends React.Component<Props, State> {
       },
       body: JSON.stringify({
         variables: {
-          q: query.q || ''
+          q: query.q || '',
         },
         query: `
 query Search($q: String) {
@@ -192,6 +203,9 @@ query Search($q: String) {
       .then(json => {
         this.setState({ result: json })
       })
+      .catch(error => {
+        this.setState({ result: error })
+      })
   }
 
   render() {
@@ -204,6 +218,27 @@ query Search($q: String) {
         {!result && <p>Loading…</p>}
 
         {!!result &&
+          result instanceof Error && (
+            <p>
+              {'Error: '}
+              {result.message}
+            </p>
+          )}
+
+        {!!result &&
+          isFailure(result) && (
+            <div>
+              {result.errors.map(error => (
+                <p>
+                  {'Error: '}
+                  {error.message}
+                </p>
+              ))}
+            </div>
+          )}
+
+        {!!result &&
+          isSuccess(result) &&
           result.data.collectedIA.lists.map(list => (
             <div key={list.name}>
               <h1>{list.name}</h1>
