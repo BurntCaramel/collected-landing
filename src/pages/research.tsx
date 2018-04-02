@@ -283,13 +283,13 @@ query Search($q: String) {
             </div>
           ))}
 
-        <article className="mb-8">
+        {/* <article className="mb-8">
           <h2 className="mb-2">Information Architecture</h2>
         </article>
 
         <article className="mb-8">
           <h2 className="mb-2">Components</h2>
-        </article>
+        </article> */}
       </div>
     )
   }
