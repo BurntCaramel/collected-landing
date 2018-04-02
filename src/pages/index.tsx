@@ -62,21 +62,27 @@ const IndexPage = (props: Props) => (
     </h1> */}
     {/* <h1 className="mt-12 mb-8">Get rapid feedback with rapid prototyping</h1> */}
     <h1 className="mt-12 mb-8">Get feedback fast with realistic prototypes</h1>
-    <article className="mb-4">
-      <h2 className="mb-4">
-        Find fantastic information architecture & flows: navigations, onboarding, forms, emails,
-        categorization, search capabilities
-      </h2>
+
+    <article className="mb-8">
+      <div className="mb-4">
+        <h2 className="mb-1">
+          Find and compare information architecture & flows
+        </h2>
+        <p>
+          Research navs, onboarding, forms, emails, categorization, search capabilities.
+        </p>
+      </div>
       <form>
         <div className="row">
           <div className="col flex-1 mr-2 mb-2">
-            <label className="flex-1">{'Search for'}</label>
+            <label className="flex-1">{'Search catalog for '}</label>
             <input placeholder="nav" className="flex-1 px-2 py-1 border" />
           </div>
           <div className="col flex-1 ml-2 mb-2">
             <label className="col flex-1">{'Industry'}</label>
             <select className="flex-1 px-2 py-1 border">
-              <option>{'Development & Design'}</option>
+              <option>{'Development & design'}</option>
+              <option>{'Open source'}</option>
               <option>{'Government'}</option>
               <option>{'Health'}</option>
               <option>{'Finance'}</option>
@@ -90,10 +96,13 @@ const IndexPage = (props: Props) => (
         </div>
       </form>
 
-      <div className="row mt-2">
+      <div className="mt-2">
         <span>{'Examples: '}</span>
-        <a href="">Stripe</a>
-        <a href="">Slack</a>
+        <a href="">Stripe</a>{' | '}
+        <a href="">Slack</a>{' | '}
+        <a href="">GitHub</a>{' | '}
+        <a href="">React</a>{' | '}
+        <a href="">Tensorflow</a>
       </div>
     </article>
 
@@ -109,13 +118,17 @@ const IndexPage = (props: Props) => (
         </ol>
       </article>
     )}
-    <article className="mb-12 px-4 py-4 bg-white rounded">
+
+    <article className="mb-12 px-8 py-8 bg-white rounded">
       {/* <h2>Turn your content into an GraphQL/REST API with Collected Source.</h2> */}
-      <h2 className="mb-4">
+      {/* <h2 className="mb-4">
         Turn your content into a prototyping data source.
+      </h2> */}
+      <h2 className="mb-8">
+        Prototype with your content from Trello or GitHub.
       </h2>
-      <div className="row mb-4">
-        <div className="mr-2">
+      <div className="row mb-8">
+        <div className="mr-4">
           <TrelloIcon size={64} color={trelloBlue} />
         </div>
         <div className="col flex-1">
@@ -132,8 +145,8 @@ const IndexPage = (props: Props) => (
           </div>
         </div>
       </div>
-      <div className="row mb-4">
-        <div className="mr-2">
+      <div className="row mb-8">
+        <div className="mr-4">
           <GitHubIcon size={64} />
         </div>
         <div className="col flex-1">
@@ -150,8 +163,8 @@ const IndexPage = (props: Props) => (
           </div>
         </div>
       </div>
-      <div className="row mb-4">
-        <div className="mr-2">
+      <div className="row mb-8">
+        <div className="mr-4">
           <AWSIcon size={64} />
         </div>
         <div className="col flex-1">
@@ -201,7 +214,7 @@ const IndexPage = (props: Props) => (
     )}
 
     <NewsletterForm />
-    
+
   </div>
 )
 
