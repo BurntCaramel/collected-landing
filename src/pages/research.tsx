@@ -80,8 +80,8 @@ function renderNavCard(card: Card) {
             {section.listItems.map(listItem => <span
             style={{
               display: 'inline-block',
-              paddingLeft: '0.25rem',
-              paddingRight: '0.25rem',
+              paddingLeft: '0.333rem',
+              paddingRight: '0.333rem',
               paddingTop: '1rem',
               paddingBottom: '1rem',
               fontWeight: /#logo/.test(listItem.text) ? 700 : 400
@@ -205,7 +205,10 @@ query Search($q: String) {
 
         {!!result &&
           result.data.collectedIA.lists.map(list => (
-            <div key={list.name}>{renderList(list)}</div>
+            <div key={list.name}>
+              <h1>{list.name}</h1>
+              {renderList(list)}
+            </div>
           ))}
 
         <article className="mb-8">

@@ -74,11 +74,14 @@ const Header = (props: Props) => {
       >
         <div className="row">
           {link('Collected', '/', ['font-bold'])}
-          <input
-            className="mr-4 mt-1 mb-1 px-2"
-            placeholder="Search catalog"
-            defaultValue={query['q'] || ''}
-          />
+          <form action='/research' method='get'>
+            <input
+              name='q'
+              className="mr-4 mt-1 mb-1 px-2"
+              placeholder="Search catalog"
+              defaultValue={query['q'] || ''}
+            />
+          </form>
         </div>
         <div className="row">
           {link('Research', '/research')}
