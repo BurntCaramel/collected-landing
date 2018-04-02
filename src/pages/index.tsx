@@ -102,15 +102,15 @@ const IndexPage = (props: Props) => (
 
       <div className="mt-2">
         <span>{'Examples: '}</span>
-        <a href="">Stripe</a>
+        <a href="/research?q=stripe">Stripe</a>
         {' | '}
-        <a href="">Slack</a>
+        <a href="/research?q=slack">Slack</a>
         {' | '}
-        <a href="">GitHub</a>
+        <a href="/research?q=github">GitHub</a>
         {' | '}
-        <a href="">React</a>
+        <a href="/research?q=react">React</a>
         {' | '}
-        <a href="">Tensorflow</a>
+        <a href="/research?q=tensorflow">Tensorflow</a>
       </div>
     </article>
 
