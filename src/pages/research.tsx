@@ -110,9 +110,11 @@ function renderNavCard(card: Card) {
                   {(isIcon || isPicture) ? '' : listItem.text}
                   {isIcon && <svg viewBox='0 0 1 1' width={24} height={24} style={{ display: 'inline-block' }}>
                     <rect width={1} height={1} />
+                    <title>{listItem.text}</title>
                   </svg>}
                   {isPicture && <svg viewBox='0 0 2 2' width={24} height={24} style={{ display: 'inline-block' }}>
                     <circle cx={1} cy={1} r={1} />
+                    <title>{listItem.text}</title>
                   </svg>}
                 </span>
               )
