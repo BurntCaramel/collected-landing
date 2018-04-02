@@ -55,7 +55,7 @@ const Header = (props: Props) => {
     )
   }
 
-  const query = queryFromLocation(location)
+  const query = queryFromLocation(props.location)
 
   return (
     <div
