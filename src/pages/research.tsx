@@ -90,6 +90,8 @@ function renderNavCard(card: Card) {
             {section.listItems.map(listItem => {
               const isPrimary = isPrimaryItem(listItem)
               const isSearch = listItem.tags[0] === 'search'
+              const isIcon = listItem.tags[0] === 'icon'
+              const isPicture = listItem.tags[0] === 'picture'
               return (
                 <span
                   style={{
@@ -105,7 +107,13 @@ function renderNavCard(card: Card) {
                     borderRadius: isPrimary ? 5 : 0,
                   }}
                 >
-                  {listItem.text}
+                  {(isIcon || isPicture) ? '' : listItem.text}
+                  {isIcon && <svg viewBox='0 0 1 1' width={24} height={24} style={{ display: 'inline-block' }}>
+                    <rect width={1} height={1} />
+                  </svg>}
+                  {isPicture && <svg viewBox='0 0 2 2' width={24} height={24} style={{ display: 'inline-block' }}>
+                    <circle cx={1} cy={1} r={1} />
+                  </svg>}
                 </span>
               )
             })}
