@@ -86,7 +86,13 @@ function renderNavCard(card: Card) {
         }}
       >
         {card.body.sections.map(section => (
-          <div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
             {section.listItems.map(listItem => {
               const isPrimary = isPrimaryItem(listItem)
               const isSearch = listItem.tags[0] === 'search'
@@ -95,7 +101,7 @@ function renderNavCard(card: Card) {
               return (
                 <span
                   style={{
-                    display: 'inline-block',
+                    display: 'flex',
                     paddingLeft: '0.333rem',
                     paddingRight: '0.333rem',
                     paddingTop: '0.25rem',
