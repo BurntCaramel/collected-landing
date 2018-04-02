@@ -6,7 +6,13 @@
 .text-white {
   color: white;
 }
+.text-shadow {
+  color: #110f00;
+}
 
+.bg-key {
+  background-color: rgb(255, 230, 62);
+}
 .bg-white {
   background-color: white;
 }

@@ -3,7 +3,7 @@ import Link from 'gatsby-link'
 
 const styles = {
   link: {
-    color: 'white',
+    color: 'black',
     textDecoration: 'none',
     fontSize: '1rem',
     lineHeight: '1.5',
@@ -15,7 +15,7 @@ const styles = {
 const Header = () => (
   <div
     style={{
-      background: '#110f00',
+      backgroundColor: '#ffffff4d',
       marginBottom: '1.45rem',
     }}
   >

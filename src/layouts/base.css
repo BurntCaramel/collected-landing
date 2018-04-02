@@ -25,12 +25,9 @@ body {
   font-feature-settings: 'kern', 'liga', 'clig', 'calt';
 }
 
-body {
-  background: rgb(255, 230, 62);
-  color: #110f00;
-}
 a {
-  color: #ca5100;
+  color: #cf6e00;
+  color: #006bcf;
 }
 
 ul, ol {
