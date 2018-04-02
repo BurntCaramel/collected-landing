@@ -68,8 +68,8 @@ const IndexPage = (props: Props) => (
           Find and compare information architecture, components, and flows
         </h2>
         <p>
-          Research navigation, onboarding, components, landing pages, forms, emails, categorization,
-          search, and accessibility capabilities.
+          Research navigation, onboarding, components, landing pages, forms,
+          emails, categorization, search, and accessibility capabilities.
         </p>
       </div>
       <form>

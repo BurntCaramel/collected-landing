@@ -1,8 +1,3 @@
-.border {
-  border-width: 1px;
-  border-style: solid;
-}
-
 .text-white {
   color: white;
 }
@@ -28,6 +23,16 @@
 }
 .bg-grey-dark {
   background-color: rgb(125, 125, 125);
+}
+
+.border {
+  border-width: 1px;
+  border-style: solid;
+}
+.border-b-2 {
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 2px;
 }
 
 .rounded {

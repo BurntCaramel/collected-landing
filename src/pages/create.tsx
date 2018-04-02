@@ -26,7 +26,8 @@ const ContributePage = (props: Props) => (
       <h2 className="mb-2">Trello</h2>
 
       <p className="mb-2">
-        Trello is a popular tool for structuring information with a friendly UI. Use Trello when:
+        Trello is a popular tool for structuring information with a friendly UI.
+        Use Trello when:
       </p>
 
       <ul>
@@ -40,12 +41,14 @@ const ContributePage = (props: Props) => (
       <h2 className="mb-2">GitHub</h2>
 
       <p className="mb-2">
-        GitHub is commonly used for managing source code, with powerful version-control features and workflows.
-        Use GitHub when:
+        GitHub is commonly used for managing source code, with powerful
+        version-control features and workflows. Use GitHub when:
       </p>
 
       <ul>
-        <li>Your team is already familiar or can get up to speed with GitHub.</li>
+        <li>
+          Your team is already familiar or can get up to speed with GitHub.
+        </li>
         <li>You need historical data.</li>
         <li>You want multiple versions using Git branches and tags.</li>
       </ul>
