@@ -3,6 +3,7 @@ import Link from 'gatsby-link'
 import TrelloIcon from '../components/FontAwesome/Trello'
 import GitHubIcon from '../components/FontAwesome/GitHub'
 import AWSIcon from '../components/FontAwesome/AWS'
+import { stringify as stringifyQuery } from 'query-string'
 
 interface Props {}
 
@@ -108,6 +109,8 @@ const IndexPage = (props: Props) => (
 
       <div className="mt-2">
         <span>{'Examples: '}</span>
+        <a href={`/research?${stringifyQuery({q: '#nav' })}`}>Navs</a>
+        {' | '}
         <a href="/research?q=stripe">Stripe</a>
         {' | '}
         <a href="/research?q=slack">Slack</a>

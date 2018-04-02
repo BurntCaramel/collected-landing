@@ -5,6 +5,70 @@ import GitHubIcon from '../components/FontAwesome/GitHub'
 import AWSIcon from '../components/FontAwesome/AWS'
 import queryFromLocation from '../nav/queryFromLocation'
 
+const listSearchQuery = `
+query Search($q: String) {
+  collectedIA: trelloBoard(id: "4wctPH1u") {
+    name
+    lists(q: $q) {
+      id
+      name
+      cards {
+        id
+        name {
+          text
+          tags
+        }
+        body: desc {
+          source,
+          sections {
+            headings {
+              text
+              level
+            }
+            listItems {
+              text
+              tags
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+const cardTagsQuery = `
+query Search($tags: [String!]) {
+  collectedIA: trelloBoard(id: "4wctPH1u") {
+    name
+    lists {
+      id
+      name
+      cards(tags: $tags) {
+        id
+        name {
+          text
+          tags
+        }
+        body: desc {
+          source,
+          sections {
+            headings {
+              text
+              level
+            }
+            listItems {
+              text
+              tags
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
+
 interface Card {
   id: string
   name: {
@@ -198,49 +262,32 @@ class ResearchPage extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const query = queryFromLocation(this.props.location)
+    const { q } = queryFromLocation(this.props.location)
+
+    let body = null
+    if (/#/.test(q)) {
+      body = {
+        variables: {
+          tags: q.replace(/#/g, '').split(/\s+/).map(s => s.trim()).filter(Boolean),
+        },
+        query: cardTagsQuery
+      }
+    }
+    else {
+      body = {
+        variables: {
+          q: q || '',
+        },
+        query: listSearchQuery
+      }
+    }
 
     fetch('https://staging.1.source.collected.design/graphql', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        variables: {
-          q: query.q || '',
-        },
-        query: `
-query Search($q: String) {
-  collectedIA: trelloBoard(id: "4wctPH1u") {
-    name
-    lists(q: $q) {
-      id
-      name
-      cards {
-        id
-        name {
-          text
-          tags
-        }
-        body: desc {
-          source,
-          sections {
-            headings {
-              text
-              level
-            }
-            listItems {
-              text
-              tags
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`,
-      }),
+      body: JSON.stringify(body),
     })
       .then(res => res.json())
       .then(json => {
