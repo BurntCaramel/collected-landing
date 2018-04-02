@@ -20,9 +20,7 @@ const NewsletterForm = () => (
       action="https://emailoctopus.com/lists/839d94de-3257-11e8-a3c9-06b79b628af2/members/embedded/1.1/add"
     >
       <div className="row">
-        <label htmlFor="newsletter-field-0">
-          Email address
-        </label>
+        <label htmlFor="newsletter-field-0">Email address</label>
         <input
           id="newsletter-field-0"
           name="embedded_form_subscription[field_0]"
@@ -47,7 +45,6 @@ const NewsletterForm = () => (
           </button>
         </div>
       </div>
-
     </form>
   </article>
 )
@@ -61,7 +58,9 @@ const IndexPage = (props: Props) => (
       Let your users give feedback fast with realistic prototypes
     </h1> */}
     {/* <h1 className="mt-12 mb-8">Get rapid feedback with rapid prototyping</h1> */}
-    <h1 className="mt-12 mb-8">Get feedback fast with realistic, better prototypes</h1>
+    <h1 className="mt-12 mb-8">
+      Get feedback fast with realistic, better prototypes
+    </h1>
 
     <article className="mb-8">
       <div className="mb-4">
@@ -69,14 +68,18 @@ const IndexPage = (props: Props) => (
           Find and compare information architecture, components, and flows
         </h2>
         <p>
-          Research navs, onboarding, components, forms, emails, categorization, search capabilities.
+          Research navs, onboarding, components, forms, emails, categorization,
+          search capabilities.
         </p>
       </div>
       <form>
         <div className="row">
           <div className="col flex-1 mr-2 mb-2">
             <label className="flex-1">{'Search catalog for '}</label>
-            <input placeholder="nav, button, sign up, welcome email" className="flex-1 px-2 py-1 border" />
+            <input
+              placeholder="nav, button, sign up, welcome email"
+              className="flex-1 px-2 py-1 border"
+            />
           </div>
           <div className="col flex-1 ml-2 mb-2">
             <label className="col flex-1">{'Industry'}</label>
@@ -98,10 +101,14 @@ const IndexPage = (props: Props) => (
 
       <div className="mt-2">
         <span>{'Examples: '}</span>
-        <a href="">Stripe</a>{' | '}
-        <a href="">Slack</a>{' | '}
-        <a href="">GitHub</a>{' | '}
-        <a href="">React</a>{' | '}
+        <a href="">Stripe</a>
+        {' | '}
+        <a href="">Slack</a>
+        {' | '}
+        <a href="">GitHub</a>
+        {' | '}
+        <a href="">React</a>
+        {' | '}
         <a href="">Tensorflow</a>
       </div>
     </article>
@@ -217,7 +224,6 @@ const IndexPage = (props: Props) => (
     )}
 
     <NewsletterForm />
-
   </div>
 )
 

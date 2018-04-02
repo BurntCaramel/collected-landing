@@ -19,7 +19,7 @@ class TemplateWrapper extends React.Component<Props, void> {
       <div>
         <Helmet
           bodyAttributes={{
-            class: 'bg-key text-shadow'
+            class: 'bg-key text-shadow',
           }}
           title="Collected"
           meta={[

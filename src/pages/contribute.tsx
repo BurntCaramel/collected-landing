@@ -29,7 +29,6 @@ const ContributePage = (props: Props) => (
         <a href="https://trello.com/b/4wctPH1u">Submit to this Trello board</a>
       </p>
     </article>
-
   </div>
 )
 

@@ -28,7 +28,9 @@ const IndexPage = (props: Props) => (
 
       <h3 className="mt-4 mb-2">Try online</h3>
       <p>
-        <a href="https://1.source.collected.design/graphiql">https://1.source.collected.design/graphiql</a>
+        <a href="https://1.source.collected.design/graphiql">
+          {'https://1.source.collected.design/graphiql'}
+        </a>
       </p>
 
       <h3 className="mt-4 mb-2">End-point</h3>
@@ -36,7 +38,9 @@ const IndexPage = (props: Props) => (
         <code>{`https://1.source.collected.design/graphql`}</code>
       </p>
 
-      <h3 className="mt-4 mb-2">GitHub: All files in the RoyalIcing/lofi-bootstrap repo</h3>
+      <h3 className="mt-4 mb-2">
+        GitHub: All files in the RoyalIcing/lofi-bootstrap repo
+      </h3>
       <pre>
         <code>
           {`
@@ -74,7 +78,9 @@ query Trello {
         </code>
       </pre>
 
-      <h3 className="mt-4 mb-2">Trello: Cards tagged #page in a list named ‘Stripe’</h3>
+      <h3 className="mt-4 mb-2">
+        Trello: Cards tagged #page in a list named ‘Stripe’
+      </h3>
       <pre>
         <code>
           {`
@@ -123,7 +129,6 @@ query Trello {
         </code>
       </pre>
     </article>
-
   </div>
 )
 

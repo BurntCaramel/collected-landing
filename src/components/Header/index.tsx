@@ -27,20 +27,13 @@ const Header = () => (
         padding: '0.5rem 1rem',
       }}
     >
-      <div
-        className="row"
-      >
+      <div className="row">
         <Link to="/" style={styles.link} className="mr-4 font-bold">
           Collected
         </Link>
-        <input
-          className="mr-4 px-2"
-          placeholder="Search catalog"
-        />
+        <input className="mr-4 px-2" placeholder="Search catalog" />
       </div>
-      <div
-        className="row"
-      >
+      <div className="row">
         <Link to="/research" style={styles.link} className="mr-4">
           Research
         </Link>

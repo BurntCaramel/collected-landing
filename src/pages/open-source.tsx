@@ -8,7 +8,10 @@ const DeployPage = () => (
     <article>
       <h2>Deploy your own Collected</h2>
       <h3>Lambda with Up</h3>
-      <h4>1. <a href="https://github.com/apex/up/issues#quick-start">Install Up</a></h4>
+      <h4>
+        1.{' '}
+        <a href="https://github.com/apex/up/issues#quick-start">Install Up</a>
+      </h4>
       <h4>2. Then clone and deploy the repo:</h4>
       <pre>
         <code>
@@ -23,7 +26,7 @@ yarn deploy:staging
     </article>
 
     <article>
-      <h2>BYO Infrastructure</h2> 
+      <h2>BYO Infrastructure</h2>
     </article>
   </div>
 )

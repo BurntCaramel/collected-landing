@@ -30,7 +30,8 @@ a {
   color: #006bcf;
 }
 
-ul, ol {
+ul,
+ol {
   margin: 0;
   padding: 0;
 }
