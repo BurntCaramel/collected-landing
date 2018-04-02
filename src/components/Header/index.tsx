@@ -74,7 +74,7 @@ const Header = (props: Props) => {
       >
         <div className="row">
           {link('Collected', '/', ['font-bold'])}
-          <form action="/research" method="get">
+          <form action="/research" method="get" className="row">
             <input
               name="q"
               className="mr-4 mt-1 mb-1 px-2"
