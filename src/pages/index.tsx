@@ -50,20 +50,21 @@ const IndexPage = (props: Props) => (
         </div>
       </form>
 
-      <div className="row">
+      <div className="row mt-2">
+        <span>{'Examples: '}</span>
         <a href="">Stripe</a>
         <a href="">Slack</a>
       </div>
     </article>
 
     <article className="mb-8">
-      <h2 className="mb-2">Hear about updates</h2>
+      <h2 className="mb-2">Hear about the latest updates</h2>
       <form
         method="post"
         action="https://emailoctopus.com/lists/839d94de-3257-11e8-a3c9-06b79b628af2/members/embedded/1.1/add"
       >
         <div className="row">
-          <label htmlFor="newsletter-field-0" className="ml-4">
+          <label htmlFor="newsletter-field-0">
             Email address
           </label>
           <input
@@ -73,24 +74,24 @@ const IndexPage = (props: Props) => (
             placeholder=""
             className="border ml-2"
           />
+          <div className="email-octopus-form-row-hp" aria-hidden="true">
+            {/* Do not remove this field, otherwise you risk bot sign-ups */}
+            <input
+              type="text"
+              name="hp839d94de-3257-11e8-a3c9-06b79b628af2"
+              tabIndex={-1}
+              autocomplete="nope"
+            />
+          </div>
+
+          <div className="email-octopus-form-row-subscribe ml-4">
+            <input type="hidden" name="successRedirectUrl" value="" />
+            <button type="submit" className="px-2 py-1 text-white bg-shadow">
+              Subscribe
+            </button>
+          </div>
         </div>
 
-        <div className="email-octopus-form-row-hp" aria-hidden="true">
-          {/* Do not remove this field, otherwise you risk bot sign-ups */}
-          <input
-            type="text"
-            name="hp839d94de-3257-11e8-a3c9-06b79b628af2"
-            tabIndex={-1}
-            autocomplete="nope"
-          />
-        </div>
-
-        <div className="email-octopus-form-row-subscribe">
-          <input type="hidden" name="successRedirectUrl" value="" />
-          <button type="submit" className="px-2 py-1 text-white bg-shadow">
-            Subscribe
-          </button>
-        </div>
       </form>
     </article>
 
@@ -106,7 +107,7 @@ const IndexPage = (props: Props) => (
         </ol>
       </article>
     )}
-    <article className="mb-12">
+    <article className="mb-12 px-4 py-4 bg-white rounded">
       {/* <h2>Turn your content into an GraphQL/REST API with Collected Source.</h2> */}
       <h2 className="mb-4">
         Turn your content into a prototyping data source.
@@ -123,7 +124,7 @@ const IndexPage = (props: Props) => (
             <input
               id="input-url-trello"
               placeholder="https://trello.com/b/abcdef"
-              className="border"
+              className="px-2 py-1 border"
             />
             <button className="text-white bg-shadow">Go</button>
           </div>
@@ -141,7 +142,7 @@ const IndexPage = (props: Props) => (
             <input
               id="input-url-github"
               placeholder="https://github.com/org/repo"
-              className="border"
+              className="px-2 py-1 border"
             />
             <button className="text-white bg-shadow">Go</button>
           </div>
@@ -159,7 +160,7 @@ const IndexPage = (props: Props) => (
             <input
               id="input-url-github"
               placeholder="bucket-name/key/path"
-              className="border"
+              className="px-2 py-1 border"
             />
             <button className="text-white bg-shadow">Go</button>
           </div>
