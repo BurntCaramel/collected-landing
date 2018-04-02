@@ -28,18 +28,20 @@ const IndexPage = (props: Props) => (
         categorization, search capabilities
       </h2>
       <form>
-        <div className="row mb-2">
-          <label className="flex-1">{'Search for'}</label>
-          <input placeholder="nav" className="flex-1 px-2 py-1 border" />
-        </div>
-        <div className="row mb-2">
-          <label className="col flex-1">{'Industry'}</label>
-          <select className="flex-1 px-2 py-1 border">
-            <option>{'Development & Design'}</option>
-            <option>{'Government'}</option>
-            <option>{'Health'}</option>
-            <option>{'Finance'}</option>
-          </select>
+        <div className="row">
+          <div className="col flex-1 mr-2 mb-2">
+            <label className="flex-1">{'Search for'}</label>
+            <input placeholder="nav" className="flex-1 px-2 py-1 border" />
+          </div>
+          <div className="col flex-1 ml-2 mb-2">
+            <label className="col flex-1">{'Industry'}</label>
+            <select className="flex-1 px-2 py-1 border">
+              <option>{'Development & Design'}</option>
+              <option>{'Government'}</option>
+              <option>{'Health'}</option>
+              <option>{'Finance'}</option>
+            </select>
+          </div>
         </div>
         <div className="row">
           <button className="flex-1 py-1 text-white bg-shadow">
@@ -47,6 +49,11 @@ const IndexPage = (props: Props) => (
           </button>
         </div>
       </form>
+
+      <div className="row">
+        <a href="">Stripe</a>
+        <a href="">Slack</a>
+      </div>
     </article>
 
     <article className="mb-8">
