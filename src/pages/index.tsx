@@ -12,6 +12,46 @@ const LinkList = ({ children, Component = 'ul' }) => (
   <Component>{React.Children.map(children, item => <li>{item}</li>)}</Component>
 )
 
+const NewsletterForm = () => (
+  <article className="mb-8">
+    <h2 className="mb-2">Hear about the latest updates</h2>
+    <form
+      method="post"
+      action="https://emailoctopus.com/lists/839d94de-3257-11e8-a3c9-06b79b628af2/members/embedded/1.1/add"
+    >
+      <div className="row">
+        <label htmlFor="newsletter-field-0">
+          Email address
+        </label>
+        <input
+          id="newsletter-field-0"
+          name="embedded_form_subscription[field_0]"
+          type="email"
+          placeholder=""
+          className="border ml-2"
+        />
+        <div className="email-octopus-form-row-hp" aria-hidden="true">
+          {/* Do not remove this field, otherwise you risk bot sign-ups */}
+          <input
+            type="text"
+            name="hp839d94de-3257-11e8-a3c9-06b79b628af2"
+            tabIndex={-1}
+            autocomplete="nope"
+          />
+        </div>
+
+        <div className="email-octopus-form-row-subscribe ml-4">
+          <input type="hidden" name="successRedirectUrl" value="" />
+          <button type="submit" className="px-2 py-1 text-white bg-shadow">
+            Subscribe
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </article>
+)
+
 const IndexPage = (props: Props) => (
   <div>
     {/* <h1 className="mt-12 mb-12">
@@ -55,44 +95,6 @@ const IndexPage = (props: Props) => (
         <a href="">Stripe</a>
         <a href="">Slack</a>
       </div>
-    </article>
-
-    <article className="mb-8">
-      <h2 className="mb-2">Hear about the latest updates</h2>
-      <form
-        method="post"
-        action="https://emailoctopus.com/lists/839d94de-3257-11e8-a3c9-06b79b628af2/members/embedded/1.1/add"
-      >
-        <div className="row">
-          <label htmlFor="newsletter-field-0">
-            Email address
-          </label>
-          <input
-            id="newsletter-field-0"
-            name="embedded_form_subscription[field_0]"
-            type="email"
-            placeholder=""
-            className="border ml-2"
-          />
-          <div className="email-octopus-form-row-hp" aria-hidden="true">
-            {/* Do not remove this field, otherwise you risk bot sign-ups */}
-            <input
-              type="text"
-              name="hp839d94de-3257-11e8-a3c9-06b79b628af2"
-              tabIndex={-1}
-              autocomplete="nope"
-            />
-          </div>
-
-          <div className="email-octopus-form-row-subscribe ml-4">
-            <input type="hidden" name="successRedirectUrl" value="" />
-            <button type="submit" className="px-2 py-1 text-white bg-shadow">
-              Subscribe
-            </button>
-          </div>
-        </div>
-
-      </form>
     </article>
 
     {false && (
@@ -197,6 +199,9 @@ const IndexPage = (props: Props) => (
         </LinkList>
       </article>
     )}
+
+    <NewsletterForm />
+    
   </div>
 )
 
