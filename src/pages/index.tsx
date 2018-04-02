@@ -90,7 +90,7 @@ const IndexPage = (props: Props) => (
           </div>
         </div>
         <div className="row">
-          <button className="flex-1 py-1 text-white bg-shadow">
+          <button className="flex-1 py-1 font-bold text-white bg-shadow">
             Search
           </button>
         </div>
