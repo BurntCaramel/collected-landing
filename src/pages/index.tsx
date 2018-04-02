@@ -8,7 +8,13 @@ interface Props {}
 
 const trelloBlue = '#0079BF'
 
-const LinkList = ({ children, Component = 'ul' }) => (
+const LinkList = ({
+  children,
+  Component = 'ul',
+}: {
+  children: React.ReactNode
+  Component?: React.ComponentType
+}) => (
   <Component>{React.Children.map(children, item => <li>{item}</li>)}</Component>
 )
 
@@ -34,7 +40,7 @@ const NewsletterForm = () => (
             type="text"
             name="hp839d94de-3257-11e8-a3c9-06b79b628af2"
             tabIndex={-1}
-            autocomplete="nope"
+            autoComplete="nope"
           />
         </div>
 
