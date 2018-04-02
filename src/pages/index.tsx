@@ -19,8 +19,8 @@ const NewsletterForm = () => (
       method="post"
       action="https://emailoctopus.com/lists/839d94de-3257-11e8-a3c9-06b79b628af2/members/embedded/1.1/add"
     >
-      <div className="row">
-        <label htmlFor="newsletter-field-0">Email address</label>
+      <div className="row row-baseline">
+        <label htmlFor="newsletter-field-0">Your email</label>
         <input
           id="newsletter-field-0"
           name="embedded_form_subscription[field_0]"
