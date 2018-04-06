@@ -30,6 +30,14 @@ class TemplateWrapper extends React.Component<Props, void> {
                 'Collected lets you design with existing content and assets',
             },
           ]}
+          link={[
+            {
+              rel: "stylesheet",
+              href: "https://use.fontawesome.com/releases/v5.0.9/css/all.css",
+              integrity: "sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1",
+              crossorigin: "anonymous"
+            }
+          ]}
         />
         <Header location={this.props.location} />
         <div
