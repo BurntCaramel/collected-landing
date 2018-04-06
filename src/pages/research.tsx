@@ -171,10 +171,30 @@ function Icon({ text, sizeRem = 1, fallbackRounded = false }: { text: string, si
   )
 }
 
+function titleForNavCard(card: Card) {
+  if (card.name.tags[1] === 'primary') {
+    return 'Primary nav'
+  }
+
+  if (card.name.tags[1] === 'footer') {
+    return 'Footer nav'
+  }
+  
+  return 'Nav'
+}
+
+function fontSizeForNavCard(card: Card) {
+  if (card.name.tags[1] === 'footer') {
+    return '0.75rem'
+  }
+  
+  return '1rem'
+}
+
 function renderNavCard(card: Card) {
   return (
     <div key={card.id} className="mb-8">
-      <h2>{card.name.tags[1] === 'primary' ? 'Primary nav' : 'Nav'}</h2>
+      <h2>{titleForNavCard(card)}</h2>
       <div
         style={{
           display: 'flex',
@@ -185,6 +205,7 @@ function renderNavCard(card: Card) {
           paddingBottom: '0.5rem',
           paddingLeft: '0.5rem',
           paddingRight: '0.5rem',
+          fontSize: fontSizeForNavCard(card),
           backgroundColor: 'white',
         }}
       >
@@ -193,6 +214,7 @@ function renderNavCard(card: Card) {
             style={{
               display: 'flex',
               flexDirection: 'row',
+              flexWrap: 'wrap',
               alignItems: 'center',
             }}
           >
