@@ -221,11 +221,12 @@ function renderNavCard(card: Card) {
               justifyContent: card.body.sections.length === 1 ? 'space-between' : 'initial',
             }}
           >
-            {section.listItems.map(listItem => {
+            {section.listItems.map((listItem, listItemIndex, { length: listItemCount }) => {
               const isPrimary = isPrimaryItem(listItem)
               const isSearch = listItem.tags[0] === 'search'
               const isIcon = listItem.tags[0] === 'icon'
               const isPicture = listItem.tags[0] === 'picture'
+              const isLast = listItemIndex === listItemCount - 1
               return (
                 <span
                   style={{
@@ -234,6 +235,8 @@ function renderNavCard(card: Card) {
                     paddingRight: '0.333rem',
                     paddingTop: '0.25rem',
                     paddingBottom: '0.25rem',
+                    marginLeft: isPrimary ? '0.25rem' : '0',
+                    marginRight: isPrimary ? '0.25rem' : '0',
                     fontWeight: listItem.tags[0] === 'logo' ? 700 : 400,
                     color: isPrimary ? 'white' : isSearch ? '#888' : '#111',
                     backgroundColor: isPrimary ? '#111' : 'white',
