@@ -142,6 +142,7 @@ const regexToFontAwesomeName = [
   { regex: /\bnotification[s]?\b/i, className: 'fas fa-bell' },
   { regex: /\bnew|add\b/i, className: 'fas fa-plus' },
   { regex: /\buser|profile|account\b/i, className: 'fas fa-user-circle' },
+  { regex: /\bsearch\b/i, className: 'fas fa-search' },
 ]
 
 function Icon({ text, sizeRem = 1, fallbackRounded = false }: { text: string, sizeRem?: number, fallbackRounded?: boolean }) {
