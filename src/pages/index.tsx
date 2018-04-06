@@ -108,7 +108,7 @@ const IndexPage = (props: Props) => (
       </form>
 
       <div className="mt-2">
-        <span>{'Examples: '}</span>
+        <span>{'Check out: '}</span>
         <a href={`/research?${stringifyQuery({q: '#nav' })}`}>Navs</a>
         {' | '}
         <a href="/research?q=stripe">Stripe</a>
