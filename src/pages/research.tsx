@@ -213,9 +213,11 @@ function renderNavCard(card: Card) {
           <div
             style={{
               display: 'flex',
-              flexDirection: 'row',
+              flexDirection: card.body.sections.length >= 4 ? 'column' : 'row',
               flexWrap: 'wrap',
-              alignItems: 'center',
+              alignItems: card.body.sections.length >= 4 ? 'flex-start' : 'center',
+              flexGrow: card.body.sections.length === 1 ? 1 : 0,
+              justifyContent: card.body.sections.length === 1 ? 'space-between' : 'initial',
             }}
           >
             {section.listItems.map(listItem => {
