@@ -19,9 +19,9 @@ const LinkList = ({
   <Component>{React.Children.map(children, item => <li>{item}</li>)}</Component>
 )
 
-const NewsletterForm = () => (
-  <article className="mb-8">
-    <h2 className="mb-2">Hear about the latest updates</h2>
+const NewsletterForm = ({ className }: { className: string }) => (
+  <article className={ className }>
+    <h2 className="mb-2">Hear about the latest updates!</h2>
     <form
       method="post"
       action="https://emailoctopus.com/lists/839d94de-3257-11e8-a3c9-06b79b628af2/members/embedded/1.1/add"
@@ -69,7 +69,7 @@ const IndexPage = (props: Props) => (
       Get feedback fast with realistic, better prototypes
     </h1>
 
-    <article className="mb-8">
+    <article className="mb-12">
       <div className="mb-4">
         <h2 className="mb-1">
           Find and compare information architecture, components, and flows
@@ -135,6 +135,8 @@ const IndexPage = (props: Props) => (
         </ol>
       </article>
     )}
+
+    <NewsletterForm className='mb-12 px-8 py-8 bg-white rounded' />
 
     <article className="mb-12 px-8 py-8 bg-white rounded">
       {/* <h2>Turn your content into an GraphQL/REST API with Collected Source.</h2> */}
@@ -232,8 +234,6 @@ const IndexPage = (props: Props) => (
         </LinkList>
       </article>
     )}
-
-    <NewsletterForm />
   </div>
 )
 
