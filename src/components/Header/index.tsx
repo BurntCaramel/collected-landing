@@ -1,5 +1,4 @@
 import * as React from 'react'
-// import Link, { navigateTo } from 'gatsby-link'
 import { Link } from 'react-static'
 import { Location } from 'history'
 import queryFromLocation from '../../nav/queryFromLocation'
