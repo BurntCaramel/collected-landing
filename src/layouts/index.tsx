@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Location } from 'history'
 import Helmet from 'react-helmet'
 
 import Header from '../components/Header'
@@ -14,7 +15,7 @@ interface Props {
 }
 
 //const TemplateWrapper = ({ children }: Props) => (
-class TemplateWrapper extends React.Component<Props, void> {
+class TemplateWrapper extends React.Component<Props, {}> {
   render() {
     return (
       <div>
@@ -48,7 +49,7 @@ class TemplateWrapper extends React.Component<Props, void> {
             paddingTop: 0,
           }}
         >
-          {this.props.children()}
+          {this.props.children}
         </div>
       </div>
     )
