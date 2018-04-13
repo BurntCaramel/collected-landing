@@ -1,4 +1,5 @@
 import { parse } from 'query-string'
+import { Location } from 'history'
 
 interface Query {
   q: string

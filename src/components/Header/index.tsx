@@ -1,5 +1,6 @@
 import * as React from 'react'
-import Link, { navigateTo } from 'gatsby-link'
+import { Link } from 'react-static'
+import { Location } from 'history'
 import queryFromLocation from '../../nav/queryFromLocation'
 
 const styles = {
@@ -23,7 +24,7 @@ function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
   event.preventDefault()
   const a = event.currentTarget
   const path = a.pathname
-  navigateTo(path)
+  //navigateTo(path)
 }
 
 interface Props {
@@ -39,8 +40,8 @@ const Header = (props: Props) => {
     const isCurrent = toPath === props.location.pathname
 
     return (
-      <a
-        href={toPath}
+      <Link
+        to={toPath}
         aria-current={isCurrent ? 'page' : null}
         style={styles.link}
         className={classes([
@@ -48,10 +49,9 @@ const Header = (props: Props) => {
           isCurrent && 'border-b-2',
           ...extraClasses,
         ])}
-        onClick={onLinkClick}
       >
         {content}
-      </a>
+      </Link>
     )
   }
 

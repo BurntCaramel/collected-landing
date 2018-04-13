@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Location } from 'history'
 import Helmet from 'react-helmet'
 
 import Header from '../components/Header'
@@ -14,7 +15,7 @@ interface Props {
 }
 
 //const TemplateWrapper = ({ children }: Props) => (
-class TemplateWrapper extends React.Component<Props, void> {
+class TemplateWrapper extends React.Component<Props, {}> {
   render() {
     return (
       <div>
@@ -35,7 +36,7 @@ class TemplateWrapper extends React.Component<Props, void> {
               rel: "stylesheet",
               href: "https://use.fontawesome.com/releases/v5.0.9/css/all.css",
               integrity: "sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1",
-              crossorigin: "anonymous"
+              crossOrigin: "anonymous"
             }
           ]}
         />
@@ -48,7 +49,7 @@ class TemplateWrapper extends React.Component<Props, void> {
             paddingTop: 0,
           }}
         >
-          {this.props.children()}
+          {this.props.children}
         </div>
       </div>
     )
