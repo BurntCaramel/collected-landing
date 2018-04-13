@@ -22,6 +22,10 @@ export default {
         component: 'src/pages/create'
       },
       {
+        path: '/contribute',
+        component: 'src/pages/contribute'
+      },
+      {
         path: '/docs',
         component: 'src/pages/docs'
       },
