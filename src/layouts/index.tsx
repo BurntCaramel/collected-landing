@@ -30,6 +30,10 @@ class TemplateWrapper extends React.Component<Props, {}> {
               content:
                 'Collected lets you design with existing content and assets',
             },
+            {
+              name: "google-site-verification",
+              content: "wWt2bpsMO6BWfCe-Nce_n0TcZPCFHfiZRXCyMtNqr90"
+            }
           ]}
           link={[
             {
