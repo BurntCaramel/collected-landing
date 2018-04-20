@@ -19,8 +19,10 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "react-static build",
-    "build:staging": "react-static build --staging",
+    "build:react": "react-static build",
+    "build:react:staging": "react-static build --staging",
+    "build:redirects": "cp src/_redirects dist/_redirects",
+    "build": "npm run build:react && npm run build:redirects",
     "dev": "react-static start",
     "format:ts": "prettier --parser typescript --write 'src/**/*.ts*'",
     "format:css": "prettier --write 'src/**/*.css'",
