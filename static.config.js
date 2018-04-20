@@ -30,6 +30,14 @@ export default {
         component: 'src/pages/docs'
       },
       {
+        path: '/signin',
+        component: 'src/pages/sign-in'
+      },
+      {
+        path: '/account',
+        component: 'src/pages/account'
+      },
+      {
         path: '/open-source',
         component: 'src/pages/open-source'
       },

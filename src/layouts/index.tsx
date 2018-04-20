@@ -47,7 +47,10 @@ class TemplateWrapper extends React.Component<Props, {}> {
             },
           ]}
         />
-        <Header location={this.props.location} authStatus={this.props.authStatus} />
+        <Header
+          location={this.props.location}
+          authStatus={this.props.authStatus}
+        />
         <div
           style={{
             margin: '0 auto',

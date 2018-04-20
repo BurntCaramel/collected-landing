@@ -28,6 +28,14 @@ function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
   //navigateTo(path)
 }
 
+function isSignedIn(authStatus: AuthStatus | null): boolean {
+  if (!authStatus) {
+    return false
+  }
+
+  return authStatus.github || authStatus.figma || authStatus.trello
+}
+
 interface Props {
   location: Location
   authStatus: AuthStatus | null
@@ -88,11 +96,11 @@ const Header = (props: Props) => {
         <div className="row">
           {link('Research', '/research')}
           {link('Create', '/create')}
-          {link('Contribute', '/contribute')}
           {link('Docs', '/docs')}
-          {link('Open source', '/open-source')}
-          {props.authStatus && props.authStatus.github &&
-            link('Your GitHub', '/account')}
+          {link('Contribute', '/contribute')}
+          {isSignedIn
+            ? link('Account', '/account')
+            : link('Sign In / Up', '/signin')}
           {/* <Link to="/inspiration" style={styles.link} className="mr-4">
             Inspiration
           </Link> */}
