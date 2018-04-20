@@ -72,7 +72,7 @@ const IndexPage = (props: Props) => (
     <article className="mb-12">
       <div className="mb-4">
         <h2 className="mb-1">
-          Find and compare information architecture, components, and flows
+          Find and compare the best in your industry
         </h2>
         <p>
           Research navigation, onboarding, components, landing pages, forms,
@@ -136,8 +136,6 @@ const IndexPage = (props: Props) => (
       </article>
     )}
 
-    <NewsletterForm className="mb-12 px-8 py-8 bg-white rounded" />
-
     <article className="mb-12 px-8 py-8 bg-white rounded">
       {/* <h2>Turn your content into an GraphQL/REST API with Collected Source.</h2> */}
       {/* <h2 className="mb-4">
@@ -146,8 +144,11 @@ const IndexPage = (props: Props) => (
       {/* <h2 className="mb-8">
         Prototype with your content from Trello or GitHub.
       </h2> */}
-      <h2 className="mb-8">
+      {/* <h2 className="mb-8">
         Prototype rapidly with content from Trello or GitHub.
+      </h2> */}
+      <h2 className="mb-8">
+        Create your own interactive prototypes rapidly
       </h2>
       <div className="row mb-8">
         <div className="mr-4">
@@ -215,6 +216,9 @@ const IndexPage = (props: Props) => (
         </Link>
       </LinkList>
     </article>
+
+    <NewsletterForm className="mb-12 px-8 py-8 bg-white rounded" />
+
     {false && (
       <article className="mb-12">
         <h2 className="mb-4">Make components simply by writing Markdown.</h2>
