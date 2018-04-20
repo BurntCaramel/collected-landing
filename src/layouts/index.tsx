@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Location } from 'history'
 import Helmet from 'react-helmet'
 
+import { AuthStatus } from '../data/auth'
 import Header from '../components/Header'
 import './reset.css'
 import './base.css'
@@ -12,6 +13,7 @@ import './style.css'
 interface Props {
   children: any
   location: Location
+  authStatus: AuthStatus
 }
 
 //const TemplateWrapper = ({ children }: Props) => (
@@ -31,20 +33,21 @@ class TemplateWrapper extends React.Component<Props, {}> {
                 'Collected lets you design with existing content and assets',
             },
             {
-              name: "google-site-verification",
-              content: "wWt2bpsMO6BWfCe-Nce_n0TcZPCFHfiZRXCyMtNqr90"
-            }
+              name: 'google-site-verification',
+              content: 'wWt2bpsMO6BWfCe-Nce_n0TcZPCFHfiZRXCyMtNqr90',
+            },
           ]}
           link={[
             {
-              rel: "stylesheet",
-              href: "https://use.fontawesome.com/releases/v5.0.9/css/all.css",
-              integrity: "sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1",
-              crossOrigin: "anonymous"
-            }
+              rel: 'stylesheet',
+              href: 'https://use.fontawesome.com/releases/v5.0.9/css/all.css',
+              integrity:
+                'sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1',
+              crossOrigin: 'anonymous',
+            },
           ]}
         />
-        <Header location={this.props.location} />
+        <Header location={this.props.location} authStatus={this.props.authStatus} />
         <div
           style={{
             margin: '0 auto',

@@ -20,7 +20,7 @@ const LinkList = ({
 )
 
 const NewsletterForm = ({ className }: { className: string }) => (
-  <article className={ className }>
+  <article className={className}>
     <h2 className="mb-2">Hear about the latest updates!</h2>
     <form
       method="post"
@@ -109,7 +109,7 @@ const IndexPage = (props: Props) => (
 
       <div className="mt-2">
         <span>{'Check out: '}</span>
-        <a href={`/research?${stringifyQuery({q: '#nav' })}`}>Navs</a>
+        <a href={`/research?${stringifyQuery({ q: '#nav' })}`}>Navs</a>
         {' | '}
         <a href="/research?q=stripe">Stripe</a>
         {' | '}
@@ -136,7 +136,7 @@ const IndexPage = (props: Props) => (
       </article>
     )}
 
-    <NewsletterForm className='mb-12 px-8 py-8 bg-white rounded' />
+    <NewsletterForm className="mb-12 px-8 py-8 bg-white rounded" />
 
     <article className="mb-12 px-8 py-8 bg-white rounded">
       {/* <h2>Turn your content into an GraphQL/REST API with Collected Source.</h2> */}

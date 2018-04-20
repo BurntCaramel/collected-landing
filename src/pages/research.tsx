@@ -147,7 +147,15 @@ const regexToFontAwesomeName = [
   { regex: /\bcontribute\b/i, className: 'fas fa-pencil-alt' },
 ]
 
-function Icon({ text, sizeRem = 1, fallbackRounded = false }: { text: string, sizeRem?: number, fallbackRounded?: boolean }) {
+function Icon({
+  text,
+  sizeRem = 1,
+  fallbackRounded = false,
+}: {
+  text: string
+  sizeRem?: number
+  fallbackRounded?: boolean
+}) {
   const key = text.toLowerCase()
   let fontAwesomeClassName = null
   regexToFontAwesomeName.some(({ regex, className }) => {
@@ -159,16 +167,26 @@ function Icon({ text, sizeRem = 1, fallbackRounded = false }: { text: string, si
   })
 
   if (fontAwesomeClassName) {
-    return <i className={fontAwesomeClassName} style={{ fontSize: `${sizeRem}rem` }} />
+    return (
+      <i
+        className={fontAwesomeClassName}
+        style={{ fontSize: `${sizeRem}rem` }}
+      />
+    )
   }
 
   return (
-    <svg viewBox='0 0 2 2' width={sizeRem * 18} height={sizeRem * 18} style={{ display: 'inline-block' }}>
-      { fallbackRounded ?
+    <svg
+      viewBox="0 0 2 2"
+      width={sizeRem * 18}
+      height={sizeRem * 18}
+      style={{ display: 'inline-block' }}
+    >
+      {fallbackRounded ? (
         <circle cx={1} cy={1} r={1} />
-        :
+      ) : (
         <rect width={2} height={2} />
-      }
+      )}
       <title>{text}</title>
     </svg>
   )
@@ -182,7 +200,7 @@ function titleForNavCard(card: Card) {
   if (card.name.tags[1] === 'footer') {
     return 'Footer nav'
   }
-  
+
   return 'Nav'
 }
 
@@ -190,7 +208,7 @@ function fontSizeForNavCard(card: Card) {
   if (card.name.tags[1] === 'footer') {
     return '0.75rem'
   }
-  
+
   return '1rem'
 }
 
@@ -218,44 +236,50 @@ function renderNavCard(card: Card) {
               display: 'flex',
               flexDirection: card.body.sections.length >= 4 ? 'column' : 'row',
               flexWrap: 'wrap',
-              alignItems: card.body.sections.length >= 4 ? 'flex-start' : 'center',
+              alignItems:
+                card.body.sections.length >= 4 ? 'flex-start' : 'center',
               flexGrow: card.body.sections.length === 1 ? 1 : 0,
-              justifyContent: card.body.sections.length === 1 ? 'space-between' : 'initial',
+              justifyContent:
+                card.body.sections.length === 1 ? 'space-between' : 'initial',
             }}
           >
-            {section.listItems.map((listItem, listItemIndex, { length: listItemCount }) => {
-              const isPrimary = isPrimaryItem(listItem)
-              const isSearch = listItem.tags[0] === 'search'
-              const isIcon = listItem.tags[0] === 'icon'
-              const isPicture = listItem.tags[0] === 'picture'
-              const isLast = listItemIndex === listItemCount - 1
-              return (
-                <span
-                  style={{
-                    display: 'flex',
-                    paddingLeft: '0.333rem',
-                    paddingRight: '0.333rem',
-                    paddingTop: '0.25rem',
-                    paddingBottom: '0.25rem',
-                    marginLeft: isPrimary ? '0.25rem' : '0',
-                    marginRight: isPrimary ? '0.25rem' : '0',
-                    fontWeight: listItem.tags[0] === 'logo' ? 700 : 400,
-                    color: isPrimary ? 'white' : isSearch ? '#888' : '#111',
-                    backgroundColor: isPrimary ? '#111' : 'white',
-                    border: isSearch ? '1px solid #111' : 'none',
-                    borderRadius: isPrimary ? 5 : 0,
-                  }}
-                >
-                  {(isIcon || isPicture) ? '' : listItem.text}
-                  {isIcon &&
-                    <Icon text={listItem.text} />
-                  }
-                  {isPicture &&
-                    <Icon text={listItem.text} sizeRem={1.5} fallbackRounded />
-                  }
-                </span>
-              )
-            })}
+            {section.listItems.map(
+              (listItem, listItemIndex, { length: listItemCount }) => {
+                const isPrimary = isPrimaryItem(listItem)
+                const isSearch = listItem.tags[0] === 'search'
+                const isIcon = listItem.tags[0] === 'icon'
+                const isPicture = listItem.tags[0] === 'picture'
+                const isLast = listItemIndex === listItemCount - 1
+                return (
+                  <span
+                    style={{
+                      display: 'flex',
+                      paddingLeft: '0.333rem',
+                      paddingRight: '0.333rem',
+                      paddingTop: '0.25rem',
+                      paddingBottom: '0.25rem',
+                      marginLeft: isPrimary ? '0.25rem' : '0',
+                      marginRight: isPrimary ? '0.25rem' : '0',
+                      fontWeight: listItem.tags[0] === 'logo' ? 700 : 400,
+                      color: isPrimary ? 'white' : isSearch ? '#888' : '#111',
+                      backgroundColor: isPrimary ? '#111' : 'white',
+                      border: isSearch ? '1px solid #111' : 'none',
+                      borderRadius: isPrimary ? 5 : 0,
+                    }}
+                  >
+                    {isIcon || isPicture ? '' : listItem.text}
+                    {isIcon && <Icon text={listItem.text} />}
+                    {isPicture && (
+                      <Icon
+                        text={listItem.text}
+                        sizeRem={1.5}
+                        fallbackRounded
+                      />
+                    )}
+                  </span>
+                )
+              }
+            )}
           </div>
         ))}
       </div>
@@ -335,17 +359,20 @@ class ResearchPage extends React.Component<Props, State> {
     if (/#/.test(q)) {
       body = {
         variables: {
-          tags: q.replace(/#/g, '').split(/\s+/).map(s => s.trim()).filter(Boolean),
+          tags: q
+            .replace(/#/g, '')
+            .split(/\s+/)
+            .map(s => s.trim())
+            .filter(Boolean),
         },
-        query: cardTagsQuery
+        query: cardTagsQuery,
       }
-    }
-    else {
+    } else {
       body = {
         variables: {
           q: q || '',
         },
-        query: listSearchQuery
+        query: listSearchQuery,
       }
     }
 

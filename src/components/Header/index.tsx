@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-static'
 import { Location } from 'history'
+import { AuthStatus } from '../../data/auth'
 import queryFromLocation from '../../nav/queryFromLocation'
 
 const styles = {
@@ -29,6 +30,7 @@ function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
 
 interface Props {
   location: Location
+  authStatus: AuthStatus | null
 }
 
 const Header = (props: Props) => {
@@ -89,6 +91,8 @@ const Header = (props: Props) => {
           {link('Contribute', '/contribute')}
           {link('Docs', '/docs')}
           {link('Open source', '/open-source')}
+          {props.authStatus && props.authStatus.github &&
+            link('Your GitHub', '/account')}
           {/* <Link to="/inspiration" style={styles.link} className="mr-4">
             Inspiration
           </Link> */}
