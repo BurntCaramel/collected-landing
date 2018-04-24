@@ -98,7 +98,7 @@ const Header = (props: Props) => {
           {link('Create', '/create')}
           {link('Docs', '/docs')}
           {link('Contribute', '/contribute')}
-          {isSignedIn
+          {isSignedIn(props.authStatus)
             ? link('Account', '/account')
             : link('Sign In / Up', '/signin')}
           {/* <Link to="/inspiration" style={styles.link} className="mr-4">
