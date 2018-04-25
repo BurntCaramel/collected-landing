@@ -124,7 +124,10 @@ interface FailureResult {
   ]
 }
 
-function renderCard(card: Card) {
+const renderCard = (list: List) => (card: Card) => {
+  const listName = list.name
+  const [domain] = listName.split(' ').slice(-1)
+
   const { tags } = card.name
 
   return (
@@ -133,12 +136,13 @@ function renderCard(card: Card) {
       text={card.name.text}
       sections={card.body.sections}
       frontmatter={card.body.frontmatter}
+      domain={domain}
     />
   )
 }
 
 function renderList(list: List) {
-  return <div>{list.cards.map(renderCard)}</div>
+  return <div>{list.cards.map(renderCard(list))}</div>
 }
 
 interface Props {

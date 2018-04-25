@@ -24,9 +24,10 @@ export interface Props {
   tags: string[]
   sections: Section[]
   frontmatter: Frontmatter
+  domain?: string
 }
 
-function Item({ text, tags, sections, frontmatter }: Props) {
+function Item({ text, tags, sections, frontmatter, domain }: Props) {
   if (tags[0] === 'nav') {
     return <Nav tags={tags} sections={sections} />
   } else if (tags[0] === 'page') {
@@ -42,6 +43,7 @@ function Item({ text, tags, sections, frontmatter }: Props) {
               text={text}
               sections={sections}
               frontmatter={frontmatter}
+              domain={domain}
             />
           </div>
         </div>

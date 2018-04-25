@@ -16,6 +16,7 @@ export interface Props {
   text: string
   sections: Section[]
   frontmatter: Frontmatter
+  domain?: string
 }
 
 function titleFor({ text, sections, frontmatter }: Props): string {
@@ -40,11 +41,9 @@ function descriptionFor({ text, sections, frontmatter }: Props): string {
   return ''
 }
 
-const baseURL = 'https://example.com'
-
-function urlFor({ text }: Props): string {
+function urlFor({ text, domain = 'example.com' }: Props): string {
   const withoutTags = stripTags(text)
-  return baseURL + withoutTags
+  return `https://${domain}${withoutTags}`
 }
 
 function SearchResult(props: Props) {
