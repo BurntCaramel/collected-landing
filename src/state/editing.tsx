@@ -74,6 +74,7 @@ export const insertSection = (props: Props, beforeIndex: number) => ({
     content: `
 ---
 title: Example - the next level experience
+description: Yes, the whole world has changed. See for yourself here
 ---
 
 # Primary heading

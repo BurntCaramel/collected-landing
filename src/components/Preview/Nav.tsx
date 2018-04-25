@@ -55,8 +55,9 @@ function Nav({ tags, sections }: Props) {
           backgroundColor: 'white',
         }}
       >
-        {sections.map((section, _sectionIndex, { length: sectionCount }) => (
+        {sections.map((section, sectionIndex, { length: sectionCount }) => (
           <div
+            key={sectionIndex}
             style={{
               display: 'flex',
               flexDirection: sectionCount >= 4 ? 'column' : 'row',
@@ -75,6 +76,7 @@ function Nav({ tags, sections }: Props) {
                 const isLast = listItemIndex === listItemCount - 1
                 return (
                   <span
+                    key={listItemIndex}
                     style={{
                       display: 'flex',
                       paddingLeft: '0.333rem',

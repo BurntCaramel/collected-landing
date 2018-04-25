@@ -19,6 +19,7 @@ export interface Props {
 }
 
 function titleFor({ text, sections, frontmatter }: Props): string {
+  console.log('frontmatter', frontmatter)
   if (frontmatter.title) {
     return frontmatter.title
   }
@@ -27,6 +28,14 @@ function titleFor({ text, sections, frontmatter }: Props): string {
   const [primaryHeading] = headings.filter(heading => heading.level === 1)
   if (primaryHeading) {
     return primaryHeading.text
+  }
+
+  return ''
+}
+
+function descriptionFor({ text, sections, frontmatter }: Props): string {
+  if (frontmatter.description) {
+    return frontmatter.description
   }
 
   return ''
@@ -67,7 +76,15 @@ function SearchResult(props: Props) {
           {urlFor(props)}
         </cite>
       </div>
-      <p />
+      <p
+        style={{
+          fontFamily: 'arial, sans-serif',
+          fontSize: 13,
+          lineHeight: 18,
+          fontWeight: 400,
+          color: 'rgb(84, 84, 84)',
+        }}
+      >{descriptionFor(props)}</p>
     </div>
   )
 }
