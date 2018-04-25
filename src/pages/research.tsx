@@ -118,7 +118,13 @@ interface FailureResult {
 function renderCard(card: Card) {
   const { tags } = card.name
 
-  return <PreviewItem tags={card.name.tags} text={card.name.text} sections={card.body.sections} />
+  return (
+    <PreviewItem
+      tags={card.name.tags}
+      text={card.name.text}
+      sections={card.body.sections}
+    />
+  )
 }
 
 function renderList(list: List) {

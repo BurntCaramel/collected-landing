@@ -1,5 +1,3 @@
-import { listTags } from '../utils/tags'
-
 export interface Props {
   initialSections?: Section[]
 }
@@ -7,35 +5,13 @@ export interface Props {
 export type Tag = string
 
 export type Section = {
-  tags: Tag[]
+  name: string
   content: string
 }
 
 export interface State {
   sections: Section[]
 }
-
-export const initial: (props: Props) => State = props => ({
-  sections: props.initialSections || [],
-})
-
-export const editSectionTags = (
-  props: Props,
-  changedIndex: number,
-  newTagsInput: string
-) => ({ sections }: State) =>
-  ({
-    sections: sections.map((section, sectionIndex) => {
-      if (sectionIndex === changedIndex) {
-        return {
-          ...section,
-          tags: listTags(newTagsInput, { strict: false }),
-        }
-      } else {
-        return section
-      }
-    }),
-  } as State)
 
 function updateAtIndex<Item>(
   items: Item[],
@@ -56,8 +32,27 @@ function insertBeforeIndex<Item>(
   beforeIndex: number,
   insertedItem: Item
 ) {
-  return items.slice(0, beforeIndex).concat([insertedItem]).concat(items.slice(beforeIndex))
+  return items
+    .slice(0, beforeIndex)
+    .concat([insertedItem])
+    .concat(items.slice(beforeIndex))
 }
+
+export const initial: (props: Props) => State = props => ({
+  sections: props.initialSections || [],
+})
+
+export const editSectionName = (
+  props: Props,
+  changedIndex: number,
+  newName: string
+) => ({ sections }: State) =>
+  ({
+    sections: updateAtIndex(sections, changedIndex, section => ({
+      ...section,
+      name: newName,
+    })),
+  } as State)
 
 export const editSectionContent = (
   props: Props,
@@ -74,11 +69,22 @@ export const editSectionContent = (
 export const insertSection = (props: Props, beforeIndex: number) => ({
   sections,
 }: State) => ({
-  sections: insertBeforeIndex(sections, beforeIndex, { tags: ['page'], content: '# Primary heading\n\n## Subheading' }),
+  sections: insertBeforeIndex(sections, beforeIndex, {
+    name: '/ #page',
+    content: `
+---
+title: Example - the next level experience
+---
+
+# Primary heading
+
+## Subheading
+`.trim(),
+  }),
 })
 
 export interface HandlersOut {
-  editSectionTags(changedIndex: number, newTagsInput: string): void
+  editSectionName(changedIndex: number, newName: string): void
   editSectionContent(changedSectionIndex: number, newContent: string): void
   insertSection(beforeIndex: number): void
 }

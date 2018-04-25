@@ -29,27 +29,24 @@ function renderHeading(heading: Heading) {
 
 function Page({ text, sections }: Props) {
   return (
-    <div className="mb-8">
-      <h2>{text}</h2>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-          padding: '1rem',
-          backgroundColor: 'white',
-        }}
-      >
-        {sections.map(section => (
-          <div
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
-            {section.headings.map(renderHeading)}
-          </div>
-        ))}
-      </div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        padding: '1rem',
+        backgroundColor: 'white',
+      }}
+    >
+      {sections.map(section => (
+        <div
+          style={{
+            marginBottom: '1rem',
+          }}
+        >
+          {section.headings.map(renderHeading)}
+        </div>
+      ))}
     </div>
   )
 }

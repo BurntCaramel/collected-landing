@@ -15,7 +15,8 @@ type State = Editing.State
 function toPreviewSections(content: string): PreviewSection[] {
   return content.split(/\*\*\*+|---+/).map(subsectionContent => ({
     headings: markdownUtils.listHeadings(subsectionContent),
-    listItems: markdownUtils.listListItems(subsectionContent)
+    listItems: markdownUtils
+      .listListItems(subsectionContent)
       .map(text => ({ text: stripTags(text), tags: listTags(text) })),
   }))
 }
@@ -23,47 +24,61 @@ function toPreviewSections(content: string): PreviewSection[] {
 const Editor: React.ComponentClass<Editing.Props> = makeAware(
   ({ sections, handlers }: State & ExtraProps<Editing.HandlersOut>) => (
     <div>
-      {sections.map((section, sectionIndex) => (<>
-        <button className='mb-4 bg-black text-white' onClick={() => handlers.insertSection(sectionIndex)}>+</button>
-        <div key={sectionIndex} className="col">
-          <input
-            className="mb-2 px-2 py-1 border"
-            value={tagsToInput(section.tags)}
-            onChange={e =>
-              handlers.editSectionTags(sectionIndex, e.target.value)
-            }
-          />
-          <div className="row">
-            <textarea
-              className="flex-1 px-2 py-1 border"
-              rows={10}
+      {sections.map((section, sectionIndex) => (
+        <>
+          <button
+            className="mb-4 bg-black text-white"
+            onClick={() => handlers.insertSection(sectionIndex)}
+          >
+            +
+          </button>
+          <div key={sectionIndex} className="col">
+            <input
+              className="mb-2 px-2 py-1 border"
+              value={section.name}
               onChange={e =>
-                handlers.editSectionContent(sectionIndex, e.target.value)
+                handlers.editSectionName(sectionIndex, e.target.value)
               }
-            >
-              {section.content}
-            </textarea>
-            <div
-              className="mt-2 ml-4"
-              style={{ maxWidth: '12rem', fontSize: '0.75rem' }}
-            >
-              <p className="mb-2">{'Put each nav item on its own line.'}</p>
-              <p className="mb-2">{'Use *** to separate into subsections.'}</p>
-              <p className="mb-2">
-                {
-                  'If you have 4 or more subsections, then it will become stacked.'
+            />
+            <div className="row">
+              <textarea
+                className="flex-1 px-2 py-1 border"
+                rows={10}
+                value={section.content}
+                onChange={e =>
+                  handlers.editSectionContent(sectionIndex, e.target.value)
                 }
-              </p>
+              />
+              <div
+                className="mt-2 ml-4"
+                style={{ maxWidth: '12rem', fontSize: '0.75rem' }}
+              >
+                <p className="mb-2">{'Put each nav item on its own line.'}</p>
+                <p className="mb-2">
+                  {'Use *** to separate into subsections.'}
+                </p>
+                <p className="mb-2">
+                  {
+                    'If you have 4 or more subsections, then it will become stacked.'
+                  }
+                </p>
+              </div>
             </div>
+            <PreviewItem
+              tags={listTags(section.name)}
+              text={stripTags(section.name)}
+              sections={toPreviewSections(section.content)}
+              frontmatter={markdownUtils.extractFrontmatter(section.content)}
+            />
           </div>
-          <PreviewItem
-            tags={section.tags}
-            text={''}
-            sections={toPreviewSections(section.content)}
-          />
-        </div>
-      </>))}
-      <button className='mt-4 bg-black text-white' onClick={() => handlers.insertSection(sections.length)}>+</button>
+        </>
+      ))}
+      <button
+        className="mt-4 bg-black text-white"
+        onClick={() => handlers.insertSection(sections.length)}
+      >
+        +
+      </button>
     </div>
   ),
   Editing
@@ -72,7 +87,7 @@ const Editor: React.ComponentClass<Editing.Props> = makeAware(
 const editorProps: Editing.Props = {
   initialSections: [
     {
-      tags: ['nav', 'primary'],
+      name: '#nav #primary',
       content: `
 - Example #logo
 
