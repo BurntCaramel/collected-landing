@@ -79,6 +79,10 @@ interface Card {
     tags: [string]
   }
   body: {
+    frontmatter: {
+      title: string | null
+      description: string | null
+    }
     sections: [
       {
         headings: [
@@ -128,7 +132,7 @@ function renderCard(card: Card) {
       tags={card.name.tags}
       text={card.name.text}
       sections={card.body.sections}
-      frontmatter={{}}
+      frontmatter={card.body.frontmatter}
     />
   )
 }
