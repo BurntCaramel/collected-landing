@@ -4,19 +4,6 @@ import { Location } from 'history'
 import { AuthStatus } from '../../data/auth'
 import queryFromLocation, { Query } from '../../nav/queryFromLocation'
 
-const styles = {
-  link: {
-    fontSize: '1rem',
-    lineHeight: '1.5',
-    paddingTop: '0.5rem',
-    paddingBottom: '0.5rem',
-    //textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-    color: 'black',
-    textDecoration: 'none',
-  } as React.CSSProperties,
-}
-
 function classes(items: Array<string | null | undefined | false>): string {
   return items.filter(Boolean).join(' ')
 }
@@ -83,7 +70,16 @@ class Header extends React.Component<Props, State> {
         <Link
           to={toPath}
           aria-current={isCurrent ? 'page' : null}
-          style={styles.link}
+          style={{
+            fontSize: '1rem',
+            lineHeight: '1.5',
+            paddingTop: '0.5rem',
+            paddingBottom: '0.5rem',
+            //textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            color: 'black',
+            textDecoration: 'none',
+          }}
           className={classes([
             'mr-4',
             isCurrent && 'border-b-2',
