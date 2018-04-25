@@ -89,7 +89,8 @@ const Header = (props: Props) => {
               name="q"
               className="mr-4 mt-1 mb-1 px-2"
               placeholder="Search catalog"
-              defaultValue={query['q'] || ''}
+              value={query['q'] || ''}
+              onChange={e => {}}
             />
           </form>
         </div>
