@@ -9,8 +9,12 @@ const DocsIndexPage = (props: Props) => (
 
     <nav className="mb-8">
       <ul>
-        <li><Link to='/docs/create'>Create</Link></li>
-        <li><Link to='/docs/api'>API</Link></li>
+        <li>
+          <Link to="/docs/create">Create</Link>
+        </li>
+        <li>
+          <Link to="/docs/api">API</Link>
+        </li>
       </ul>
     </nav>
   </div>

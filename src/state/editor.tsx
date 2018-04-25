@@ -51,6 +51,14 @@ function updateAtIndex<Item>(
   })
 }
 
+function insertBeforeIndex<Item>(
+  items: Item[],
+  beforeIndex: number,
+  insertedItem: Item
+) {
+  return items.slice(0, beforeIndex).concat([insertedItem]).concat(items.slice(beforeIndex))
+}
+
 export const editSectionContent = (
   props: Props,
   changedSectionIndex: number,
@@ -63,7 +71,14 @@ export const editSectionContent = (
     })),
   } as State)
 
+export const insertSection = (props: Props, beforeIndex: number) => ({
+  sections,
+}: State) => ({
+  sections: insertBeforeIndex(sections, beforeIndex, { tags: ['page'], content: '' }),
+})
+
 export interface HandlersOut {
   editSectionTags(changedIndex: number, newTagsInput: string): void
   editSectionContent(changedSectionIndex: number, newContent: string): void
+  insertSection(beforeIndex: number): void
 }

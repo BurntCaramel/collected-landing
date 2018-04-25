@@ -22,7 +22,8 @@ function toNavSections(content: string): PreviewNavSection[] {
 const Editor: React.ComponentClass<editorModule.Props> = makeAware(
   ({ sections, handlers }: State & ExtraProps<editorModule.HandlersOut>) => (
     <div>
-      {sections.map((section, sectionIndex) => (
+      {sections.map((section, sectionIndex) => (<>
+        <button className='bg-black text-white' onClick={() => handlers.insertSection(sectionIndex)}>+</button>
         <div key={sectionIndex} className="col">
           <input
             className="mb-2 px-2 py-1 border"
@@ -31,7 +32,7 @@ const Editor: React.ComponentClass<editorModule.Props> = makeAware(
               handlers.editSectionTags(sectionIndex, e.target.value)
             }
           />
-          <div className='row'>
+          <div className="row">
             <textarea
               className="flex-1 px-2 py-1 border"
               rows={10}
@@ -41,10 +42,17 @@ const Editor: React.ComponentClass<editorModule.Props> = makeAware(
             >
               {section.content}
             </textarea>
-            <div className='mt-2 ml-4' style={{ maxWidth: '12rem', fontSize: '0.75rem' }}>
-              <p className='mb-2'>{'Put each nav item on its own line.'}</p>
-              <p className='mb-2'>{'Use *** to separate into subsections.'}</p>
-              <p className='mb-2'>{'If you have 4 or more subsections, then it will become stacked.'}</p>
+            <div
+              className="mt-2 ml-4"
+              style={{ maxWidth: '12rem', fontSize: '0.75rem' }}
+            >
+              <p className="mb-2">{'Put each nav item on its own line.'}</p>
+              <p className="mb-2">{'Use *** to separate into subsections.'}</p>
+              <p className="mb-2">
+                {
+                  'If you have 4 or more subsections, then it will become stacked.'
+                }
+              </p>
             </div>
           </div>
           <PreviewNav
@@ -52,7 +60,8 @@ const Editor: React.ComponentClass<editorModule.Props> = makeAware(
             sections={toNavSections(section.content)}
           />
         </div>
-      ))}
+      </>))}
+      <button className='bg-black text-white' onClick={() => handlers.insertSection(sections.length)}>+</button>
     </div>
   ),
   editorModule
@@ -83,8 +92,6 @@ class EditPage extends React.PureComponent<Props, {}> {
         <h1 className="mt-8 mb-8">{'Edit prototype'}</h1>
 
         <article className="mb-8">
-          <h2 className="mb-2">{'Add section'}</h2>
-
           <Editor {...editorProps} />
         </article>
       </div>
