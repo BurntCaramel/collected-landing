@@ -71,9 +71,7 @@ const IndexPage = (props: Props) => (
 
     <article className="mb-12">
       <div className="mb-4">
-        <h2 className="mb-1">
-          Find and compare the best in your industry
-        </h2>
+        <h2 className="mb-1">Find and compare the best in your industry</h2>
         <p>
           Research navigation, onboarding, components, landing pages, forms,
           emails, categorization, search, and accessibility capabilities.
@@ -147,9 +145,7 @@ const IndexPage = (props: Props) => (
       {/* <h2 className="mb-8">
         Prototype rapidly with content from Trello or GitHub.
       </h2> */}
-      <h2 className="mb-8">
-        Create your own interactive prototypes rapidly
-      </h2>
+      <h2 className="mb-8">Create your own interactive prototypes rapidly</h2>
       <div className="row mb-8">
         <div className="mr-4">
           <TrelloIcon size={64} color={trelloBlue} />

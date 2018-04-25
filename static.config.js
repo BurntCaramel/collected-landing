@@ -19,7 +19,7 @@ export default {
       },
       {
         path: '/create',
-        component: 'src/pages/create'
+        component: 'src/pages/create/edit'
       },
       {
         path: '/contribute',
@@ -27,7 +27,15 @@ export default {
       },
       {
         path: '/docs',
-        component: 'src/pages/docs'
+        component: 'src/pages/docs/index'
+      },
+      {
+        path: '/docs/create',
+        component: 'src/pages/docs/create'
+      },
+      {
+        path: '/docs/api',
+        component: 'src/pages/docs/api'
       },
       {
         path: '/signin',
@@ -36,10 +44,6 @@ export default {
       {
         path: '/account',
         component: 'src/pages/account'
-      },
-      {
-        path: '/open-source',
-        component: 'src/pages/open-source'
       },
       {
         is404: true,

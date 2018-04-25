@@ -18,7 +18,7 @@ const LinkList = ({
   <Component>{React.Children.map(children, item => <li>{item}</li>)}</Component>
 )
 
-const IndexPage = (props: Props) => (
+const DocsAPIPage = (props: Props) => (
   <div>
     <h1 className="mt-8 mb-8">Collected Docs</h1>
 
@@ -138,4 +138,4 @@ query Trello {
   </div>
 )
 
-export default IndexPage
+export default DocsAPIPage

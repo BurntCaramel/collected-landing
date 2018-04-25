@@ -1,12 +1,9 @@
 import * as React from 'react'
 import { Link } from 'react-static'
-import TrelloIcon from '../components/FontAwesome/Trello'
-import GitHubIcon from '../components/FontAwesome/GitHub'
-import AWSIcon from '../components/FontAwesome/AWS'
 
 interface Props {}
 
-const ContributePage = (props: Props) => (
+const DocsCreatePage = (props: Props) => (
   <div>
     <h1 className="mt-8 mb-8">Create your own Collected</h1>
 
@@ -44,4 +41,4 @@ const ContributePage = (props: Props) => (
   </div>
 )
 
-export default ContributePage
+export default DocsCreatePage

@@ -7,23 +7,17 @@ const AccountPage = () => (
 
     <article className="mb-8">
       <h3>Trello: @username</h3>
-      <p>
-        Connect a Trello board
-      </p>
+      <p>Connect a Trello board</p>
     </article>
 
     <article className="mb-8">
       <h3>GitHub: @Username</h3>
-      <p>
-        Connect a GitHub repo
-      </p>
+      <p>Connect a GitHub repo</p>
     </article>
 
     <article className="mb-8">
       <h3>Figma</h3>
-      <p>
-        Connect a Figma document
-      </p>
+      <p>Connect a Figma document</p>
     </article>
   </div>
 )

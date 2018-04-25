@@ -495,6 +495,10 @@ autoprefixer@^7.1.5:
     postcss "^6.0.17"
     postcss-value-parser "^3.2.3"
 
+awareness@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/awareness/-/awareness-1.1.4.tgz#d242cad0e87e26a90df961b50e5d5fd8309f26d8"
+
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -6378,6 +6382,12 @@ react-hot-loader@^4:
     hoist-non-react-statics "^2.5.0"
     prop-types "^15.6.1"
     shallowequal "^1.0.2"
+
+react-organism@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/react-organism/-/react-organism-0.3.7.tgz#1ba162625bd7e7a99828390ba67526ea78be1a4d"
+  dependencies:
+    awareness "^1.1.4"
 
 react-router-dom@^4.2.2:
   version "4.2.2"
