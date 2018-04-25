@@ -123,6 +123,7 @@ function renderCard(card: Card) {
       tags={card.name.tags}
       text={card.name.text}
       sections={card.body.sections}
+      frontmatter={{}}
     />
   )
 }
