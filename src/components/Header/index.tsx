@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Link } from 'react-static'
 import { Location } from 'history'
 import { AuthStatus } from '../../data/auth'
-import queryFromLocation from '../../nav/queryFromLocation'
+import queryFromLocation, { Query } from '../../nav/queryFromLocation'
 
 const styles = {
   link: {
@@ -41,74 +41,102 @@ interface Props {
   authStatus: AuthStatus | null
 }
 
-const Header = (props: Props) => {
-  const link = (
-    content: string,
-    toPath: string,
-    extraClasses: Array<string> = []
-  ) => {
-    const isCurrent = toPath === props.location.pathname
+interface State {
+  urlQuery: Query
+  enteredQ: string
+}
 
-    return (
-      <Link
-        to={toPath}
-        aria-current={isCurrent ? 'page' : null}
-        style={styles.link}
-        className={classes([
-          'mr-4',
-          isCurrent && 'border-b-2',
-          ...extraClasses,
-        ])}
-      >
-        {content}
-      </Link>
-    )
+class Header extends React.Component<Props, State> {
+  state: State = {
+    urlQuery: queryFromLocation(this.props.location),
+    enteredQ: queryFromLocation(this.props.location).q || '',
   }
 
-  const query = queryFromLocation(props.location)
+  static getDerivedStateFromProps(nextProps: Props, prevState: State): any {
+    const query = queryFromLocation(nextProps.location)
+    if (prevState.urlQuery.q !== query.q) {
+      return {
+        urlQuery: query,
+        enteredQ: query.q || '',
+      }
+    }
 
-  return (
-    <div
-      style={{
-        backgroundColor: '#ffffff4d',
-        marginBottom: '1.45rem',
-      }}
-    >
+    return null
+  }
+
+  onChangeQ = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ enteredQ: e.target.value })
+  }
+
+  render() {
+    const link = (
+      content: string,
+      toPath: string,
+      extraClasses: Array<string> = []
+    ) => {
+      const isCurrent = toPath === this.props.location.pathname
+
+      return (
+        <Link
+          to={toPath}
+          aria-current={isCurrent ? 'page' : null}
+          style={styles.link}
+          className={classes([
+            'mr-4',
+            isCurrent && 'border-b-2',
+            ...extraClasses,
+          ])}
+        >
+          {content}
+        </Link>
+      )
+    }
+
+    const { enteredQ } = this.state
+
+    return (
       <div
         style={{
-          display: 'flex',
-          margin: '0 auto',
-          maxWidth: 960,
-          padding: '0 1rem',
+          backgroundColor: '#ffffff4d',
+          marginBottom: '1.45rem',
         }}
       >
-        <div className="row">
-          {link('Collected', '/', ['font-bold'])}
-          <form action="/research" method="get" className="row">
-            <input
-              name="q"
-              className="mr-4 mt-1 mb-1 px-2"
-              placeholder="Search catalog"
-              value={query['q'] || ''}
-              onChange={e => {}}
-            />
-          </form>
-        </div>
-        <div className="row">
-          {link('Research', '/research')}
-          {link('Create', '/create')}
-          {link('Docs', '/docs')}
-          {link('Contribute', '/contribute')}
-          {isSignedIn(props.authStatus)
-            ? link('Account', '/account')
-            : link('Sign In / Up', '/signin')}
-          {/* <Link to="/inspiration" style={styles.link} className="mr-4">
-            Inspiration
-          </Link> */}
+        <div
+          style={{
+            display: 'flex',
+            margin: '0 auto',
+            maxWidth: 960,
+            padding: '0 1rem',
+          }}
+        >
+          <div className="row">
+            {link('Collected', '/', ['font-bold'])}
+            <form action="/research" method="get" className="row">
+              <input
+                name="q"
+                className="mr-4 mt-1 mb-1 px-2"
+                placeholder="Search catalog"
+                value={enteredQ}
+                onChange={this.onChangeQ}
+              />
+            </form>
+          </div>
+          <div className="row">
+            {link('Research', '/research')}
+            {link('Create', '/create')}
+            {link('Docs', '/docs')}
+            {link('Contribute', '/contribute')}
+            {isSignedIn(this.props.authStatus)
+              ? link('Account', '/account')
+              : link('Sign In / Up', '/signin')}
+            {/* <Link to="/inspiration" style={styles.link} className="mr-4">
+              Inspiration
+            </Link> */}
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Header

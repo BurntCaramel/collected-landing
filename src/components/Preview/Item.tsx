@@ -31,14 +31,16 @@ export interface Props {
 
 function Item({ text, tags, sections, frontmatter, domain }: Props) {
   if (tags[0] === 'nav') {
-    return <div className='mb-4'>
-      <h3>
-        <Link to={`/research?q=${encodeURIComponent(tagsToInput(tags))}`}>
-          {tagsToInput(tags)}
-        </Link>
-      </h3>
-      <Nav tags={tags} sections={sections} />
-    </div>
+    return (
+      <div className="mb-4">
+        <h3>
+          <Link to={`/research?q=${encodeURIComponent(tagsToInput(tags))}`}>
+            {tagsToInput(tags)}
+          </Link>
+        </h3>
+        <Nav tags={tags} sections={sections} />
+      </div>
+    )
   } else if (tags[0] === 'page') {
     return (
       <div className="mb-4">

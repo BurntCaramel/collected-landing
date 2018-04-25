@@ -1,7 +1,7 @@
 import { parse } from 'query-string'
 import { Location } from 'history'
 
-interface Query {
+export interface Query {
   q: string
   industry: string
 }
