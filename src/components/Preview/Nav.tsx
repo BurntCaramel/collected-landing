@@ -40,7 +40,7 @@ function fontSizeForTags(tags: string[]) {
 function Nav({ tags, sections }: Props) {
   return (
     <div className="mb-8">
-      <h2>{titleForTags(tags)}</h2>
+      <h3>{titleForTags(tags)}</h3>
       <div
         style={{
           display: 'flex',

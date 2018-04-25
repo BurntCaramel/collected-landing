@@ -247,11 +247,11 @@ class ResearchPage extends React.Component<Props, State> {
           isSuccess(result) &&
           result.data.collectedIA.lists.map(list => (
             <div key={list.name}>
-              <h1>
+              <h2>
                 <Link to={`/research/?q=${encodeURIComponent(list.name)}`}>
                   {list.name}
                 </Link>
-              </h1>
+              </h2>
               {renderList(list)}
             </div>
           ))}
