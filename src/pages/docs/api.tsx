@@ -20,15 +20,15 @@ const LinkList = ({
 
 const DocsAPIPage = (props: Props) => (
   <div>
-    <h1 className="mt-8 mb-8">Collected Docs</h1>
+    <h1 className="mt-8 mb-8">
+      <Link to="/docs">{'Collected Docs:'}</Link>
+      {' API'}
+    </h1>
 
     <article className="mb-8">
       <h2 className="mb-2">Collected Source GraphQL</h2>
-      <p>Query & load content from Trello, GitHub.</p>
-
-      <h3 className="mt-4 mb-2">Try online</h3>
-      <p>
-        <a href="https://1.source.collected.design/graphiql">
+      <p className='mb-2'>Query & load content from Trello, GitHub.</p>
+      <p className='mb-2'>Try online: <a href="https://1.source.collected.design/graphiql">
           {'https://1.source.collected.design/graphiql'}
         </a>
       </p>
@@ -38,9 +38,11 @@ const DocsAPIPage = (props: Props) => (
         <code>{`https://1.source.collected.design/graphql`}</code>
       </p>
 
-      <h3 className="mt-4 mb-2">
+      <h3 className="mt-4 mb-2">GraphQL examples</h3>
+
+      <h4 className="mt-4 mb-2">
         GitHub: All files in the RoyalIcing/lofi-bootstrap repo
-      </h3>
+      </h4>
       <pre>
         <code>
           {`
@@ -55,7 +57,7 @@ gitHubRepo(owner: "RoyalIcing", repoName: "lofi-bootstrap") {
         </code>
       </pre>
 
-      <h3 className="mt-4 mb-2">Trello: Lists and their cards in a board</h3>
+      <h4 className="mt-4 mb-2">Trello: Lists and their cards in a board</h4>
       <pre>
         <code>
           {`
@@ -82,16 +84,16 @@ query Trello {
         </code>
       </pre>
 
-      <h3 className="mt-4 mb-2">
-        Trello: Cards tagged #page in a list named ‘Stripe’
-      </h3>
+      <h4 className="mt-4 mb-2">
+        Trello: Cards tagged #page in a list named ‘Stripe stripe.com’
+      </h4>
       <pre>
         <code>
           {`
 {
   collectedNavs: trelloBoard(id: "4wctPH1u") {
     name
-    lists(q: "Stripe") {
+    lists(q: "Stripe stripe.com") {
       name
       pages: cards(tags: ["page"]) {
         name {
@@ -114,21 +116,24 @@ query Trello {
 
     <article className="mb-8">
       <h2 className="mb-2">Collected Source REST</h2>
-      <p>Load from Trello, GitHub. Formats: JSON.</p>
+      <p className='mb-2'>Load from Trello, GitHub.</p>
+      <p className='mb-2'>Formats: JSON.</p>
 
       <h3 className="mt-4 mb-2">Base URL</h3>
       <p>
         <code>{`https://1.source.collected.design`}</code>
       </p>
 
-      <h3 className="mt-4 mb-2">List files in a GitHub repo</h3>
+      <h3 className="mt-4 mb-2">REST examples</h3>
+
+      <h4 className="mt-4 mb-2">List files in a GitHub repo</h4>
       <pre>
         <code>
           {`GET https://1.source.collected.design/github/RoyalIcing/lofi-bootstrap/master/command:list?content`}
         </code>
       </pre>
 
-      <h3 className="mt-4 mb-2">List cards in a Trello board</h3>
+      <h4 className="mt-4 mb-2">List cards in a Trello board</h4>
       <pre>
         <code>
           {`GET https://1.source.collected.design/trello/580710faeb62c4f7a6fa7786`}

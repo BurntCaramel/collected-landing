@@ -3,21 +3,12 @@ import { Link } from 'react-static'
 import TrelloIcon from '../components/FontAwesome/Trello'
 import GitHubIcon from '../components/FontAwesome/GitHub'
 import AWSIcon from '../components/FontAwesome/AWS'
+import LinkList from '../components/LinkList'
 import { stringify as stringifyQuery } from 'query-string'
 
 interface Props {}
 
 const trelloBlue = '#0079BF'
-
-const LinkList = ({
-  children,
-  Component = 'ul',
-}: {
-  children: React.ReactNode
-  Component?: React.ComponentType
-}) => (
-  <Component>{React.Children.map(children, item => <li>{item}</li>)}</Component>
-)
 
 const NewsletterForm = ({ className }: { className: string }) => (
   <article className={className}>
@@ -201,14 +192,8 @@ const IndexPage = (props: Props) => (
         </div>
       </div>
       <LinkList>
-        <Link to="/page-2/" className="text-xl">
-          Trello: Onboarding flow, from forms to emails
-        </Link>
-        <Link to="/page-2/" className="text-xl">
-          Trello: Header, sidebar & footer navigation
-        </Link>
-        <Link to="/page-2/" className="text-xl">
-          Trello: Landing page
+        <Link to="/docs/" className="text-xl">
+          Learn more at the Collected docs
         </Link>
       </LinkList>
     </article>

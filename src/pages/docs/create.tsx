@@ -5,7 +5,10 @@ interface Props {}
 
 const DocsCreatePage = (props: Props) => (
   <div>
-    <h1 className="mt-8 mb-8">Create your own Collected</h1>
+    <h1 className="mt-8 mb-8">
+      <Link to="/docs">{'Collected Docs:'}</Link>
+      {' Create your own content'}
+    </h1>
 
     <article className="mb-8">
       <h2 className="mb-2">Trello</h2>
