@@ -74,7 +74,10 @@ class Header extends React.Component<Props, State> {
       toPath: string,
       extraClasses: Array<string> = []
     ) => {
-      const isCurrent = toPath === this.props.location.pathname
+      const pathToMatch = this.props.location.pathname
+      const isCurrent =
+        toPath ===
+        (toPath === '/' ? pathToMatch : pathToMatch.slice(0, toPath.length))
 
       return (
         <Link
