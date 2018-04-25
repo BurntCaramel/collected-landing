@@ -19,7 +19,6 @@ export interface Props {
 }
 
 function titleFor({ text, sections, frontmatter }: Props): string {
-  console.log('frontmatter', frontmatter)
   if (frontmatter.title) {
     return frontmatter.title
   }
@@ -84,7 +83,9 @@ function SearchResult(props: Props) {
           fontWeight: 400,
           color: 'rgb(84, 84, 84)',
         }}
-      >{descriptionFor(props)}</p>
+      >
+        {descriptionFor(props)}
+      </p>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-static'
+import { Location } from 'history'
 import queryFromLocation from '../nav/queryFromLocation'
 import PreviewItem from '../components/Preview/Item'
 
@@ -17,6 +18,10 @@ query Search($q: String) {
           tags
         }
         body: desc {
+          frontmatter {
+            title: value(key: "title"),
+            description: value(key: "description")
+          }
           source,
           sections {
             headings {
@@ -153,6 +158,14 @@ class ResearchPage extends React.Component<Props, State> {
     result: null,
   }
 
+  get graphqlURL(): string {
+    return window.location.hostname === 'collected.design'
+      ? 'https://1.source.collected.design/graphql'
+      : window.location.hostname === 'localhost'
+        ? 'http://localhost:9090/graphql'
+        : 'https://staging.1.source.collected.design/graphql'
+  }
+
   componentDidMount() {
     const { q } = queryFromLocation(this.props.location)
 
@@ -177,7 +190,7 @@ class ResearchPage extends React.Component<Props, State> {
       }
     }
 
-    fetch('https://staging.1.source.collected.design/graphql', {
+    fetch(this.graphqlURL, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
