@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-static'
 import queryFromLocation from '../nav/queryFromLocation'
-import PreviewNav from '../components/Preview/Nav'
+import PreviewItem from '../components/Preview/Item'
 
 const listSearchQuery = `
 query Search($q: String) {
@@ -118,57 +118,7 @@ interface FailureResult {
 function renderCard(card: Card) {
   const { tags } = card.name
 
-  if (tags[0] === 'nav') {
-    return renderNavCard(card)
-  } else if (tags[0] === 'page') {
-    return renderPageCard(card)
-  } else {
-    return null
-  }
-}
-
-function renderNavCard(card: Card) {
-  return <PreviewNav key={card.id} tags={card.name.tags} sections={card.body.sections} />
-}
-
-function renderHeading(heading: { level: number; text: string }) {
-  let Component = 'h3'
-  if (heading.level === 1) {
-    Component = 'h1'
-  } else if (heading.level === 2) {
-    Component = 'h2'
-  } else if (heading.level === 3) {
-    Component = 'h3'
-  }
-
-  return <Component key={heading.text}>{heading.text}</Component>
-}
-
-function renderPageCard(card: Card) {
-  return (
-    <div key={card.id} className="mb-8">
-      <h2>{card.name.text}</h2>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-          padding: '1rem',
-          backgroundColor: 'white',
-        }}
-      >
-        {card.body.sections.map(section => (
-          <div
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
-            {section.headings.map(renderHeading)}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+  return <PreviewItem tags={card.name.tags} text={card.name.text} sections={card.body.sections} />
 }
 
 function renderList(list: List) {
