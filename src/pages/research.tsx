@@ -128,7 +128,7 @@ function renderCard(card: Card) {
 }
 
 function renderNavCard(card: Card) {
-  return <PreviewNav tags={card.name.tags} sections={card.body.sections} />
+  return <PreviewNav key={card.id} tags={card.name.tags} sections={card.body.sections} />
 }
 
 function renderHeading(heading: { level: number; text: string }) {

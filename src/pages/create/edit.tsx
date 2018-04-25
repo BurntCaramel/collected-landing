@@ -1,29 +1,30 @@
 import * as React from 'react'
 import { Link } from 'react-static'
 import makeAware, { ExtraProps } from 'react-organism'
-import * as editorModule from '../../state/editor'
+import * as Editing from '../../state/editing'
 import { listTags, stripTags, tagsToInput } from '../../utils/tags'
-import PreviewNav, {
-  Section as PreviewNavSection,
-} from '../../components/Preview/Nav'
+import * as markdownUtils from '../../utils/markdown'
+import PreviewItem, {
+  Section as PreviewSection,
+} from '../../components/Preview/Item'
 
 interface Props {}
 
-type State = editorModule.State
+type State = Editing.State
 
-function toNavSections(content: string): PreviewNavSection[] {
+function toPreviewSections(content: string): PreviewSection[] {
   return content.split(/\*\*\*+|---+/).map(subsectionContent => ({
-    listItems: subsectionContent
-      .split(/\n+/)
+    headings: markdownUtils.listHeadings(subsectionContent),
+    listItems: markdownUtils.listListItems(subsectionContent)
       .map(text => ({ text: stripTags(text), tags: listTags(text) })),
   }))
 }
 
-const Editor: React.ComponentClass<editorModule.Props> = makeAware(
-  ({ sections, handlers }: State & ExtraProps<editorModule.HandlersOut>) => (
+const Editor: React.ComponentClass<Editing.Props> = makeAware(
+  ({ sections, handlers }: State & ExtraProps<Editing.HandlersOut>) => (
     <div>
       {sections.map((section, sectionIndex) => (<>
-        <button className='bg-black text-white' onClick={() => handlers.insertSection(sectionIndex)}>+</button>
+        <button className='mb-4 bg-black text-white' onClick={() => handlers.insertSection(sectionIndex)}>+</button>
         <div key={sectionIndex} className="col">
           <input
             className="mb-2 px-2 py-1 border"
@@ -55,31 +56,32 @@ const Editor: React.ComponentClass<editorModule.Props> = makeAware(
               </p>
             </div>
           </div>
-          <PreviewNav
+          <PreviewItem
             tags={section.tags}
-            sections={toNavSections(section.content)}
+            text={''}
+            sections={toPreviewSections(section.content)}
           />
         </div>
       </>))}
-      <button className='bg-black text-white' onClick={() => handlers.insertSection(sections.length)}>+</button>
+      <button className='mt-4 bg-black text-white' onClick={() => handlers.insertSection(sections.length)}>+</button>
     </div>
   ),
-  editorModule
+  Editing
 )
 
-const editorProps: editorModule.Props = {
+const editorProps: Editing.Props = {
   initialSections: [
     {
       tags: ['nav', 'primary'],
       content: `
-Example #logo
+- Example #logo
 
 ***
 
-Features
-Pricing
-Sign In
-Sign Up #primary
+- Features
+- Pricing
+- Sign In
+- Sign Up #primary
 `.trim(),
     },
   ],
@@ -89,7 +91,7 @@ class EditPage extends React.PureComponent<Props, {}> {
   render() {
     return (
       <div>
-        <h1 className="mt-8 mb-8">{'Edit prototype'}</h1>
+        <h1 className="mt-8 mb-8">{'Create prototype'}</h1>
 
         <article className="mb-8">
           <Editor {...editorProps} />

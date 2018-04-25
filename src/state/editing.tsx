@@ -74,7 +74,7 @@ export const editSectionContent = (
 export const insertSection = (props: Props, beforeIndex: number) => ({
   sections,
 }: State) => ({
-  sections: insertBeforeIndex(sections, beforeIndex, { tags: ['page'], content: '' }),
+  sections: insertBeforeIndex(sections, beforeIndex, { tags: ['page'], content: '# Primary heading\n\n## Subheading' }),
 })
 
 export interface HandlersOut {
