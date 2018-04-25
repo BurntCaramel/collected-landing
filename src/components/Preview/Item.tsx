@@ -1,8 +1,10 @@
 import React from 'react'
+import { Link } from 'react-static'
 import Nav from './Nav'
 import Page from './Page'
 import SearchResult from './SearchResult'
 import { Frontmatter } from '../../utils/markdown'
+import { tagsToInput } from '../../utils/tags'
 
 export interface Heading {
   level: number
@@ -29,11 +31,18 @@ export interface Props {
 
 function Item({ text, tags, sections, frontmatter, domain }: Props) {
   if (tags[0] === 'nav') {
-    return <Nav tags={tags} sections={sections} />
+    return <div className='mb-4'>
+      <h3>
+        <Link to={`/research?q=${encodeURIComponent(tagsToInput(tags))}`}>
+          {tagsToInput(tags)}
+        </Link>
+      </h3>
+      <Nav tags={tags} sections={sections} />
+    </div>
   } else if (tags[0] === 'page') {
     return (
       <div className="mb-4">
-        <h2>{text}</h2>
+        <h3>{text}</h3>
         <div className="row row-stretch">
           <div className="flex-1">
             <Page text={text} sections={sections} />
