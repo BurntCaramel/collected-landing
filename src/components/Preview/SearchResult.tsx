@@ -66,7 +66,7 @@ function SearchResult(props: Props) {
           style={{
             fontFamily: 'arial, sans-serif',
             fontSize: 14,
-            lineHeight: 16,
+            lineHeight: '16px',
             color: 'rgb(0, 102, 33)',
             fontStyle: 'normal',
             whiteSpace: 'nowrap',
@@ -79,7 +79,7 @@ function SearchResult(props: Props) {
         style={{
           fontFamily: 'arial, sans-serif',
           fontSize: 13,
-          lineHeight: 18,
+          lineHeight: '18px',
           fontWeight: 400,
           color: 'rgb(84, 84, 84)',
         }}
