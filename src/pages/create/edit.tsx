@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-static'
-import makeAware, { ExtraProps } from 'react-organism'
+import makeAware, { ReceiverProps } from 'react-organism'
 import * as Editing from '../../state/editing'
 import { listTags, stripTags, tagsToInput } from '../../utils/tags'
 import * as markdownUtils from '../../utils/markdown'
@@ -22,7 +22,7 @@ function toPreviewSections(content: string): PreviewSection[] {
 }
 
 const Editor: React.ComponentClass<Editing.Props> = makeAware(
-  ({ sections, handlers }: State & ExtraProps<Editing.HandlersOut>) => (
+  ({ sections, handlers }: State & ReceiverProps<Editing.HandlersOut>) => (
     <div>
       {sections.map((section, sectionIndex) => (
         <>

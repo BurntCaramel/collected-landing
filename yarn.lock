@@ -6383,9 +6383,9 @@ react-hot-loader@^4:
     prop-types "^15.6.1"
     shallowequal "^1.0.2"
 
-react-organism@^0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/react-organism/-/react-organism-0.3.7.tgz#1ba162625bd7e7a99828390ba67526ea78be1a4d"
+react-organism@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/react-organism/-/react-organism-0.3.9.tgz#92fb6b27ee843c7a94b9ee568ae663eeee5611b7"
   dependencies:
     awareness "^1.1.4"
 

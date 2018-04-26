@@ -3,14 +3,14 @@ declare const graphql: (query: TemplateStringsArray) => void
 declare module 'react-organism' {
   import React from 'react'
 
-  export interface ExtraProps<HandlersOut> {
+  export interface ReceiverProps<HandlersOut> {
     handlers: HandlersOut
   }
 
   function makeOrganism<Props, State, HandlersIn, HandlersOut>(
     Pure:
-      | React.ComponentClass<State & ExtraProps<HandlersOut>>
-      | React.StatelessComponent<State & ExtraProps<HandlersOut>>,
+      | React.ComponentClass<State & ReceiverProps<HandlersOut>>
+      | React.StatelessComponent<State & ReceiverProps<HandlersOut>>,
     handlersIn: HandlersIn,
     options?: {
       onChange: (newState: State) => {}
