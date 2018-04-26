@@ -3,6 +3,7 @@ import { Link } from 'react-static'
 import { Location } from 'history'
 import queryFromLocation from '../nav/queryFromLocation'
 import PreviewItem from '../components/Preview/Item'
+import { queryCollectedIATrelloBoard } from '../services/source'
 
 const listSearchQuery = `
 query Search($q: String) {

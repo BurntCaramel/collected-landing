@@ -4,6 +4,7 @@ import { Location } from 'history'
 export interface Query {
   q: string
   industry: string
+  url: string
 }
 
 export default function queryFromLocation(location: Location): Query {

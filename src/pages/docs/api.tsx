@@ -27,8 +27,10 @@ const DocsAPIPage = (props: Props) => (
 
     <article className="mb-8">
       <h2 className="mb-2">Collected Source GraphQL</h2>
-      <p className='mb-2'>Query & load content from Trello, GitHub.</p>
-      <p className='mb-2'>Try online: <a href="https://1.source.collected.design/graphiql">
+      <p className="mb-2">Query & load content from Trello, GitHub.</p>
+      <p className="mb-2">
+        Try online:{' '}
+        <a href="https://1.source.collected.design/graphiql">
           {'https://1.source.collected.design/graphiql'}
         </a>
       </p>
@@ -116,8 +118,8 @@ query Trello {
 
     <article className="mb-8">
       <h2 className="mb-2">Collected Source REST</h2>
-      <p className='mb-2'>Load from Trello, GitHub.</p>
-      <p className='mb-2'>Formats: JSON.</p>
+      <p className="mb-2">Load from Trello, GitHub.</p>
+      <p className="mb-2">Formats: JSON.</p>
 
       <h3 className="mt-4 mb-2">Base URL</h3>
       <p>

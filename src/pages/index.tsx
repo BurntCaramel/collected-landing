@@ -141,19 +141,20 @@ const IndexPage = (props: Props) => (
         <div className="mr-4">
           <TrelloIcon size={64} color={trelloBlue} />
         </div>
-        <div className="col flex-1">
+        <form method="get" action="/create/source" className="col flex-1">
           <label htmlFor="input-url-trello" className="col flex-1">
             {'Paste your Trello board URL '}
           </label>
           <div className="row">
             <input
+              name='url'
               id="input-url-trello"
               placeholder="https://trello.com/b/abcdef"
               className="px-2 py-1 border"
             />
             <button className="text-white bg-shadow">Go</button>
           </div>
-        </div>
+        </form>
       </div>
       <div className="row mb-8">
         <div className="mr-4">

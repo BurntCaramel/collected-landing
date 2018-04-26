@@ -22,6 +22,10 @@ export default {
         component: 'src/pages/create/edit'
       },
       {
+        path: '/create/source',
+        component: 'src/pages/create/source'
+      },
+      {
         path: '/contribute',
         component: 'src/pages/contribute'
       },
