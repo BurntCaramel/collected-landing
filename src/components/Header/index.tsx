@@ -81,7 +81,7 @@ class Header extends React.Component<Props, State> {
             textDecoration: 'none',
           }}
           className={classes([
-            'mr-4',
+            'px-2',
             isCurrent && 'border-b-2',
             ...extraClasses,
           ])}
@@ -113,7 +113,7 @@ class Header extends React.Component<Props, State> {
             <form action="/research" method="get" className="row">
               <input
                 name="q"
-                className="mr-4 mt-1 mb-1 px-2"
+                className="ml-2 mr-2 mt-1 mb-1 px-2"
                 placeholder="Search catalog"
                 value={enteredQ}
                 onChange={this.onChangeQ}
