@@ -124,7 +124,7 @@ class Header extends React.Component<Props, State> {
             {link('Research', '/research')}
             {link('Create', '/create')}
             {link('Docs', '/docs')}
-            {link('Contribute', '/contribute')}
+            {link('Open Source', '/contribute')}
             {isSignedIn(this.props.authStatus)
               ? link('Account', '/account')
               : link('Sign In / Up', '/signin')}
