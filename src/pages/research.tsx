@@ -44,7 +44,10 @@ const stateHandlers = {
     return { result: null }
   },
 
-  async load(props: RenderProps, prevProps: RenderProps | null): Promise<Partial<State> | null> {
+  async load(
+    props: RenderProps,
+    prevProps: RenderProps | null
+  ): Promise<Partial<State> | null> {
     if (!prevProps || props.q !== prevProps.q) {
       let q = props.q
       let tags = null
@@ -54,7 +57,7 @@ const stateHandlers = {
           .split(/\s+/)
           .map(s => s.trim())
           .filter(Boolean)
-        
+
         q = null
       }
 
@@ -63,18 +66,23 @@ const stateHandlers = {
     }
 
     return null
-  }
+  },
 }
 
-function Render({
-  result
-}: State): JSX.Element {
-  const count = (!!result && !!result.data && !!result.data.source.collections && !!result.data.source.collections ? result.data.source.collections.length : null) || null
+function Render({ result }: State): JSX.Element {
+  const count =
+    (!!result &&
+    !!result.data &&
+    !!result.data.source.collections &&
+    !!result.data.source.collections
+      ? result.data.source.collections.length
+      : null) || null
 
   return (
     <div>
-      <h3 className="mt-8 mb-8">  
-        {count != null && (count === 1 ? `1 catalog result` : `${count} catalog results`) }
+      <h3 className="mt-8 mb-8">
+        {count != null &&
+          (count === 1 ? `1 catalog result` : `${count} catalog results`)}
       </h3>
 
       {!result && <p>Loading…</p>}
@@ -105,9 +113,7 @@ function Render({
         result.data.source.collections.map(collection => (
           <div key={collection.name}>
             <h2>
-              <Link
-                to={`/research/?q=${encodeURIComponent(collection.name)}`}
-              >
+              <Link to={`/research/?q=${encodeURIComponent(collection.name)}`}>
                 {collection.name}
               </Link>
             </h2>
@@ -126,7 +132,10 @@ function Render({
   )
 }
 
-const Loader: React.ComponentClass<RenderProps> = makeAware(Render, stateHandlers)
+const Loader: React.ComponentClass<RenderProps> = makeAware(
+  Render,
+  stateHandlers
+)
 
 class ResearchPage extends React.Component<PageProps> {
   render() {

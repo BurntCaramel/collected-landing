@@ -36,6 +36,18 @@ ol {
   padding: 0;
 }
 
+code,
+kbd,
+pre,
+samp {
+  color: #110f00;
+  background-color: white;
+}
+pre {
+  overflow: auto;
+  padding: 0.5rem;
+}
+
 .email-octopus-form-row-hp {
   display: none;
 }

@@ -30,15 +30,17 @@ const DocsAPIPage = (props: Props) => (
       <p className="mb-2">Query & load content from Trello, GitHub.</p>
       <p className="mb-2">
         Try online:{' '}
-        <a href="https://1.source.collected.design/graphiql">
+        <a
+          className="font-bold"
+          href="https://1.source.collected.design/graphiql"
+          rel="noopener"
+        >
           {'https://1.source.collected.design/graphiql'}
         </a>
       </p>
 
       <h3 className="mt-4 mb-2">End-point</h3>
-      <p>
-        <code>{`https://1.source.collected.design/graphql`}</code>
-      </p>
+      <pre>{`https://1.source.collected.design/graphql`}</pre>
 
       <h3 className="mt-4 mb-2">GraphQL examples</h3>
 
@@ -122,9 +124,7 @@ query Trello {
       <p className="mb-2">Formats: JSON.</p>
 
       <h3 className="mt-4 mb-2">Base URL</h3>
-      <p>
-        <code>{`https://1.source.collected.design`}</code>
-      </p>
+      <pre>{`https://1.source.collected.design`}</pre>
 
       <h3 className="mt-4 mb-2">REST examples</h3>
 
