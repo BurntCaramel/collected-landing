@@ -14,8 +14,9 @@ const SourceLoader: React.ComponentClass<SourceLoading.Props> = makeAware(
   ({ source }: SourceLoading.State) => (
     <div>
       {!source && <p>Loading…</p>}
-      {!!source && <h1>{name}</h1> }
-      {!!source && source.collections &&
+      {!!source && <h1>{name}</h1>}
+      {!!source &&
+        source.collections &&
         source.collections.map((collection, collectionIndex) => (
           <div key={collectionIndex}>
             <h2>{collection.name}</h2>
@@ -47,7 +48,12 @@ const LoadSourcePage = (
       <h1 className="mt-8 mb-8">{'Create from Source'}</h1>
 
       <article className="mb-8">
-        <h2>Source: <a href={query.url} rel='noopener'>{query.url}</a></h2>
+        <h2>
+          Source:{' '}
+          <a href={query.url} rel="noopener">
+            {query.url}
+          </a>
+        </h2>
         <SourceLoader url={query.url} />
       </article>
     </div>

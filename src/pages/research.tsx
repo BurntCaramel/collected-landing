@@ -3,147 +3,27 @@ import { Link } from 'react-static'
 import { Location } from 'history'
 import queryFromLocation from '../nav/queryFromLocation'
 import PreviewItem from '../components/Preview/Item'
-import { queryCollectedIATrelloBoard } from '../services/source'
+import { Source, Collection, Unit } from '../types/source'
+import {
+  queryCollectedIATrelloBoard,
+  GraphQLResult,
+  GraphQLError,
+} from '../services/source'
 
-const listSearchQuery = `
-query Search($q: String) {
-  collectedIA: trelloBoard(id: "4wctPH1u") {
-    name
-    lists(q: $q) {
-      id
-      name
-      cards {
-        id
-        name {
-          text
-          tags
-        }
-        body: desc {
-          frontmatter {
-            title: value(key: "title"),
-            description: value(key: "description")
-          }
-          source,
-          sections {
-            headings {
-              text
-              level
-            }
-            listItems {
-              text
-              tags
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`
-
-const cardTagsQuery = `
-query Search($tags: [String!]) {
-  collectedIA: trelloBoard(id: "4wctPH1u") {
-    name
-    lists {
-      id
-      name
-      cards(tags: $tags) {
-        id
-        name {
-          text
-          tags
-        }
-        body: desc {
-          source,
-          sections {
-            headings {
-              text
-              level
-            }
-            listItems {
-              text
-              tags
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`
-
-interface Card {
-  id: string
-  name: {
-    text: string
-    tags: [string]
-  }
-  body: {
-    frontmatter: {
-      title: string | null
-      description: string | null
-    }
-    sections: [
-      {
-        headings: [
-          {
-            level: number
-            text: string
-          }
-        ]
-        listItems: [
-          {
-            text: string
-            tags: [string]
-          }
-        ]
-      }
-    ]
-  }
-}
-
-interface List {
-  id: string
-  name: string
-  cards: [Card]
-}
-
-interface SuccessResult {
-  data: {
-    collectedIA: {
-      lists: [List]
-    }
-  }
-}
-
-interface FailureResult {
-  errors: [
-    {
-      message: string
-    }
-  ]
-}
-
-const renderCard = (list: List) => (card: Card) => {
-  const listName = list.name
-  const [domain] = listName.split(' ').slice(-1)
-
-  const { tags } = card.name
-
+const renderUnit = (collection: Collection) => (unit: Unit) => {
   return (
     <PreviewItem
-      tags={card.name.tags}
-      text={card.name.text}
-      sections={card.body.sections}
-      frontmatter={card.body.frontmatter}
-      domain={domain}
+      tags={unit.tags}
+      text={unit.name}
+      sections={unit.body.sections}
+      frontmatter={unit.body.frontmatter}
+      domain={collection.domain}
     />
   )
 }
 
-function renderList(list: List) {
-  return <div>{list.cards.map(renderCard(list))}</div>
+function renderCollection(collection: Collection) {
+  return <div>{collection.units.map(renderUnit(collection))}</div>
 }
 
 interface Props {
@@ -151,16 +31,8 @@ interface Props {
 }
 
 interface State {
-  result: SuccessResult | FailureResult | Error
+  result: GraphQLResult<{ source: Source }>
 }
-
-const isSuccess = (
-  result: SuccessResult | FailureResult | Error
-): result is SuccessResult => !!(result as SuccessResult).data
-
-const isFailure = (
-  result: SuccessResult | FailureResult | Error
-): result is FailureResult => !!(result as FailureResult).errors
 
 class ResearchPage extends React.Component<Props, State> {
   state: State = {
@@ -176,43 +48,23 @@ class ResearchPage extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const { q } = queryFromLocation(this.props.location)
+    let { q } = queryFromLocation(this.props.location)
 
     let body = null
+    let tags = null
     if (/#/.test(q)) {
-      body = {
-        variables: {
-          tags: q
-            .replace(/#/g, '')
-            .split(/\s+/)
-            .map(s => s.trim())
-            .filter(Boolean),
-        },
-        query: cardTagsQuery,
-      }
-    } else {
-      body = {
-        variables: {
-          q: q || '',
-        },
-        query: listSearchQuery,
-      }
+      tags = q
+        .replace(/#/g, '')
+        .split(/\s+/)
+        .map(s => s.trim())
+        .filter(Boolean)
+      
+      q = null
     }
 
-    fetch(this.graphqlURL, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
+    queryCollectedIATrelloBoard({ q, tags }).then(result => {
+      this.setState({ result })
     })
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ result: json })
-      })
-      .catch(error => {
-        this.setState({ result: error })
-      })
   }
 
   render() {
@@ -233,7 +85,7 @@ class ResearchPage extends React.Component<Props, State> {
           )}
 
         {!!result &&
-          isFailure(result) && (
+          !!result.errors && (
             <div>
               {result.errors.map(error => (
                 <p>
@@ -245,15 +97,18 @@ class ResearchPage extends React.Component<Props, State> {
           )}
 
         {!!result &&
-          isSuccess(result) &&
-          result.data.collectedIA.lists.map(list => (
-            <div key={list.name}>
+          !!result.data &&
+          !!result.data.source.collections &&
+          result.data.source.collections.map(collection => (
+            <div key={collection.name}>
               <h2>
-                <Link to={`/research/?q=${encodeURIComponent(list.name)}`}>
-                  {list.name}
+                <Link
+                  to={`/research/?q=${encodeURIComponent(collection.name)}`}
+                >
+                  {collection.name}
                 </Link>
               </h2>
-              {renderList(list)}
+              {renderCollection(collection)}
             </div>
           ))}
 

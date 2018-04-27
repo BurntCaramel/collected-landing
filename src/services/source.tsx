@@ -11,13 +11,13 @@ function graphqlURL(): string {
 const collectedIABoardID = '4wctPH1u'
 
 const searchCollectionsInTrelloBoardQuery = `
-query Search($boardID: String!, $q: String) {
+query Search($boardID: String!, $q: String, $tags: [String!]) {
   source: trelloBoard(id: $boardID) {
     name
     collections(q: $q) {
       name
       domain: value(key: "domain")
-      units {
+      units(tags: $tags) {
         name
         tags
         body {
@@ -78,13 +78,13 @@ query Search($boardID: String!, $q: String) {
 }
 `
 
-type GraphQLError = {
+export type GraphQLError = {
   message: string
 }
 
-type GraphQLResult<Data> = {
-  data: Data | void
-  errors: GraphQLError[] | void
+export type GraphQLResult<Data> = {
+  data?: Data
+  errors?: GraphQLError[]
 }
 
 export async function queryCollectedSource<Data>(
@@ -107,19 +107,21 @@ export async function queryCollectedSource<Data>(
 
 export async function queryTrelloBoard(
   boardID: string,
-  q: string
-): Promise<GraphQLResult<{ source: Source | null }>> {
-  return queryCollectedSource<{ source: Source | null }>(
+  { q, tags }: { q?: string; tags?: string[] }
+): Promise<GraphQLResult<{ source: Source }>> {
+  return queryCollectedSource<{ source: Source }>(
     searchCollectionsInTrelloBoardQuery,
     {
       boardID,
       q,
+      tags,
     }
   )
 }
 
-export async function queryCollectedIATrelloBoard(
-  q: string
-): Promise<GraphQLResult<{ source: Source | null }>> {
-  return queryTrelloBoard(collectedIABoardID, q)
+export async function queryCollectedIATrelloBoard(query: {
+  q?: string
+  tags?: string[]
+}): Promise<GraphQLResult<{ source: Source }>> {
+  return queryTrelloBoard(collectedIABoardID, query)
 }

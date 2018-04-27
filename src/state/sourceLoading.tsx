@@ -27,7 +27,7 @@ export async function load(
       props.url.match(/^https?:\/\/trello.com\/b\/([^\/]+)/) || []
     console.log('boardID', boardID)
     if (boardID) {
-      const { data, errors } = await queryTrelloBoard(boardID, '')
+      const { data, errors } = await queryTrelloBoard(boardID, { q: '' })
       if (data) {
         changes.source = data.source
       }

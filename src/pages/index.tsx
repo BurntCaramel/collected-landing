@@ -147,7 +147,7 @@ const IndexPage = (props: Props) => (
           </label>
           <div className="row">
             <input
-              name='url'
+              name="url"
               id="input-url-trello"
               placeholder="https://trello.com/b/abcdef"
               className="px-2 py-1 border"
