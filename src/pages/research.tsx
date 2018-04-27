@@ -69,9 +69,13 @@ const stateHandlers = {
 function Render({
   result
 }: State): JSX.Element {
+  const count = (!!result && !!result.data && !!result.data.source.collections && !!result.data.source.collections ? result.data.source.collections.length : null) || null
+
   return (
     <div>
-      <h1 className="mt-8 mb-8">Research</h1>
+      <h3 className="mt-8 mb-8">  
+        {count != null && (count === 1 ? `1 catalog result` : `${count} catalog results`) }
+      </h3>
 
       {!result && <p>Loading…</p>}
 
