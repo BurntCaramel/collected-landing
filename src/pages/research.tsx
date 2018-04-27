@@ -9,6 +9,7 @@ import {
   GraphQLResult,
   GraphQLError,
 } from '../services/source'
+import makeAware from 'react-organism'
 
 const renderUnit = (collection: Collection) => (unit: Unit) => {
   return (
@@ -26,101 +27,108 @@ function renderCollection(collection: Collection) {
   return <div>{collection.units.map(renderUnit(collection))}</div>
 }
 
-interface Props {
+interface PageProps {
   location: Location
+}
+
+interface RenderProps {
+  q: string
 }
 
 interface State {
   result: GraphQLResult<{ source: Source }>
 }
 
-class ResearchPage extends React.Component<Props, State> {
-  state: State = {
-    result: null,
-  }
+const stateHandlers = {
+  initial(): State {
+    return { result: null }
+  },
 
-  get graphqlURL(): string {
-    return window.location.hostname === 'collected.design'
-      ? 'https://1.source.collected.design/graphql'
-      : window.location.hostname === 'localhost'
-        ? 'http://localhost:9090/graphql'
-        : 'https://staging.1.source.collected.design/graphql'
-  }
+  async load(props: RenderProps, prevProps: RenderProps | null): Promise<Partial<State> | null> {
+    if (!prevProps || props.q !== prevProps.q) {
+      let q = props.q
+      let tags = null
+      if (/#/.test(q)) {
+        tags = q
+          .replace(/#/g, '')
+          .split(/\s+/)
+          .map(s => s.trim())
+          .filter(Boolean)
+        
+        q = null
+      }
 
-  componentDidMount() {
-    let { q } = queryFromLocation(this.props.location)
-
-    let body = null
-    let tags = null
-    if (/#/.test(q)) {
-      tags = q
-        .replace(/#/g, '')
-        .split(/\s+/)
-        .map(s => s.trim())
-        .filter(Boolean)
-      
-      q = null
+      const result = await queryCollectedIATrelloBoard({ q, tags })
+      return { result }
     }
 
-    queryCollectedIATrelloBoard({ q, tags }).then(result => {
-      this.setState({ result })
-    })
+    return null
   }
+}
 
+function Render({
+  result
+}: State): JSX.Element {
+  return (
+    <div>
+      <h1 className="mt-8 mb-8">Research</h1>
+
+      {!result && <p>Loading…</p>}
+
+      {!!result &&
+        result instanceof Error && (
+          <p>
+            {'Error: '}
+            {result.message}
+          </p>
+        )}
+
+      {!!result &&
+        !!result.errors && (
+          <div>
+            {result.errors.map(error => (
+              <p>
+                {'Error: '}
+                {error.message}
+              </p>
+            ))}
+          </div>
+        )}
+
+      {!!result &&
+        !!result.data &&
+        !!result.data.source.collections &&
+        result.data.source.collections.map(collection => (
+          <div key={collection.name}>
+            <h2>
+              <Link
+                to={`/research/?q=${encodeURIComponent(collection.name)}`}
+              >
+                {collection.name}
+              </Link>
+            </h2>
+            {renderCollection(collection)}
+          </div>
+        ))}
+
+      {/* <article className="mb-8">
+        <h2 className="mb-2">Information Architecture</h2>
+      </article>
+
+      <article className="mb-8">
+        <h2 className="mb-2">Components</h2>
+      </article> */}
+    </div>
+  )
+}
+
+const Loader: React.ComponentClass<RenderProps> = makeAware(Render, stateHandlers)
+
+class ResearchPage extends React.Component<PageProps> {
   render() {
-    const { result } = this.state
+    const { q } = queryFromLocation(this.props.location)
 
-    return (
-      <div>
-        <h1 className="mt-8 mb-8">Research</h1>
-
-        {!result && <p>Loading…</p>}
-
-        {!!result &&
-          result instanceof Error && (
-            <p>
-              {'Error: '}
-              {result.message}
-            </p>
-          )}
-
-        {!!result &&
-          !!result.errors && (
-            <div>
-              {result.errors.map(error => (
-                <p>
-                  {'Error: '}
-                  {error.message}
-                </p>
-              ))}
-            </div>
-          )}
-
-        {!!result &&
-          !!result.data &&
-          !!result.data.source.collections &&
-          result.data.source.collections.map(collection => (
-            <div key={collection.name}>
-              <h2>
-                <Link
-                  to={`/research/?q=${encodeURIComponent(collection.name)}`}
-                >
-                  {collection.name}
-                </Link>
-              </h2>
-              {renderCollection(collection)}
-            </div>
-          ))}
-
-        {/* <article className="mb-8">
-          <h2 className="mb-2">Information Architecture</h2>
-        </article>
-
-        <article className="mb-8">
-          <h2 className="mb-2">Components</h2>
-        </article> */}
-      </div>
-    )
+    return <Loader q={q} />
   }
 }
 
