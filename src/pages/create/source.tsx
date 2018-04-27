@@ -47,7 +47,7 @@ const LoadSourcePage = (
       <h1 className="mt-8 mb-8">{'Create from Source'}</h1>
 
       <article className="mb-8">
-        <p>Sourced from: {query.url}</p>
+        <h2>Source: <a href={query.url} rel='noopener'>{query.url}</a></h2>
         <SourceLoader url={query.url} />
       </article>
     </div>
