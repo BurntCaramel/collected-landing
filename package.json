@@ -36,6 +36,7 @@
     "@types/react-router": "^4.0.24",
     "parcel-bundler": "^1.7.1",
     "prettier": "^1.12.1",
+    "react-hot-loader": "^4.1.2",
     "ts-loader": "^3.5.0",
     "typescript": "^2.8.3"
   }
