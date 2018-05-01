@@ -26,6 +26,10 @@ export default {
         component: 'src/pages/create/source'
       },
       {
+        path: '/libraries',
+        component: 'src/pages/libraries'
+      },
+      {
         path: '/contribute',
         component: 'src/pages/contribute'
       },
@@ -88,6 +92,6 @@ export default {
         ],
       },
     ]
-return config
+    return config
   }
 }

@@ -1,4 +1,4 @@
-import { Source, Collection } from '../types/source'
+import { Source, Collection, GitHubSource } from '../types/source'
 
 function graphqlURL(): string {
   return window.location.hostname === 'collected.design'
@@ -33,6 +33,47 @@ query Search($boardID: String!, $q: String, $tags: [String!]) {
             listItems {
               text
               tags
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+const searchESInGitHubRepo = `
+query Search($owner: String!, $repoName: String!, $pathPrefixes: [String], $pathMatching: [String], $pathNotMatching: [String]) {
+  source: gitHubRepo(owner: $owner, repoName: $repoName) {
+    dependencies {
+      sources {
+        file {
+          path
+        }
+        items {
+          name
+          rule
+          groups
+        }
+      }
+    }
+    files(pathPrefixes: $pathPrefixes, pathMatching: $pathMatching, pathNotMatching: $pathNotMatching) {
+      path
+      asJavaScript {
+        transform {
+          imports {
+            source
+            specifiers {
+              in
+              as
+            }
+          }
+          classes {
+            name
+            superClass
+            methods {
+              name
+              lineCount
             }
           }
         }
@@ -87,7 +128,7 @@ export type GraphQLResult<Data> = {
   errors?: GraphQLError[]
 }
 
-export async function queryCollectedSource<Data>(
+async function queryCollectedSource<Data>(
   query: string,
   variables: {}
 ): Promise<GraphQLResult<Data>> {
@@ -124,4 +165,21 @@ export async function queryCollectedIATrelloBoard(query: {
   tags?: string[]
 }): Promise<GraphQLResult<{ source: Source }>> {
   return queryTrelloBoard(collectedIABoardID, query)
+}
+
+export async function queryESInGitHubRepo(
+  owner: string,
+  repoName: string,
+  { pathPrefixes, pathMatching, pathNotMatching }: { pathPrefixes?: string[], pathMatching?: string[], pathNotMatching?: string[] }
+): Promise<GraphQLResult<{ source: GitHubSource }>> {
+  return queryCollectedSource<{ source: GitHubSource }>(
+    searchESInGitHubRepo,
+    {
+      owner,
+      repoName,
+      pathPrefixes,
+      pathMatching,
+      pathNotMatching
+    }
+  )
 }
