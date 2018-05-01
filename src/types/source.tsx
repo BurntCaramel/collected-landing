@@ -32,7 +32,9 @@ export interface Source {
   collections: Collection[]
 }
 
-
+export interface File {
+  path: string
+}
 
 interface DependencySourceItem {
   name: string
@@ -41,9 +43,7 @@ interface DependencySourceItem {
 }
 
 interface DependencySource {
-  file: {
-    path: string
-  }
+  file: File
   items: DependencySourceItem[]
 }
 

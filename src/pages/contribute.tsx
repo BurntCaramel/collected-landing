@@ -11,7 +11,8 @@ const DeployPage = () => (
       <h3 className="my-2">Collected IA Catalog</h3>
       <p>
         {'Submit to '}
-        <a href="https://trello.com/b/4wctPH1u">{'this Trello board'}</a>{'.'}
+        <a href="https://trello.com/b/4wctPH1u">{'this Trello board'}</a>
+        {'.'}
       </p>
     </article>
 
@@ -40,7 +41,11 @@ yarn dev
         </code>
       </pre>
 
-      <h4 className="mt-2">{'Deploy — '}<a href="https://github.com/apex/up/issues#quick-start">Apex Up</a>{':'}</h4>
+      <h4 className="mt-2">
+        {'Deploy — '}
+        <a href="https://github.com/apex/up/issues#quick-start">Apex Up</a>
+        {':'}
+      </h4>
       <pre>
         <code>
           {`

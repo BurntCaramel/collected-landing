@@ -170,16 +170,21 @@ export async function queryCollectedIATrelloBoard(query: {
 export async function queryESInGitHubRepo(
   owner: string,
   repoName: string,
-  { pathPrefixes, pathMatching, pathNotMatching }: { pathPrefixes?: string[], pathMatching?: string[], pathNotMatching?: string[] }
+  {
+    pathPrefixes,
+    pathMatching,
+    pathNotMatching,
+  }: {
+    pathPrefixes?: string[]
+    pathMatching?: string[]
+    pathNotMatching?: string[]
+  }
 ): Promise<GraphQLResult<{ source: GitHubSource }>> {
-  return queryCollectedSource<{ source: GitHubSource }>(
-    searchESInGitHubRepo,
-    {
-      owner,
-      repoName,
-      pathPrefixes,
-      pathMatching,
-      pathNotMatching
-    }
-  )
+  return queryCollectedSource<{ source: GitHubSource }>(searchESInGitHubRepo, {
+    owner,
+    repoName,
+    pathPrefixes,
+    pathMatching,
+    pathNotMatching,
+  })
 }
