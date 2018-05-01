@@ -37,9 +37,9 @@ class LibrariesPage extends React.PureComponent {
 
   componentDidMount() {
     queryESInGitHubRepo('seek-oss', 'seek-style-guide', {
-      pathPrefixes: ['react/'],
+      // pathPrefixes: ['react/'],
       pathMatching: ["**/*.js"],
-      pathNotMatching: ["**/__snapshots__/*", "**/*.demo.js", "**/*.test.js", "**/*.sketch.js", "**/private/**"]
+      pathNotMatching: ["**/test/**", "**/__snapshots__/*", "**/*.config.js", "**/*.demo.js", "**/*.test.js", "**/*.sketch.js", "**/private/**"]
     })
       .then(source => { this.setState({ seekStyleGuide: source })})
   }
