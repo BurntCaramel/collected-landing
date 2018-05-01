@@ -86,7 +86,7 @@ class LibrariesPage extends React.PureComponent {
         <div>
           <h3>Files</h3>
           {seekStyleGuide.data.source.files.map(file => (
-            <div>
+            <div className='my-2'>
               <h4>{file.path}</h4>
               {!!file.asJavaScript &&
                 <>
