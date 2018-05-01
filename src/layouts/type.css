@@ -26,6 +26,9 @@
   font-size: 3rem;
 }
 
+.font-normal {
+  font-weight: 400;
+}
 .font-semibold {
   font-weight: 600;
 }

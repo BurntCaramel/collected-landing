@@ -111,13 +111,15 @@ class LibrariesPage extends React.PureComponent {
                   )}
                 </div>
                 <div>
-                  <h3>Files</h3>
-                  <input
-                    className="px-2 py-1"
-                    value={fileSearch}
-                    placeholder="Filter files…"
-                    onChange={this.onChangeFileSearch}
-                  />
+                  <h3>
+                    {'Files '}
+                    <input
+                      className="ml-2 px-2 py-1 text-base font-normal"
+                      value={fileSearch}
+                      placeholder="Filter files…"
+                      onChange={this.onChangeFileSearch}
+                    />
+                  </h3>
                   {seekStyleGuide.data.source.files
                     .filter(includeFile)
                     .map(file => (
