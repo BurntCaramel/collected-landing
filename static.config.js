@@ -1,6 +1,8 @@
 import Path from 'path'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default {
+  siteRoot: 'https://collected.design',
   entry: Path.join(__dirname, 'src', 'index.tsx'),
   getSiteData() {
     return {
@@ -59,7 +61,7 @@ export default {
       }
     ]
   },
-  webpack(config, { defaultLoaders }) {
+  webpack(config, { stage, defaultLoaders }) {
     // Add .ts and .tsx extension to resolver
     config.resolve.extensions.push('.ts', '.tsx')
 
@@ -87,6 +89,13 @@ export default {
               },
             ],
           },
+          // {
+          //   test: /\.css$/,
+          //   use: ExtractTextPlugin.extract({
+          //     fallback: 'style-loader',
+          //     use: 'css-loader'
+          //   })
+          // },
           defaultLoaders.cssLoader,
           defaultLoaders.fileLoader,
         ],
