@@ -1,5 +1,6 @@
 import Path from 'path'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 export default {
   siteRoot: 'https://collected.design',
@@ -68,6 +69,15 @@ export default {
     // Add TypeScript Path Mappings (from tsconfig via webpack.config.js)
     // to react-statics alias resolution
     // config.resolve.alias = typescriptWebpackPaths.resolve.alias
+
+    config.plugins.push(
+      new CopyWebpackPlugin([
+        {
+          from: Path.join(__dirname, 'node_modules/monaco-editor/min/vs'),
+          to: 'vs',
+        }
+      ])
+    )
 
     // We replace the existing JS rule with one, that allows us to use
     // both TypeScript and JavaScript interchangeably

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-static'
 import makeAware, { ReceiverProps } from 'react-organism'
+import CodeEditor from 'react-monaco-editor'
 import * as Editing from '../../state/editing'
 import { listTags, stripTags, tagsToInput } from '../../utils/tags'
 import * as markdownUtils from '../../utils/markdown'
@@ -41,28 +42,21 @@ const Editor: React.ComponentClass<Editing.Props> = makeAware(
               }
             />
             <div className="row">
-              <textarea
-                className="flex-1 px-2 py-1 border"
-                rows={10}
-                value={section.content}
-                onChange={e =>
-                  handlers.editSectionContent(sectionIndex, e.target.value)
-                }
-              />
-              <div
-                className="mt-2 ml-4"
-                style={{ maxWidth: '12rem', fontSize: '0.75rem' }}
-              >
-                <p className="mb-2">{'Put each nav item on its own line.'}</p>
-                <p className="mb-2">
-                  {'Use *** to separate into subsections.'}
-                </p>
-                <p className="mb-2">
-                  {
-                    'If you have 4 or more subsections, then it will become stacked.'
-                  }
-                </p>
+              <div className="flex-1">
+                <CodeEditor
+                  height={400}
+                  language="markdown"
+                  value={section.content}
+                  theme="vs-light"
+                  options={{
+                    fontSize: 16,
+                  }}
+                  onChange={(newValue: string) => {
+                    handlers.editSectionContent(sectionIndex, newValue)
+                  }}
+                />
               </div>
+              
             </div>
             <PreviewItem
               tags={listTags(section.name)}

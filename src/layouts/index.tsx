@@ -26,6 +26,7 @@ class TemplateWrapper extends React.Component<Props, {}> {
             class: 'bg-key text-shadow',
           }}
           title="Collected"
+          base={{ href: '/' }}
           meta={[
             {
               name: 'description',
