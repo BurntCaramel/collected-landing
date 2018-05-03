@@ -81,11 +81,14 @@ const IndexPage = (props: Props) => (
           <div className="col flex-1 ml-2 mb-2">
             <label className="col flex-1">{'Industry'}</label>
             <select name="industry" className="flex-1 px-2 py-1 border">
-              <option>{'Development & design'}</option>
+              <option>{'Software'}</option>
               <option>{'Open source'}</option>
+              <option>{'Retail'}</option>
+              <option>{'Education'}</option>
+              <option>{'Finance'}</option>
               <option>{'Government'}</option>
               <option>{'Health'}</option>
-              <option>{'Finance'}</option>
+              <option>{'Media'}</option>
             </select>
           </div>
         </div>
