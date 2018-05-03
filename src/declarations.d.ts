@@ -7,7 +7,7 @@ declare module 'react-organism' {
     handlers: HandlersOut
   }
 
-  function makeOrganism<Props, State, HandlersIn, HandlersOut>(
+  export default function makeOrganism<Props, State, HandlersIn, HandlersOut>(
     Pure:
       | React.ComponentClass<State & ReceiverProps<HandlersOut>>
       | React.StatelessComponent<State & ReceiverProps<HandlersOut>>,
@@ -17,6 +17,20 @@ declare module 'react-organism' {
       adjustArgs: (args: any[]) => any[]
     }
   ): React.ComponentClass<Props>
+}
 
-  export default makeOrganism
+declare module 'react-monaco-editor' {
+  import React from 'react'
+
+  interface Props {
+    language?: string
+    value: string
+    width?: number
+    height?: number
+    theme?: string
+  }
+
+  export class CodeEditor extends React.Component<Props, any> {
+    constructor(props: Props)
+  }
 }

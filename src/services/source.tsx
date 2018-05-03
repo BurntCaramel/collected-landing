@@ -43,7 +43,7 @@ query Search($boardID: String!, $q: String, $tags: [String!]) {
 `
 
 const searchESInGitHubRepo = `
-query Search($owner: String!, $repoName: String!, $pathPrefixes: [String], $pathMatching: [String], $pathNotMatching: [String]) {
+query Search($owner: String!, $repoName: String!, $pathPrefixes: [String], $pathMatching: [String], $pathNotMatching: [String], $includeContent: Boolean!) {
   source: gitHubRepo(owner: $owner, repoName: $repoName) {
     dependencies {
       sources {
@@ -59,6 +59,7 @@ query Search($owner: String!, $repoName: String!, $pathPrefixes: [String], $path
     }
     files(pathPrefixes: $pathPrefixes, pathMatching: $pathMatching, pathNotMatching: $pathNotMatching) {
       path
+      content @include(if: $includeContent)
       asJavaScript {
         transform {
           imports {
@@ -135,10 +136,12 @@ export async function queryESInGitHubRepo(
   owner: string,
   repoName: string,
   {
+    includeContent = false,
     pathPrefixes,
     pathMatching,
     pathNotMatching,
   }: {
+    includeContent: boolean
     pathPrefixes?: string[]
     pathMatching?: string[]
     pathNotMatching?: string[]
@@ -147,6 +150,7 @@ export async function queryESInGitHubRepo(
   return queryCollectedSource<{ source: GitHubSource }>(searchESInGitHubRepo, {
     owner,
     repoName,
+    includeContent,
     pathPrefixes,
     pathMatching,
     pathNotMatching,

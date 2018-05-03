@@ -32,8 +32,30 @@ export interface Source {
   collections: Collection[]
 }
 
+interface ESModuleTransformer {
+  imports: {
+    source: string
+    specifiers: {
+      in: string | null
+      as: string
+    }[]
+  }[]
+  classes: {
+    name: string
+    superClass: string | null
+    methods: {
+      name: string
+      lineCount: number
+    }
+  }
+}
+
 export interface File {
   path: string
+  content?: string
+  asJavaScript?: {
+    transform: ESModuleTransformer
+  }
 }
 
 interface DependencySourceItem {
@@ -51,26 +73,5 @@ export interface GitHubSource {
   dependencies: {
     sources: DependencySource[]
   }
-  files: {
-    path: string
-    asJavaScript: {
-      transform: {
-        imports: {
-          source: string
-          specifiers: {
-            in: string | null
-            as: string
-          }[]
-        }[]
-        classes: {
-          name: string
-          superClass: string | null
-          methods: {
-            name: string
-            lineCount: number
-          }
-        }
-      }
-    }
-  }[]
+  files: File[]
 }

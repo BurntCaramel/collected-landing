@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Link } from 'react-static'
 import { queryESInGitHubRepo, GraphQLResult } from '../services/source'
 import { GitHubSource, File } from '../types/source'
+// import CodeEditor from '../components/CodeEditor'
+import JavaScriptFile from '../components/File/JavaScriptFile'
 
 const Grid = ({
   Component = 'div',
@@ -39,6 +41,7 @@ class LibrariesPage extends React.PureComponent {
 
   componentDidMount() {
     queryESInGitHubRepo('seek-oss', 'seek-style-guide', {
+      includeContent: true,
       // pathPrefixes: ['react/'],
       pathMatching: ['**/*.js'],
       pathNotMatching: [
@@ -123,23 +126,9 @@ class LibrariesPage extends React.PureComponent {
                   {seekStyleGuide.data.source.files
                     .filter(includeFile)
                     .map(file => (
-                      <div className="my-4">
+                      <div key={file.path} className="my-4">
                         <h4>{file.path}</h4>
-                        {!!file.asJavaScript && (
-                          <>
-                            <dl>
-                              {file.asJavaScript.transform.imports.map(
-                                importDeclaration => (
-                                  <>
-                                    <dt className="ml-4">
-                                      {importDeclaration.source}
-                                    </dt>
-                                  </>
-                                )
-                              )}
-                            </dl>
-                          </>
-                        )}
+                        {!!file.asJavaScript && <JavaScriptFile file={file} />}
                       </div>
                     ))}
                 </div>

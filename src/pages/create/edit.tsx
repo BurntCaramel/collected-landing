@@ -56,7 +56,6 @@ const Editor: React.ComponentClass<Editing.Props> = makeAware(
                   }}
                 />
               </div>
-              
             </div>
             <PreviewItem
               tags={listTags(section.name)}
