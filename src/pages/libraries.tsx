@@ -49,7 +49,10 @@ class LibrariesPage extends React.PureComponent<Props, State> {
     fileSearch: '',
   }
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State): Partial<State> | null {
+  static getDerivedStateFromProps(
+    nextProps: Props,
+    prevState: State
+  ): Partial<State> | null {
     let { owner = '', repoName = '' } = queryFromLocation(nextProps.location)
     owner = owner.trim()
     repoName = repoName.trim()
@@ -147,25 +150,25 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                     )
                   )}
                 </div>
-                <div>
-                  <h3>
-                    {'Files '}
-                    <input
-                      className="ml-2 px-2 py-1 text-base font-normal"
-                      value={fileSearch}
-                      placeholder="Filter files…"
-                      onChange={this.onChangeFileSearch}
-                    />
-                  </h3>
-                  {result.data.source.files
-                    .filter(includeFile)
-                    .map(file => (
+                {!!result.data.source.files && (
+                  <div>
+                    <h3>
+                      {'Files '}
+                      <input
+                        className="ml-2 px-2 py-1 text-base font-normal"
+                        value={fileSearch}
+                        placeholder="Filter files…"
+                        onChange={this.onChangeFileSearch}
+                      />
+                    </h3>
+                    {result.data.source.files.filter(includeFile).map(file => (
                       <div key={file.path} className="my-4">
                         <h4>{file.path}</h4>
                         {!!file.asJavaScript && <JavaScriptFile file={file} />}
                       </div>
                     ))}
-                </div>
+                  </div>
+                )}
               </div>
             )}
         </article>
