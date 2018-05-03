@@ -102,6 +102,8 @@ async function queryCollectedSource<Data>(
     query,
   }
 
+  console.log('fetching', body)
+
   return fetch(graphqlURL(), {
     method: 'post',
     headers: {

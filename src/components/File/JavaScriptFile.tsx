@@ -35,6 +35,9 @@ class JavaScriptFile extends React.Component<Props, State> {
                 value={file.content}
                 height={600}
                 theme="vs-dark"
+                minimap={{
+                  enabled: false
+                }}
               />
             )}
           </>

@@ -5,9 +5,10 @@ export interface Query {
   q: string
   industry: string
   url: string
+  owner: string
+  repoName: string
 }
 
 export default function queryFromLocation(location: Location): Query {
-  const query = parse(location.search)
-  return query
+  return parse(location.search)
 }

@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-static'
+import { Location } from 'history'
+import queryFromLocation from '../nav/queryFromLocation'
 import { queryESInGitHubRepo, GraphQLResult } from '../services/source'
 import { GitHubSource, File } from '../types/source'
 // import CodeEditor from '../components/CodeEditor'
@@ -28,19 +30,49 @@ const Grid = ({
   </Component>
 )
 
+interface Props {
+  location: Location
+}
+
 interface State {
-  seekStyleGuide: GraphQLResult<{ source: GitHubSource }> | null
+  owner: string
+  repoName: string
+  result: GraphQLResult<{ source: GitHubSource }> | null
   fileSearch: string
 }
 
-class LibrariesPage extends React.PureComponent {
+class LibrariesPage extends React.PureComponent<Props, State> {
   state: State = {
-    seekStyleGuide: null,
+    owner: '',
+    repoName: '',
+    result: null,
     fileSearch: '',
   }
 
-  componentDidMount() {
-    queryESInGitHubRepo('seek-oss', 'seek-style-guide', {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State): Partial<State> | null {
+    let { owner = '', repoName = '' } = queryFromLocation(nextProps.location)
+    owner = owner.trim()
+    repoName = repoName.trim()
+
+    return { owner, repoName }
+  }
+
+  get canLoad() {
+    const { owner, repoName } = this.state
+    if (owner === '' || repoName === '') {
+      return false
+    }
+
+    return true
+  }
+
+  load() {
+    if (!this.canLoad) {
+      return
+    }
+
+    const { owner, repoName } = this.state
+    queryESInGitHubRepo(owner, repoName, {
       includeContent: true,
       // pathPrefixes: ['react/'],
       pathMatching: ['**/*.js'],
@@ -54,7 +86,7 @@ class LibrariesPage extends React.PureComponent {
         '**/private/**',
       ],
     }).then(source => {
-      this.setState({ seekStyleGuide: source })
+      this.setState({ result: source })
     })
   }
 
@@ -63,7 +95,7 @@ class LibrariesPage extends React.PureComponent {
   }
 
   render() {
-    let { seekStyleGuide, fileSearch } = this.state
+    let { result, fileSearch, owner, repoName } = this.state
 
     fileSearch = fileSearch.trim()
     const includeFile: (file: File) => boolean =
@@ -76,13 +108,15 @@ class LibrariesPage extends React.PureComponent {
         <h1 className="mt-8 mb-8">Libraries</h1>
 
         <article className="mb-8">
-          <h2 className="my-2">Seek Style Guide</h2>
+          <h2 className="my-4">
+            {owner} / {repoName}
+          </h2>
 
-          {!seekStyleGuide && <p>Loading…</p>}
-          {!!seekStyleGuide &&
-            !!seekStyleGuide.errors && (
+          {!result && this.canLoad && <p>Loading…</p>}
+          {!!result &&
+            !!result.errors && (
               <div>
-                {seekStyleGuide.errors.map(error => (
+                {result.errors.map(error => (
                   <p>
                     {'Error: '}
                     {error.message}
@@ -90,12 +124,12 @@ class LibrariesPage extends React.PureComponent {
                 ))}
               </div>
             )}
-          {!!seekStyleGuide &&
-            !!seekStyleGuide.data && (
+          {!!result &&
+            !!result.data && (
               <div>
-                <div className="mb-4">
+                <div className="mb-8">
                   <h3 className="my-2">Dependencies</h3>
-                  {seekStyleGuide.data.source.dependencies.sources.map(
+                  {result.data.source.dependencies.sources.map(
                     dependencySource => (
                       <div>
                         <div className="my-2">
@@ -123,7 +157,7 @@ class LibrariesPage extends React.PureComponent {
                       onChange={this.onChangeFileSearch}
                     />
                   </h3>
-                  {seekStyleGuide.data.source.files
+                  {result.data.source.files
                     .filter(includeFile)
                     .map(file => (
                       <div key={file.path} className="my-4">
@@ -137,6 +171,17 @@ class LibrariesPage extends React.PureComponent {
         </article>
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.load()
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    const { owner, repoName } = this.state
+    if (owner !== prevState.owner || repoName !== prevState.repoName) {
+      this.load()
+    }
   }
 }
 
