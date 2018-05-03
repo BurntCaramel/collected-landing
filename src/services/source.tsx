@@ -83,42 +83,6 @@ query Search($owner: String!, $repoName: String!, $pathPrefixes: [String], $path
 }
 `
 
-const searchListsInTrelloBoardQuery = `
-query Search($boardID: String!, $q: String) {
-  collectedIA: trelloBoard(id: $boardID) {
-    name
-    lists(q: $q) {
-      id
-      name
-      cards {
-        id
-        name {
-          text
-          tags
-        }
-        body: desc {
-          frontmatter {
-            title: value(key: "title"),
-            description: value(key: "description")
-          }
-          source,
-          sections {
-            headings {
-              text
-              level
-            }
-            listItems {
-              text
-              tags
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`
-
 export type GraphQLError = {
   message: string
 }
