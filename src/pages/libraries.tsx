@@ -130,26 +130,28 @@ class LibrariesPage extends React.PureComponent<Props, State> {
           {!!result &&
             !!result.data && (
               <div>
-                <div className="mb-8">
-                  <h3 className="my-2">Dependencies</h3>
-                  {result.data.source.dependencies.sources.map(
-                    dependencySource => (
-                      <div>
-                        <div className="my-2">
-                          <em>{dependencySource.file.path}</em>
+                {!!result.data.source.dependencies && (
+                  <div className="mb-8">
+                    <h3 className="my-2">Dependencies</h3>
+                    {result.data.source.dependencies.sources.map(
+                      dependencySource => (
+                        <div>
+                          <div className="my-2">
+                            <em>{dependencySource.file.path}</em>
+                          </div>
+                          <Grid columns="repeat(auto-fill, 12rem)" gap={10}>
+                            {dependencySource.items.map(item => (
+                              <div>
+                                <div className="font-bold">{item.name}</div>
+                                <div>{item.rule}</div>
+                              </div>
+                            ))}
+                          </Grid>
                         </div>
-                        <Grid columns="repeat(auto-fill, 12rem)" gap={10}>
-                          {dependencySource.items.map(item => (
-                            <div>
-                              <div className="font-bold">{item.name}</div>
-                              <div>{item.rule}</div>
-                            </div>
-                          ))}
-                        </Grid>
-                      </div>
-                    )
-                  )}
-                </div>
+                      )
+                    )}
+                  </div>
+                )}
                 {!!result.data.source.files && (
                   <div>
                     <h3>
