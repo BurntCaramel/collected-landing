@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { File } from '../../types/source'
 import CodeEditor from 'react-monaco-editor'
+import Frame from 'react-frame-component'
 
 interface Props {
   file: File
