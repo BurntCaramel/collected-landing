@@ -79,6 +79,11 @@ export default {
       ])
     )
 
+    config.resolve = config.resolve || {}
+    config.resolve.alias = {
+      "Babel": "@babel/standalone"
+    }
+
     // We replace the existing JS rule with one, that allows us to use
     // both TypeScript and JavaScript interchangeably
     config.module.rules = [
