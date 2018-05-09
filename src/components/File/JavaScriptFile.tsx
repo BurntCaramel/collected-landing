@@ -144,8 +144,12 @@ async function compile2(input: string, path: string, allFiles: File[]): string {
     // format: 'system',
     format: 'iife',
     name: 'Output',
+    globals: {
+      'react': 'React',
+      'prop-types': 'PropTypes',
+      'classnames': 'classNames',
+    },
   })
-  console.log('generate code', code)
   return code
 }
 
@@ -171,7 +175,6 @@ class JavaScriptFile extends React.Component<Props, State> {
   }
   
   render() {
-    console.log('Babel', (window as any).Babel)
     const { file, allFiles } = this.props
     const { error, showEditor, compiledCode } = this.state
     const { toggleEditor } = this
@@ -183,15 +186,39 @@ class JavaScriptFile extends React.Component<Props, State> {
           <>
             <button onClick={toggleEditor}>Code</button>
             {!!compiledCode && (
-              <CodeEditor
-                language="javascript"
-                value={compiledCode}
-                height={600}
-                theme="vs-dark"
-                minimap={{
-                  enabled: false,
-                }}
-              />
+              <>
+                <CodeEditor
+                  language="javascript"
+                  value={compiledCode}
+                  height={600}
+                  theme="vs-dark"
+                  minimap={{
+                    enabled: false,
+                  }}
+                />
+                <Frame
+                  initialContent={`
+<div id="app">Initial</div>
+<script src='https://unpkg.com/react@16.3.2/umd/react.production.min.js'></script>
+<script src='https://unpkg.com/prop-types@15.6.1/prop-types.min.js'></script>
+<script src='https://unpkg.com/classnames@2.2.5/index.js'></script>
+<script src='https://unpkg.com/react-dom@16.3.2/umd/react-dom.production.min.js'></script>
+<script id='inserter'>
+var inserter = document.getElementById('inserter');
+var newScript = document.createElement('script');
+newScript.textContent = ${JSON.stringify(compiledCode)};
+inserter.parentNode.insertBefore(newScript, inserter);
+</script>
+<script>
+var app = document.getElementById('app');
+var Output = window.Output;
+app.textContent = 'Hello 3';
+console.log('Output', Output);
+ReactDOM.render(React.createElement(Output, null), app);
+</script>
+                  `}
+                />
+              </>
             )}
           </>
         )}
