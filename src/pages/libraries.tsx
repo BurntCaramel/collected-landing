@@ -4,7 +4,6 @@ import { Location } from 'history'
 import queryFromLocation from '../nav/queryFromLocation'
 import { queryESInGitHubRepo, GraphQLResult } from '../services/source'
 import { GitHubSource, File } from '../types/source'
-// import CodeEditor from '../components/CodeEditor'
 import JavaScriptFile from '../components/File/JavaScriptFile'
 
 const Grid = ({
@@ -166,7 +165,7 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                     {result.data.source.files.filter(includeFile).map(file => (
                       <div key={file.path} className="my-4">
                         <h4>{file.path}</h4>
-                        {!!file.asJavaScript && <JavaScriptFile file={file} />}
+                        {!!file.asJavaScript && <JavaScriptFile file={file} allFiles={result.data.source.files} />}
                       </div>
                     ))}
                   </div>

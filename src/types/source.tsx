@@ -47,7 +47,7 @@ interface ESModuleTransformer {
       name: string
       lineCount: number
     }
-  }
+  }[]
 }
 
 export interface File {

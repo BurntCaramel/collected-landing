@@ -33,6 +33,10 @@ export default {
         component: 'src/pages/libraries'
       },
       {
+        path: '/libraries2',
+        component: 'src/pages/libraries2'
+      },
+      {
         path: '/contribute',
         component: 'src/pages/contribute'
       },
@@ -83,6 +87,11 @@ export default {
     config.resolve.alias = {
       "Babel": "@babel/standalone"
     }
+
+    config.node = config.node || {}
+    config.node['fs'] = 'empty'
+    config.node['module'] = 'empty'
+    config.node['path'] = true
 
     // We replace the existing JS rule with one, that allows us to use
     // both TypeScript and JavaScript interchangeably

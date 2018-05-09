@@ -21,7 +21,9 @@
     "react-helmet": "^5.2.0",
     "react-monaco-editor": "^0.14.1",
     "react-organism": "^0.3.9",
-    "react-static": "5.7.5"
+    "react-static": "5.7.5",
+    "rollup": "^0.58.2",
+    "rollup-plugin-hypothetical": "^2.1.0"
   },
   "keywords": [
     "gatsby"
