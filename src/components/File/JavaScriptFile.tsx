@@ -10,6 +10,12 @@ import rollupHypothetical from 'rollup-plugin-hypothetical'
 import * as Path from 'path'
 import { resolve } from 'url';
 
+type CompiledFile = {
+  scripts: string[]
+  css: string[]
+  contentHTML: string[]
+}
+
 interface Props {
   file: File
   allFiles: File[]
@@ -18,7 +24,7 @@ interface Props {
 type State = {
   error: Error | null
   showEditor: boolean
-  compiledCode: string | null
+  compiled: CompiledFile | null
 }
 
 function compile(input: string): string {
@@ -48,7 +54,7 @@ function filePathEquals(file: File, pathToMatch: string): boolean {
   return file.path[0] === '/' ? file.path === pathToMatch : file.path === pathToMatch.slice(1)
 }
 
-async function compile2(input: string, path: string, allFiles: File[]): Promise<string> {
+async function compile2(input: string, path: string, allFiles: File[]): Promise<CompiledFile> {
   const inputPath = path[0] === '/' ? path : '/' + path
   const bundle = await rollup.rollup({
     input: inputPath,
@@ -153,21 +159,26 @@ async function compile2(input: string, path: string, allFiles: File[]): Promise<
       'classnames': 'classNames',
     },
   })
-  return code
+
+  return {
+    scripts: [code],
+    css: [],
+    contentHTML: [],
+  }
 }
 
 class JavaScriptFile extends React.Component<Props, State> {
   state: State = {
     error: null,
     showEditor: false,
-    compiledCode: null
+    compiled: null
   }
 
   async reload() {
     const { showEditor } = this.state
     const { file, allFiles } = this.props
-    const compiledCode = await compile2(file.content, file.path, allFiles)
-    this.setState({ compiledCode })
+    const compiled = await compile2(file.content, file.path, allFiles)
+    this.setState({ compiled })
   }
 
   componentDidMount() {
@@ -194,7 +205,7 @@ class JavaScriptFile extends React.Component<Props, State> {
   
   render() {
     const { file, allFiles } = this.props
-    const { error, showEditor, compiledCode } = this.state
+    const { error, showEditor, compiled } = this.state
     const { toggleEditor } = this
 
     return (
@@ -203,11 +214,11 @@ class JavaScriptFile extends React.Component<Props, State> {
         {!!file.content && (
           <>
             <button onClick={toggleEditor}>Code</button>
-            {showEditor && !!compiledCode && (
+            {showEditor && !!compiled && (
               <>
                 <CodeEditor
                   language="javascript"
-                  value={compiledCode}
+                  value={compiled.scripts[0] || ''}
                   height={600}
                   theme="vs-dark"
                   minimap={{
@@ -224,7 +235,7 @@ class JavaScriptFile extends React.Component<Props, State> {
 <script id='inserter'>
 var inserter = document.getElementById('inserter');
 var newScript = document.createElement('script');
-newScript.textContent = ${JSON.stringify(compiledCode)};
+newScript.textContent = ${JSON.stringify(compiled.scripts.join('\n'))};
 inserter.parentNode.insertBefore(newScript, inserter);
 </script>
 <script>
@@ -234,6 +245,7 @@ app.textContent = 'Hello 3';
 console.log('Output', Output);
 ReactDOM.render(React.createElement(Output, null), app);
 </script>
+${compiled.contentHTML.join('\n')}
                   `}
                 />
               </>
