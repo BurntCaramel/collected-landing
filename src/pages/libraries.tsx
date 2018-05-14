@@ -104,6 +104,11 @@ class LibrariesPage extends React.PureComponent<Props, State> {
       fileSearch === ''
         ? () => true
         : file => file.path.toLowerCase().indexOf(fileSearch) !== -1
+    
+    const filteredFiles =
+      !!result && !!result.data && !!result.data.source.files ?
+      result.data.source.files.filter(includeFile) :
+      null
 
     return (
       <div>
@@ -151,18 +156,19 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                     )}
                   </div>
                 )}
-                {!!result.data.source.files && (
+                {!!filteredFiles && (
                   <div>
                     <h3>
                       {'Files '}
                       <input
-                        className="ml-2 px-2 py-1 text-base font-normal"
+                        className="mx-2 px-2 py-1 text-base font-normal"
                         value={fileSearch}
                         placeholder="Filter files…"
                         onChange={this.onChangeFileSearch}
                       />
+                      {` ${filteredFiles.length}`}
                     </h3>
-                    {result.data.source.files.filter(includeFile).map(file => (
+                    {filteredFiles.map(file => (
                       <div key={file.path} className="my-4">
                         <h4>{file.path}</h4>
                         {!!file.asJavaScript && (
