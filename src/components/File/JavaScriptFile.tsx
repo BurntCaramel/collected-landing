@@ -8,6 +8,7 @@ import babelPluginUnpkg from 'babel-plugin-unpkg'
 const rollup = require('rollup')
 import rollupHypothetical from 'rollup-plugin-hypothetical'
 import * as Path from 'path'
+import { resolve } from 'url';
 
 interface Props {
   file: File
@@ -43,9 +44,14 @@ function compile(input: string): string {
   }
 }
 
-async function compile2(input: string, path: string, allFiles: File[]): string {
+function filePathEquals(file: File, pathToMatch: string): boolean {
+  return file.path[0] === '/' ? file.path === pathToMatch : file.path === pathToMatch.slice(1)
+}
+
+async function compile2(input: string, path: string, allFiles: File[]): Promise<string> {
+  const inputPath = path[0] === '/' ? path : '/' + path
   const bundle = await rollup.rollup({
-    input: path,
+    input: inputPath,
     plugins: [
       {
         transform(input: string, id: string) {
@@ -78,20 +84,17 @@ async function compile2(input: string, path: string, allFiles: File[]): string {
             let resolvedPath: string = importee
             if (importer) {
               resolvedPath = Path.join(importer, '..', importee)
-              console.log('resolvedPath', importee)
             }
-            const file = allFiles.find(file => file.path === resolvedPath)
+            const file = allFiles.find((file) => filePathEquals(file, resolvedPath))
             if (file) {
-              console.log('resolved file:', file.path)
-              return file.path
+              return file.path[0] === '/' ? file.path : '/' + file.path
             }
           }
 
           return false
         },
         load(id: string): string | null {
-          const file = allFiles.find(file => file.path === id)
-          console.log('load', id, !!file && file.path)
+          const file = allFiles.find((file) => filePathEquals(file, id))
           if (!file) {
             return null
           }
@@ -160,10 +163,25 @@ class JavaScriptFile extends React.Component<Props, State> {
     compiledCode: null
   }
 
-  async componentDidMount() {
+  async reload() {
+    const { showEditor } = this.state
     const { file, allFiles } = this.props
     const compiledCode = await compile2(file.content, file.path, allFiles)
     this.setState({ compiledCode })
+  }
+
+  componentDidMount() {
+    const { showEditor } = this.state
+    if (showEditor) {
+      this.reload()
+    }
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    const { showEditor } = this.state
+    if (showEditor && !prevState.showEditor) {
+      this.reload()
+    }
   }
   
   toggleEditor = () => {
@@ -185,7 +203,7 @@ class JavaScriptFile extends React.Component<Props, State> {
         {!!file.content && (
           <>
             <button onClick={toggleEditor}>Code</button>
-            {!!compiledCode && (
+            {showEditor && !!compiledCode && (
               <>
                 <CodeEditor
                   language="javascript"

@@ -77,7 +77,7 @@ class LibrariesPage extends React.PureComponent<Props, State> {
     queryESInGitHubRepo(owner, repoName, {
       includeContent: true,
       // pathPrefixes: ['react/'],
-      pathMatching: ['**/*.js'],
+      pathMatching: ['**/*.(js|css|less|scss|svg)'],
       pathNotMatching: [
         '**/test/**',
         '**/__snapshots__/*',

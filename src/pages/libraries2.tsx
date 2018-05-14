@@ -33,7 +33,7 @@ Logo.defaultProps = {
 
 const files: File[] = [
   {
-    path: '/docs/src/components/App/Header/Logo/Logo.js',
+    path: 'docs/src/components/App/Header/Logo/Logo.js',
     content: logoJS,
     asJavaScript: {
       transform: {
@@ -43,7 +43,7 @@ const files: File[] = [
     }
   },
   {
-    path: '/docs/src/components/App/Header/Logo/logo.svg',
+    path: 'docs/src/components/App/Header/Logo/logo.svg',
     content: '<svg><g><rect x="10" y="10" width="40" height="20" fill="green" /></g></svg>',
   }
 ]
