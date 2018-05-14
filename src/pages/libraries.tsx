@@ -165,7 +165,12 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                     {result.data.source.files.filter(includeFile).map(file => (
                       <div key={file.path} className="my-4">
                         <h4>{file.path}</h4>
-                        {!!file.asJavaScript && <JavaScriptFile file={file} allFiles={result.data.source.files} />}
+                        {!!file.asJavaScript && (
+                          <JavaScriptFile
+                            file={file}
+                            allFiles={result.data.source.files}
+                          />
+                        )}
                       </div>
                     ))}
                   </div>

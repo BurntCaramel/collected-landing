@@ -38,14 +38,15 @@ const files: File[] = [
     asJavaScript: {
       transform: {
         imports: [],
-        classes: []
-      }
-    }
+        classes: [],
+      },
+    },
   },
   {
     path: 'docs/src/components/App/Header/Logo/logo.svg',
-    content: '<svg><g><rect x="10" y="10" width="40" height="20" fill="green" /></g></svg>',
-  }
+    content:
+      '<svg><g><rect x="10" y="10" width="40" height="20" fill="green" /></g></svg>',
+  },
 ]
 
 function Libraries2Page() {
