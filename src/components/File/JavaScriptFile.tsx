@@ -243,9 +243,10 @@ class JavaScriptFile extends React.Component<Props, State> {
                     }}
                   />
                 )}
-                {!!compiled && !!compiled.scripts[0] && (
-                  <Frame
-                    initialContent={`
+                {!!compiled &&
+                  !!compiled.scripts[0] && (
+                    <Frame
+                      initialContent={`
 <div id="app">Initial</div>
 <script src='https://unpkg.com/react@16.3.2/umd/react.production.min.js'></script>
 <script src='https://unpkg.com/prop-types@15.6.1/prop-types.min.js'></script>
@@ -266,8 +267,8 @@ ReactDOM.render(React.createElement(Output, null), app);
 </script>
 ${compiled.contentHTML.join('\n')}
                   `}
-                  />
-                )}
+                    />
+                  )}
               </>
             )}
           </>

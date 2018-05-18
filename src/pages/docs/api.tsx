@@ -64,7 +64,9 @@ gitHubRepo(owner: "RoyalIcing", repoName: "lofi-bootstrap") {
       <h4 className="mt-4 mb-2">
         GitHub: All NPM projects in the zendeskgarden/react-components monorepo
       </h4>
-      {`
+      <pre>
+        <code>
+          {`
 {
   gitHubRepo(owner: "zendeskgarden", repoName: "react-components") {
     npmProjects {
@@ -85,6 +87,8 @@ gitHubRepo(owner: "RoyalIcing", repoName: "lofi-bootstrap") {
   }
 }
 `.trim()}
+        </code>
+      </pre>
 
       <h4 className="mt-4 mb-2">Trello: Lists and their cards in a board</h4>
       <pre>
