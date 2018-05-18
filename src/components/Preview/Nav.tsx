@@ -17,7 +17,7 @@ export interface Props {
 
 const isPrimaryItem = ({ tags }: ListItem): boolean => tags[0] === 'primary'
 
-function titleForTags(tags: string[]) {
+export function titleForTags(tags: string[]) {
   if (tags[1] === 'primary') {
     return 'Primary nav'
   }
@@ -41,8 +41,7 @@ const blue = '#0267ff'
 
 function Nav({ tags, sections }: Props) {
   return (
-    <div className="mb-8">
-      <h3>{titleForTags(tags)}</h3>
+    <div>
       <div
         style={{
           display: 'flex',
