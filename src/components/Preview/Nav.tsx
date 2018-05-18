@@ -37,6 +37,8 @@ function fontSizeForTags(tags: string[]) {
   return '1rem'
 }
 
+const blue = '#0267ff'
+
 function Nav({ tags, sections }: Props) {
   return (
     <div className="mb-8">
@@ -52,7 +54,7 @@ function Nav({ tags, sections }: Props) {
           paddingLeft: '0.5rem',
           paddingRight: '0.5rem',
           fontSize: fontSizeForTags(tags),
-          backgroundColor: 'white',
+          backgroundColor: blue,
         }}
       >
         {sections.map((section, sectionIndex, { length: sectionCount }) => (
@@ -86,9 +88,9 @@ function Nav({ tags, sections }: Props) {
                       marginLeft: isPrimary ? '0.25rem' : '0',
                       marginRight: isPrimary ? '0.25rem' : '0',
                       fontWeight: listItem.tags[0] === 'logo' ? 700 : 400,
-                      color: isPrimary ? 'white' : isSearch ? '#888' : '#111',
-                      backgroundColor: isPrimary ? '#111' : 'white',
-                      border: isSearch ? '1px solid #111' : 'none',
+                      color: isPrimary ? 'white' : isSearch ? 'rgba(255,255,255,0.7)' : 'white',
+                      backgroundColor: isPrimary ? 'rgba(0,0,0,0.7)' : 'transparent',
+                      border: isSearch ? '1px solid white' : 'none',
                       borderRadius: isPrimary ? 5 : 0,
                     }}
                   >

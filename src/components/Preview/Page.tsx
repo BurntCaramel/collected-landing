@@ -27,6 +27,8 @@ function renderHeading(heading: Heading) {
   return <Component key={heading.text}>{heading.text}</Component>
 }
 
+const blue = '#0267ff'
+
 function Page({ text, sections }: Props) {
   return (
     <div
@@ -35,7 +37,8 @@ function Page({ text, sections }: Props) {
         flexDirection: 'column',
         flexWrap: 'wrap',
         padding: '1rem',
-        backgroundColor: 'white',
+        color: 'white',
+        backgroundColor: blue,
       }}
     >
       {sections.map(section => (
