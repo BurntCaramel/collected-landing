@@ -1,21 +1,14 @@
 import React from 'react'
+import { Section, ListItem } from '../../types/source'
 import Icon from './Icon'
-
-export interface ListItem {
-  tags: string[]
-  text: string
-}
-
-export interface Section {
-  listItems: ListItem[]
-}
 
 export interface Props {
   tags: string[]
   sections: Section[]
 }
 
-const isPrimaryItem = ({ tags }: ListItem): boolean => tags[0] === 'primary'
+const isPrimaryItem = ({ content: { tags } }: ListItem): boolean =>
+  tags[0] === 'primary'
 
 export function titleForTags(tags: string[]) {
   if (tags[1] === 'primary') {
@@ -38,6 +31,76 @@ function fontSizeForTags(tags: string[]) {
 }
 
 const blue = '#0267ff'
+
+function renderListItem({
+  key,
+  listItem,
+  isLast,
+}: {
+  key: number | string
+  listItem: ListItem
+  isLast: boolean
+}) {
+  const isPrimary = isPrimaryItem(listItem)
+  const isSearch = listItem.content.tags[0] === 'search'
+  const isIcon = listItem.content.tags[0] === 'icon'
+  const isPicture = listItem.content.tags[0] === 'picture'
+  return (
+    <details
+      key={key}
+      style={{
+        display: 'flex',
+        paddingLeft: '0.333rem',
+        paddingRight: '0.333rem',
+        paddingTop: '0.25rem',
+        paddingBottom: '0.25rem',
+        marginLeft: isPrimary ? '0.25rem' : '0',
+        marginRight: isPrimary ? '0.25rem' : '0',
+        fontWeight: listItem.content.tags[0] === 'logo' ? 700 : 400,
+        color: isPrimary
+          ? 'white'
+          : isSearch
+            ? 'rgba(255,255,255,0.7)'
+            : 'white',
+        backgroundColor: isPrimary ? 'rgba(0,0,0,0.7)' : 'transparent',
+        border: isSearch ? '1px solid white' : 'none',
+        borderRadius: isPrimary ? 5 : 0,
+        cursor: isSearch ? 'text' : 'pointer',
+        position: 'relative',
+      }}
+    >
+      <summary>
+        {isIcon || isPicture ? '' : listItem.content.text}
+        {isIcon && <Icon text={listItem.content.text} />}
+        {isPicture && (
+          <Icon text={listItem.content.text} sizeRem={1.5} fallbackRounded />
+        )}
+        {listItem.childItems && listItem.childItems.length > 0 && ' ▾'}
+      </summary>
+      {listItem.childItems && (
+        <ul
+          style={{
+            position: 'absolute',
+            left: '-0.5em',
+            minWidth: '10em',
+            padding: '0.5em',
+            backgroundColor: blue,
+          }}
+        >
+          {listItem.childItems.map(
+            (listItem, listItemIndex, { length: listItemCount }) => {
+              return renderListItem({
+                key: listItemIndex,
+                listItem,
+                isLast: listItemIndex === listItemCount - 1,
+              })
+            }
+          )}
+        </ul>
+      )}
+    </details>
+  )
+}
 
 function Nav({ tags, sections }: Props) {
   return (
@@ -70,46 +133,11 @@ function Nav({ tags, sections }: Props) {
           >
             {section.listItems.map(
               (listItem, listItemIndex, { length: listItemCount }) => {
-                const isPrimary = isPrimaryItem(listItem)
-                const isSearch = listItem.tags[0] === 'search'
-                const isIcon = listItem.tags[0] === 'icon'
-                const isPicture = listItem.tags[0] === 'picture'
-                const isLast = listItemIndex === listItemCount - 1
-                return (
-                  <span
-                    key={listItemIndex}
-                    style={{
-                      display: 'flex',
-                      paddingLeft: '0.333rem',
-                      paddingRight: '0.333rem',
-                      paddingTop: '0.25rem',
-                      paddingBottom: '0.25rem',
-                      marginLeft: isPrimary ? '0.25rem' : '0',
-                      marginRight: isPrimary ? '0.25rem' : '0',
-                      fontWeight: listItem.tags[0] === 'logo' ? 700 : 400,
-                      color: isPrimary
-                        ? 'white'
-                        : isSearch
-                          ? 'rgba(255,255,255,0.7)'
-                          : 'white',
-                      backgroundColor: isPrimary
-                        ? 'rgba(0,0,0,0.7)'
-                        : 'transparent',
-                      border: isSearch ? '1px solid white' : 'none',
-                      borderRadius: isPrimary ? 5 : 0,
-                    }}
-                  >
-                    {isIcon || isPicture ? '' : listItem.text}
-                    {isIcon && <Icon text={listItem.text} />}
-                    {isPicture && (
-                      <Icon
-                        text={listItem.text}
-                        sizeRem={1.5}
-                        fallbackRounded
-                      />
-                    )}
-                  </span>
-                )
+                return renderListItem({
+                  key: listItemIndex,
+                  listItem,
+                  isLast: listItemIndex === listItemCount - 1,
+                })
               }
             )}
           </div>

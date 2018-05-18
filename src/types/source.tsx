@@ -1,12 +1,17 @@
+export interface ListItem {
+  content: {
+    text: string
+    tags: string[]
+  }
+  childItems?: ListItem[]
+}
+
 export interface Section {
   headings: {
     level: number
     text: string
   }[]
-  listItems: {
-    text: string
-    tags: string[]
-  }[]
+  listItems: ListItem[]
 }
 
 export interface Unit {

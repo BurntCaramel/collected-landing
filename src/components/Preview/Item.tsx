@@ -1,25 +1,11 @@
 import React from 'react'
 import { Link } from 'react-static'
+import { Section } from '../../types/source'
 import Nav, { titleForTags as titleForNavTags } from './Nav'
 import Page from './Page'
 import SearchResult from './SearchResult'
 import { Frontmatter } from '../../utils/markdown'
 import { stripTags, tagsToInput } from '../../utils/tags'
-
-export interface Heading {
-  level: number
-  text: string
-}
-
-export interface ListItem {
-  tags: string[]
-  text: string
-}
-
-export interface Section {
-  headings: Heading[]
-  listItems: ListItem[]
-}
 
 export interface Props {
   text: string

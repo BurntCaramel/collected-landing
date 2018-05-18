@@ -31,8 +31,16 @@ query Search($boardID: String!, $q: String, $tags: [String!]) {
               level
             }
             listItems {
-              text
-              tags
+              content {
+                text
+                tags
+              }
+              childItems {
+                content {
+                  text
+                  tags
+                }
+              }
             }
           }
         }

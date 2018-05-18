@@ -41,7 +41,8 @@ interface State {
   fileSearch: string
 }
 
-const keyForOwnerAndRepo = (owner: string, repoName: string) => [owner, repoName].join('/')
+const keyForOwnerAndRepo = (owner: string, repoName: string) =>
+  [owner, repoName].join('/')
 
 class LibrariesPage extends React.PureComponent<Props, State> {
   state: State = {
