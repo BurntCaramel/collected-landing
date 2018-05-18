@@ -2,12 +2,11 @@ import * as React from 'react'
 import { Link } from 'react-static'
 import makeAware, { ReceiverProps } from 'react-organism'
 import CodeEditor from 'react-monaco-editor'
+import { Section as PreviewSection } from '../../types/source'
 import * as Editing from '../../state/editing'
 import { listTags, stripTags, tagsToInput } from '../../utils/tags'
 import * as markdownUtils from '../../utils/markdown'
-import PreviewItem, {
-  Section as PreviewSection,
-} from '../../components/Preview/Item'
+import PreviewItem from '../../components/Preview/Item'
 
 interface Props {}
 
@@ -18,7 +17,7 @@ function toPreviewSections(content: string): PreviewSection[] {
     headings: markdownUtils.listHeadings(subsectionContent),
     listItems: markdownUtils
       .listListItems(subsectionContent)
-      .map(text => ({ text: stripTags(text), tags: listTags(text) })),
+      .map(text => ({ content: { text: stripTags(text), tags: listTags(text) }, childItems: [] })),
   }))
 }
 
