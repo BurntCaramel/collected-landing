@@ -273,15 +273,16 @@ ${compiled.contentHTML.join('\n')}
             )}
           </>
         )}
-        {!!file.asJavaScript && !!file.asJavaScript.transform &&(
-          <dl>
-            {file.asJavaScript.transform.imports.map(importDeclaration => (
-              <>
-                <dt className="ml-4">{importDeclaration.source}</dt>
-              </>
-            ))}
-          </dl>
-        )}
+        {!!file.asJavaScript &&
+          !!file.asJavaScript.transform && (
+            <dl>
+              {file.asJavaScript.transform.imports.map(importDeclaration => (
+                <>
+                  <dt className="ml-4">{importDeclaration.source}</dt>
+                </>
+              ))}
+            </dl>
+          )}
       </>
     )
   }

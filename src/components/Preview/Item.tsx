@@ -34,8 +34,7 @@ function Item({ text, tags, sections, frontmatter, domain }: Props) {
     return (
       <div className="my-4">
         <h3>
-          {titleForNavTags(tags)}
-          {' '}
+          {titleForNavTags(tags)}{' '}
           <Link to={`/research?q=${encodeURIComponent(tagsToInput(tags))}`}>
             {tagsToInput(tags)}
           </Link>
@@ -47,8 +46,7 @@ function Item({ text, tags, sections, frontmatter, domain }: Props) {
     return (
       <div className="mb-4">
         <h3>
-          {stripTags(text)}
-          {' '}
+          {stripTags(text)}{' '}
           <Link to={`/research?q=${encodeURIComponent(tagsToInput(tags))}`}>
             {tagsToInput(tags)}
           </Link>

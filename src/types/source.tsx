@@ -70,6 +70,12 @@ interface DependencySource {
 }
 
 export interface GitHubSource {
+  npmProjects: {
+    directoryPath: string
+    name: string
+    version: string
+    dependencies: DependencySource
+  }[]
   dependencies: {
     sources: DependencySource[]
   }

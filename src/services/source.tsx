@@ -45,6 +45,29 @@ query Search($boardID: String!, $q: String, $tags: [String!]) {
 const searchESInGitHubRepo = `
 query Search($owner: String!, $repoName: String!, $pathPrefixes: [String], $pathMatching: [String], $pathNotMatching: [String], $includeContent: Boolean!) {
   source: gitHubRepo(owner: $owner, repoName: $repoName) {
+    npmProjects {
+      directoryPath
+      name
+      version
+      dependencies {
+        items {
+          name
+          rule
+        }
+      }
+    }
+    dependencies {
+      sources {
+        file {
+          path
+        }
+        items {
+          name
+          rule
+          groups
+        }
+      }
+    }
     dependencies {
       sources {
         file {

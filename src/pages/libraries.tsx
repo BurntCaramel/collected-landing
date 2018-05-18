@@ -114,20 +114,31 @@ class LibrariesPage extends React.PureComponent<Props, State> {
     return (
       <div>
         <article className="mb-8">
-          { this.canLoad && <Link to='/libraries/'>Libraries</Link> }
+          {this.canLoad && <Link to="/libraries/">Libraries</Link>}
 
           <h1 className="mt-2 mb-4">
-            { !this.canLoad && 'Libraries' }
-            { this.canLoad && `${owner} / ${repoName}` }
-            { this.canLoad && <iframe className="ml-4" src={`https://ghbtns.com/github-btn.html?user=${owner}&repo=${repoName}&type=star&count=true`} frameBorder="0" scrolling="0" width="170px" height="20px"></iframe> }
+            {!this.canLoad && 'Libraries'}
+            {this.canLoad && `${owner} / ${repoName}`}
+            {this.canLoad && (
+              <iframe
+                className="ml-4"
+                src={`https://ghbtns.com/github-btn.html?user=${owner}&repo=${repoName}&type=star&count=true`}
+                frameBorder="0"
+                scrolling="0"
+                width="170px"
+                height="20px"
+              />
+            )}
           </h1>
 
-          { !this.canLoad &&
-            <LinkList noBullets className='text-2xl font-bold'>
+          {!this.canLoad && (
+            <LinkList noBullets className="text-2xl font-bold">
               <Link to={`/libraries/?owner=seek-oss&repoName=seek-style-guide`}>
                 {'Seek Style Guide'}
               </Link>
-              <Link to={`/libraries/?owner=zendeskgarden&repoName=react-components`}>
+              <Link
+                to={`/libraries/?owner=zendeskgarden&repoName=react-components`}
+              >
                 {'Zendesk Garden: React Components'}
               </Link>
               <Link to={`/libraries/?owner=pinterest&repoName=gestalt`}>
@@ -143,10 +154,11 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                 {'Pivotal UI'}
               </Link>
             </LinkList>
-          }
+          )}
 
           {this.canLoad && !result && <p>Loading files from GitHub…</p>}
-          {this.canLoad && !!result &&
+          {this.canLoad &&
+            !!result &&
             !!result.errors && (
               <div>
                 {result.errors.map(error => (
@@ -157,29 +169,33 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                 ))}
               </div>
             )}
-          {this.canLoad && !!result &&
+          {this.canLoad &&
+            !!result &&
             !!result.data && (
               <div>
-                {!!result.data.source.dependencies && (
+                {!!result.data.source.npmProjects && (
                   <div className="mb-8">
-                    <h2 className="my-2">Dependencies</h2>
-                    {result.data.source.dependencies.sources.map(
-                      dependencySource => (
-                        <div key={dependencySource.file.path} className="mb-8">
-                          <h3 className="my-2">
-                            {dependencySource.file.path}
-                          </h3>
-                          <Grid columns="repeat(auto-fill, 12rem)" gap={10}>
-                            {dependencySource.items.map(item => (
-                              <div key={item.name}>
-                                <div className="font-bold">{item.name}</div>
-                                <div>{item.rule}</div>
-                              </div>
-                            ))}
-                          </Grid>
-                        </div>
-                      )
-                    )}
+                    <h2 className="my-2">Packages</h2>
+                    {result.data.source.npmProjects.map(npmProject => (
+                      <div key={npmProject.directoryPath} className="mb-8">
+                        <h3 className="my-2">
+                          {npmProject.name} @ {npmProject.version}
+                        </h3>
+                        {npmProject.directoryPath !== '.' && (
+                          <p className="my-2">
+                            <em>{npmProject.directoryPath}</em>
+                          </p>
+                        )}
+                        <Grid columns="repeat(auto-fill, 12rem)" gap={10}>
+                          {npmProject.dependencies.items.map(item => (
+                            <div key={item.name}>
+                              <div className="font-bold">{item.name}</div>
+                              <div>{item.rule}</div>
+                            </div>
+                          ))}
+                        </Grid>
+                      </div>
+                    ))}
                   </div>
                 )}
                 {!!filteredFiles && (

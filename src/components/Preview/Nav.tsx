@@ -87,8 +87,14 @@ function Nav({ tags, sections }: Props) {
                       marginLeft: isPrimary ? '0.25rem' : '0',
                       marginRight: isPrimary ? '0.25rem' : '0',
                       fontWeight: listItem.tags[0] === 'logo' ? 700 : 400,
-                      color: isPrimary ? 'white' : isSearch ? 'rgba(255,255,255,0.7)' : 'white',
-                      backgroundColor: isPrimary ? 'rgba(0,0,0,0.7)' : 'transparent',
+                      color: isPrimary
+                        ? 'white'
+                        : isSearch
+                          ? 'rgba(255,255,255,0.7)'
+                          : 'white',
+                      backgroundColor: isPrimary
+                        ? 'rgba(0,0,0,0.7)'
+                        : 'transparent',
                       border: isSearch ? '1px solid white' : 'none',
                       borderRadius: isPrimary ? 5 : 0,
                     }}
