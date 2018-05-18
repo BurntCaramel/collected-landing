@@ -273,7 +273,7 @@ ${compiled.contentHTML.join('\n')}
             )}
           </>
         )}
-        {!!file.asJavaScript && (
+        {!!file.asJavaScript && !!file.asJavaScript.transform &&(
           <dl>
             {file.asJavaScript.transform.imports.map(importDeclaration => (
               <>

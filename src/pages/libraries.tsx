@@ -128,7 +128,19 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                 {'Seek Style Guide'}
               </Link>
               <Link to={`/libraries/?owner=zendeskgarden&repoName=react-components`}>
-                {'Zen Desk Garden: React Components'}
+                {'Zendesk Garden: React Components'}
+              </Link>
+              <Link to={`/libraries/?owner=pinterest&repoName=gestalt`}>
+                {'Pinterest Gestalt'}
+              </Link>
+              <Link to={`/libraries/?owner=Shopify&repoName=polaris`}>
+                {'Shopify Polaris'}
+              </Link>
+              <Link to={`/libraries/?owner=pluralsight&repoName=design-system`}>
+                {'Pluralsight Design System'}
+              </Link>
+              <Link to={`/libraries/?owner=pivotal-cf&repoName=pivotal-ui`}>
+                {'Pivotal UI'}
               </Link>
             </LinkList>
           }
