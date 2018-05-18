@@ -61,6 +61,31 @@ gitHubRepo(owner: "RoyalIcing", repoName: "lofi-bootstrap") {
         </code>
       </pre>
 
+      <h4 className="mt-4 mb-2">
+        GitHub: All NPM projects in the zendeskgarden/react-components monorepo
+      </h4>
+      {`
+{
+  gitHubRepo(owner: "zendeskgarden", repoName: "react-components") {
+    npmProjects {
+      directoryPath
+      name
+      version
+      private
+      license
+      homepage
+      npmOrgURL
+      dependencies {
+        items {
+          name
+          rule
+        }
+      }
+    }
+  }
+}
+`.trim()}
+
       <h4 className="mt-4 mb-2">Trello: Lists and their cards in a board</h4>
       <pre>
         <code>
