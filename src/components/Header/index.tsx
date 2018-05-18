@@ -93,6 +93,8 @@ class Header extends React.Component<Props, State> {
 
     const { enteredQ } = this.state
 
+    const signedIn = isSignedIn(this.props.authStatus)
+
     return (
       <div
         style={{
@@ -114,6 +116,7 @@ class Header extends React.Component<Props, State> {
               <input
                 name="q"
                 className="ml-2 mr-2 mt-1 mb-1 px-2"
+                style={{ width: '12em' }}
                 placeholder="Search catalog"
                 value={enteredQ}
                 onChange={this.onChangeQ}
@@ -122,12 +125,12 @@ class Header extends React.Component<Props, State> {
           </div>
           <div className="row">
             {link('Research', '/research')}
-            {link('Create', '/create')}
+            {link('Libraries', '/libraries/')}
+            {/* {link('Create', '/create')} */}
             {link('Docs', '/docs')}
             {link('Open Source', '/contribute')}
-            {isSignedIn(this.props.authStatus)
-              ? link('Account', '/account')
-              : link('Sign In / Up', '/signin')}
+            {/* {!signedIn && link('Sign In / Up', '/signin')} */}
+            {signedIn && link('Account', '/account')}
             {/* <Link to="/inspiration" style={styles.link} className="mr-4">
               Inspiration
             </Link> */}
