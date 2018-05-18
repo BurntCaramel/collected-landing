@@ -2,10 +2,10 @@ import * as React from 'react'
 import { File } from '../../types/source'
 import CodeEditor from 'react-monaco-editor'
 import Frame from 'react-frame-component'
-const Babel = require('@babel/standalone')
-const babelPresetEnv = require('@babel/preset-env-standalone')
+import * as Babel from '@babel/standalone'
+import * as babelPresetEnv from '@babel/preset-env-standalone'
 import babelPluginUnpkg from 'babel-plugin-unpkg'
-const rollup = require('rollup')
+import * as rollup from 'rollup'
 import rollupHypothetical from 'rollup-plugin-hypothetical'
 import * as Path from 'path'
 import { resolve } from 'url'

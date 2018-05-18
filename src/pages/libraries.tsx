@@ -104,11 +104,11 @@ class LibrariesPage extends React.PureComponent<Props, State> {
       fileSearch === ''
         ? () => true
         : file => file.path.toLowerCase().indexOf(fileSearch) !== -1
-    
+
     const filteredFiles =
-      !!result && !!result.data && !!result.data.source.files ?
-      result.data.source.files.filter(includeFile) :
-      null
+      !!result && !!result.data && !!result.data.source.files
+        ? result.data.source.files.filter(includeFile)
+        : null
 
     return (
       <div>
@@ -124,7 +124,7 @@ class LibrariesPage extends React.PureComponent<Props, State> {
             !!result.errors && (
               <div>
                 {result.errors.map(error => (
-                  <p>
+                  <p key={error.message}>
                     {'Error: '}
                     {error.message}
                   </p>
@@ -139,13 +139,13 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                     <h3 className="my-2">Dependencies</h3>
                     {result.data.source.dependencies.sources.map(
                       dependencySource => (
-                        <div>
+                        <div key={dependencySource.file.path} className="mb-4">
                           <div className="my-2">
                             <em>{dependencySource.file.path}</em>
                           </div>
                           <Grid columns="repeat(auto-fill, 12rem)" gap={10}>
                             {dependencySource.items.map(item => (
-                              <div>
+                              <div key={item.name}>
                                 <div className="font-bold">{item.name}</div>
                                 <div>{item.rule}</div>
                               </div>

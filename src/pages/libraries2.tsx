@@ -54,9 +54,9 @@ interface Props {}
 function Libraries2Page(props: Props) {
   return (
     <div>
-      { typeof document !== 'undefined' &&
+      {typeof document !== 'undefined' && (
         <JavaScriptFile file={files[0]} allFiles={files} />
-      }
+      )}
     </div>
   )
 }
