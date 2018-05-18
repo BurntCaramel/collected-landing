@@ -99,7 +99,7 @@ class EditPage extends React.PureComponent<Props, {}> {
   render() {
     return (
       <div>
-        <h1 className="mt-8 mb-8">{'Create prototype'}</h1>
+        <h1 className="mt-8 mb-8">{'Prototype with Markdown'}</h1>
 
         <article className="mb-8">
           <Editor {...editorProps} />

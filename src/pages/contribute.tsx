@@ -3,10 +3,10 @@ import { Link } from 'react-static'
 
 const DeployPage = () => (
   <div>
-    <h1 className="mt-8 mb-8">Contribute to Collected Open Source</h1>
+    <h1 className="mt-8 mb-8">Collected Open Source</h1>
 
     <article className="mb-8">
-      <h2 className="my-2">Want to change or improve the catalog?</h2>
+      <h2 className="my-2">Want to contribute to the catalog?</h2>
 
       <h3 className="my-2">Collected IA Catalog</h3>
       <p>
@@ -14,6 +14,18 @@ const DeployPage = () => (
         <a href="https://trello.com/b/4wctPH1u">{'this Trello board'}</a>
         {'.'}
       </p>
+    </article>
+
+    <article className="mb-8">
+      <h2 className="my-2">Want to contribute to the code?</h2>
+
+      <ul>
+        <li>
+          <a href="https://github.com/RoyalIcing/collected-source">
+            {'Collected Source GraphQL server'}
+          </a>
+        </li>
+      </ul>
     </article>
 
     <article>
