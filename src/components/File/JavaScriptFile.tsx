@@ -243,7 +243,7 @@ class JavaScriptFile extends React.Component<Props, State> {
                     }}
                   />
                 )}
-                {!!compiled.scripts[0] && (
+                {!!compiled && !!compiled.scripts[0] && (
                   <Frame
                     initialContent={`
 <div id="app">Initial</div>
