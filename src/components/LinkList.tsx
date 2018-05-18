@@ -1,13 +1,18 @@
 import React from 'react'
 
+interface Props {
+  children: React.ReactNode
+  className?: string,
+  noBullets: boolean
+}
+
 const LinkList = ({
   children,
-  Component = 'ul',
-}: {
-  children: React.ReactNode
-  Component?: React.ComponentType
-}) => (
-  <Component>{React.Children.map(children, item => <li>{item}</li>)}</Component>
-)
+  className,
+  noBullets = false
+}: Props) => {
+  const Component = 'ul'
+  return <Component className={className} style={Object.assign({}, noBullets && { listStyle: 'none' })}>{React.Children.map(children, item => <li>{item}</li>)}</Component>
+}
 
 export default LinkList

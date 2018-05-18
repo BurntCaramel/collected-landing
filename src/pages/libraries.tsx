@@ -5,6 +5,7 @@ import queryFromLocation from '../nav/queryFromLocation'
 import { queryESInGitHubRepo, GraphQLResult } from '../services/source'
 import { GitHubSource, File } from '../types/source'
 import JavaScriptFile from '../components/File/JavaScriptFile'
+import LinkList from '../components/LinkList'
 
 const Grid = ({
   Component = 'div',
@@ -112,15 +113,28 @@ class LibrariesPage extends React.PureComponent<Props, State> {
 
     return (
       <div>
-        <h1 className="mt-8 mb-8">Libraries</h1>
-
         <article className="mb-8">
-          <h2 className="my-4">
-            {owner} / {repoName}
-          </h2>
+          { this.canLoad && <Link to='/libraries/'>Libraries</Link> }
 
-          {!result && this.canLoad && <p>Loading…</p>}
-          {!!result &&
+          <h1 className="mt-2 mb-4">
+            { !this.canLoad && 'Libraries' }
+            { this.canLoad && `${owner} / ${repoName}` }
+            { this.canLoad && <iframe className="ml-4" src={`https://ghbtns.com/github-btn.html?user=${owner}&repo=${repoName}&type=star&count=true`} frameBorder="0" scrolling="0" width="170px" height="20px"></iframe> }
+          </h1>
+
+          { !this.canLoad &&
+            <LinkList noBullets className='text-2xl font-bold'>
+              <Link to={`/libraries/?owner=seek-oss&repoName=seek-style-guide`}>
+                {'Seek Style Guide'}
+              </Link>
+              <Link to={`/libraries/?owner=zendeskgarden&repoName=react-components`}>
+                {'Zen Desk Garden: React Components'}
+              </Link>
+            </LinkList>
+          }
+
+          {this.canLoad && !result && <p>Loading files from GitHub…</p>}
+          {this.canLoad && !!result &&
             !!result.errors && (
               <div>
                 {result.errors.map(error => (
@@ -136,13 +150,13 @@ class LibrariesPage extends React.PureComponent<Props, State> {
               <div>
                 {!!result.data.source.dependencies && (
                   <div className="mb-8">
-                    <h3 className="my-2">Dependencies</h3>
+                    <h2 className="my-2">Dependencies</h2>
                     {result.data.source.dependencies.sources.map(
                       dependencySource => (
                         <div key={dependencySource.file.path} className="mb-8">
-                          <div className="my-2">
-                            <em>{dependencySource.file.path}</em>
-                          </div>
+                          <h3 className="my-2">
+                            {dependencySource.file.path}
+                          </h3>
                           <Grid columns="repeat(auto-fill, 12rem)" gap={10}>
                             {dependencySource.items.map(item => (
                               <div key={item.name}>
@@ -158,7 +172,7 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                 )}
                 {!!filteredFiles && (
                   <div>
-                    <h3>
+                    <h2>
                       {'Files '}
                       <input
                         className="mx-2 px-2 py-1 text-base font-normal"
@@ -166,8 +180,8 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                         placeholder="Filter files…"
                         onChange={this.onChangeFileSearch}
                       />
-                      {` ${filteredFiles.length}`}
-                    </h3>
+                      <small>{` ${filteredFiles.length}`}</small>
+                    </h2>
                     {filteredFiles.map(file => (
                       <div key={file.path} className="my-4">
                         <h4>{file.path}</h4>
