@@ -49,10 +49,14 @@ const files: File[] = [
   },
 ]
 
-function Libraries2Page() {
+interface Props {}
+
+function Libraries2Page(props: Props) {
   return (
     <div>
-      <JavaScriptFile file={files[0]} allFiles={files} />
+      { typeof document !== 'undefined' &&
+        <JavaScriptFile file={files[0]} allFiles={files} />
+      }
     </div>
   )
 }
