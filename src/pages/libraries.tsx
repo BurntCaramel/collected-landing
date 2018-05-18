@@ -139,7 +139,7 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                     <h3 className="my-2">Dependencies</h3>
                     {result.data.source.dependencies.sources.map(
                       dependencySource => (
-                        <div key={dependencySource.file.path} className="mb-4">
+                        <div key={dependencySource.file.path} className="mb-8">
                           <div className="my-2">
                             <em>{dependencySource.file.path}</em>
                           </div>
