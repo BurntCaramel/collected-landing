@@ -37,15 +37,17 @@ interface Props {
 interface State {
   owner: string
   repoName: string
-  result: GraphQLResult<{ source: GitHubSource }> | null
+  results: Map<string, GraphQLResult<{ source: GitHubSource }>>
   fileSearch: string
 }
+
+const keyForOwnerAndRepo = (owner: string, repoName: string) => [owner, repoName].join('/')
 
 class LibrariesPage extends React.PureComponent<Props, State> {
   state: State = {
     owner: '',
     repoName: '',
-    result: null,
+    results: new Map(),
     fileSearch: '',
   }
 
@@ -89,8 +91,18 @@ class LibrariesPage extends React.PureComponent<Props, State> {
         '**/private/**',
       ],
     }).then(source => {
-      this.setState({ result: source })
+      this.setState(({ results }) => {
+        const newResults = new Map(results.entries())
+        newResults.set(keyForOwnerAndRepo(owner, repoName), source)
+        return { results: newResults }
+      })
     })
+  }
+
+  get currentResult(): GraphQLResult<{ source: GitHubSource }> | null {
+    const { owner, repoName } = this.state
+    const key = keyForOwnerAndRepo(owner, repoName)
+    return this.state.results.get(key)
   }
 
   onChangeFileSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +110,8 @@ class LibrariesPage extends React.PureComponent<Props, State> {
   }
 
   render() {
-    let { result, fileSearch, owner, repoName } = this.state
+    let { fileSearch, owner, repoName } = this.state
+    const result = this.currentResult
 
     fileSearch = fileSearch.trim()
     const includeFile: (file: File) => boolean =
