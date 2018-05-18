@@ -145,7 +145,7 @@ class LibrariesPage extends React.PureComponent<Props, State> {
                 ))}
               </div>
             )}
-          {!!result &&
+          {this.canLoad && !!result &&
             !!result.data && (
               <div>
                 {!!result.data.source.dependencies && (
