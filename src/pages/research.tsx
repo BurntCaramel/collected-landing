@@ -11,6 +11,10 @@ import {
 } from '../services/source'
 import makeAware from 'react-organism'
 
+const unitsWithTag = (tag: string, units: Unit[]) => {
+  return units.filter(unit => unit.tags[0] === tag)
+}
+
 const renderUnit = (collection: Collection) => (unit: Unit) => {
   return (
     <PreviewItem
@@ -24,7 +28,21 @@ const renderUnit = (collection: Collection) => (unit: Unit) => {
 }
 
 function renderCollection(collection: Collection) {
-  return <div>{collection.units.map(renderUnit(collection))}</div>
+  return <div>
+    {unitsWithTag('category', collection.units).map(unit => (
+      <dl>
+        { false && <dt>{unit.name}:</dt> }
+        {unit.body.sections.map(section => (
+          <>
+            {section.listItems.map(listItem => (
+              <dd>{listItem.content.text}</dd>
+            ))}
+          </>
+        ))}
+      </dl>
+    ))}
+    {collection.units.map(renderUnit(collection))}
+  </div>
 }
 
 interface PageProps {
