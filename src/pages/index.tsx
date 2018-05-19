@@ -60,7 +60,7 @@ const IndexPage = (props: Props) => (
       Get feedback fast with realistic, better prototypes
     </h1> */}
     <h1 className="mt-12 mb-4">
-      Find and compare the best IA in the industry
+      Find and compare the best IA in your industry
     </h1>
 
     <article className="mb-12">
