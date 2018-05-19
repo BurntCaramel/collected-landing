@@ -18,7 +18,7 @@ const NewsletterForm = ({ className }: { className: string }) => (
       action="https://emailoctopus.com/lists/839d94de-3257-11e8-a3c9-06b79b628af2/members/embedded/1.1/add"
     >
       <div className="row row-baseline">
-        <label htmlFor="newsletter-field-0">Your email</label>
+        <label htmlFor="newsletter-field-0">Your email:</label>
         <input
           id="newsletter-field-0"
           name="embedded_form_subscription[field_0]"
@@ -71,13 +71,14 @@ const IndexPage = (props: Props) => (
             <label className="flex-1">{'Search catalog for '}</label>
             <input
               name="q"
-              placeholder="nav, button, sign up, welcome email"
+              placeholder="#nav, #footer, Slack, BBC, Figma"
               className="flex-1 px-2 py-1 border"
             />
           </div>
           <div className="col flex-1 ml-2 mb-2">
             <label className="col flex-1">{'Industry'}</label>
             <select name="industry" className="flex-1 px-2 py-1 border">
+              <option value=''>{'All'}</option>
               <option>{'Software'}</option>
               <option>{'Open source'}</option>
               <option>{'Retail'}</option>
@@ -136,14 +137,18 @@ const IndexPage = (props: Props) => (
       {/* <h2 className="mb-8">
         Prototype rapidly with content from Trello or GitHub.
       </h2> */}
-      <h2 className="mb-8">Create your own interactive prototypes rapidly</h2>
+      {/* <h2 className="mb-8">Create your own interactive prototypes rapidly</h2> */}
+      <h2 className="mb-8">Create prototypes rapidly, even from your phone</h2>
       <div className="row mb-8">
         <div className="mr-4">
           <TrelloIcon size={64} color={trelloBlue} />
         </div>
         <form method="get" action="/create/source" className="col flex-1">
+          <p>
+            1. Create a <Link to='/docs/create/'>structured Trello board</Link> using Markdown.
+          </p>
           <label htmlFor="input-url-trello" className="col flex-1">
-            {'Paste your Trello board URL '}
+            {'2: Paste your Trello board URL here:'}
           </label>
           <div className="row">
             <input
@@ -161,8 +166,11 @@ const IndexPage = (props: Props) => (
           <GitHubIcon size={64} />
         </div>
         <div className="col flex-1">
+          <p>
+            1. Create a <Link to='/docs/create/'>structured GitHub repo</Link> using Markdown.
+          </p>
           <label htmlFor="input-url-github" className="col flex-1">
-            {'Paste your GitHub repo URL '}
+            {'2. Paste your GitHub repo URL here:'}
           </label>
           <div className="row">
             <input
@@ -174,7 +182,7 @@ const IndexPage = (props: Props) => (
           </div>
         </div>
       </div>
-      <div className="row mb-8">
+      {false && <div className="row mb-8">
         <div className="mr-4">
           <AWSIcon size={64} />
         </div>
@@ -191,10 +199,10 @@ const IndexPage = (props: Props) => (
             <button className="text-white bg-shadow">Go</button>
           </div>
         </div>
-      </div>
+      </div>}
       <LinkList>
         <Link to="/docs/" className="text-xl">
-          Learn more at the Collected docs
+          See examples here
         </Link>
       </LinkList>
     </article>

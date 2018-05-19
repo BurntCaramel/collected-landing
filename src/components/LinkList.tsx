@@ -3,7 +3,7 @@ import React from 'react'
 interface Props {
   children: React.ReactNode
   className?: string
-  noBullets: boolean
+  noBullets?: boolean
 }
 
 const LinkList = ({ children, className, noBullets = false }: Props) => {
