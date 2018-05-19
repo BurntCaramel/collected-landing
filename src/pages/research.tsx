@@ -88,13 +88,18 @@ const stateHandlers = {
 }
 
 function Render({ result }: State): JSX.Element {
-  const count =
+  const collections =
     (!!result &&
     !!result.data &&
     !!result.data.source.collections &&
     !!result.data.source.collections
-      ? result.data.source.collections.length
+      ? result.data.source.collections.filter(collection => collection.units.length > 0)
       : null) || null
+
+  const count =
+    collections
+      ? collections.length
+      : null
 
   return (
     <div>
@@ -125,10 +130,8 @@ function Render({ result }: State): JSX.Element {
           </div>
         )}
 
-      {!!result &&
-        !!result.data &&
-        !!result.data.source.collections &&
-        result.data.source.collections.map(collection => (
+      {!!collections &&
+        collections.map(collection => (
           <div key={collection.name}>
             <h2>
               <Link to={`/research/?q=${encodeURIComponent(collection.name)}`}>
