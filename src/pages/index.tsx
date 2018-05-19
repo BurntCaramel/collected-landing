@@ -56,18 +56,15 @@ const IndexPage = (props: Props) => (
       Let your users give feedback fast with realistic prototypes
     </h1> */}
     {/* <h1 className="mt-12 mb-8">Get rapid feedback with rapid prototyping</h1> */}
-    <h1 className="mt-12 mb-8">
+    {/* <h1 className="mt-12 mb-8">
       Get feedback fast with realistic, better prototypes
+    </h1> */}
+    <h1 className="mt-12 mb-4">
+      Find and compare the best IA in the industry
     </h1>
 
     <article className="mb-12">
-      <div className="mb-4">
-        <h2 className="mb-1">Find and compare the best in your industry</h2>
-        <p>
-          Research navigation, onboarding, components, landing pages, forms,
-          emails, categorization, search, and accessibility capabilities.
-        </p>
-      </div>
+      <h2 className="mb-4">Research navigation, onboarding, and components.</h2>
       <form action="/research">
         <div className="row">
           <div className="col flex-1 mr-2 mb-2">
