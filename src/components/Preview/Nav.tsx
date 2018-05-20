@@ -7,8 +7,8 @@ export interface Props {
   sections: Section[]
 }
 
-const isPrimaryItem = ({ content: { tags } }: ListItem): boolean =>
-  tags[0] === 'primary'
+const hasTag = (tag: string, { content: { tags } }: ListItem): boolean =>
+  tags[0] === tag
 
 export function titleForTags(tags: string[]) {
   if (tags[1] === 'primary') {
@@ -40,11 +40,13 @@ function renderListItem({
   key: number | string
   listItem: ListItem
   isLast: boolean
-}) {
-  const isPrimary = isPrimaryItem(listItem)
-  const isSearch = listItem.content.tags[0] === 'search'
-  const isIcon = listItem.content.tags[0] === 'icon'
-  const isPicture = listItem.content.tags[0] === 'picture'
+}): React.ReactElement<'details'> {
+  const isPrimary = hasTag('primary', listItem)
+  const isSecondary = hasTag('secondary', listItem)
+  const isSearch = hasTag('search', listItem)
+  const isIcon = hasTag('icon', listItem)
+  const isPicture = hasTag('picture', listItem)
+  const isLogo = hasTag('logo', listItem)
   return (
     <details
       key={key}
@@ -56,15 +58,15 @@ function renderListItem({
         paddingBottom: '0.25rem',
         marginLeft: isPrimary ? '0.25rem' : '0',
         marginRight: isPrimary ? '0.25rem' : '0',
-        fontWeight: listItem.content.tags[0] === 'logo' ? 700 : 400,
+        fontWeight: isLogo ? 700 : 400,
         color: isPrimary
           ? 'white'
           : isSearch
             ? 'rgba(255,255,255,0.7)'
             : 'white',
-        backgroundColor: isPrimary ? 'rgba(0,0,0,0.7)' : 'transparent',
+        backgroundColor: isPrimary ? 'rgba(0,0,0,0.7)' : isSecondary ? 'rgb(255,255,255,0.3)' :'transparent',
         border: isSearch ? '1px solid white' : 'none',
-        borderRadius: isPrimary ? 5 : 0,
+        borderRadius: (isPrimary || isSecondary) ? 5 : 0,
         cursor: isSearch ? 'text' : 'pointer',
         position: 'relative',
       }}
