@@ -2,7 +2,7 @@ import { Source, Collection, GitHubSource } from '../types/source'
 
 function graphqlURL(): string {
   return window.location.hostname === 'collected.design'
-    ? 'https://collected-source-dot-collected-193006.appspot.com/graphql' //'https://1.source.collected.design/graphql'
+    ? 'https://collected-source.now.sh/graphql'
     : window.location.hostname === 'localhost'
       ? 'http://localhost:9090/graphql'
       : 'https://staging.1.source.collected.design/graphql'
